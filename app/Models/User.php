@@ -18,6 +18,9 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    public const ROLE_ADMIN = 1;
+    public const ROLE_USER = 2;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,6 +30,17 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username',
+        'profession',
+        'gender',
+        'address',
+        'city',
+        'state',
+        'area',
+        'professional_email',
+        'contact',
+        'whatsapp_contact',
+        'role',
     ];
 
     /**
@@ -48,6 +62,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'role' => 'integer',
     ];
 
     /**
@@ -58,4 +73,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function isAdmin()
+    {
+        $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isUser()
+    {
+        $this->role === self::ROLE_USER;
+    }
 }

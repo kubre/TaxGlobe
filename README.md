@@ -3,6 +3,7 @@
 ## Commits
 
 -   `(20/jun 01:32am)` Init new repo with jetstream and modified styles and navbar
+-   `(20/jun 11:50pm)` Registration from old project migrated properly
 
 ## :rocket: Feature List
 

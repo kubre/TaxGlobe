@@ -1,4 +1,5 @@
-<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-200">
+<div {!! $attributes->merge(['class' => 'pb-12 pt-6 min-h-screen flex flex-col sm:justify-center items-center
+    bg-gray-200']) !!}>
     <div>
         {{ $logo }}
     </div>
