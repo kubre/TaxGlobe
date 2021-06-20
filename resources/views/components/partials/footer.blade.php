@@ -13,16 +13,15 @@
                 <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">GENERAL</h2>
                 <nav class="list-none mb-10">
                     <li>
-                        <a class="text-gray-600 hover:text-gray-800">About</a>
+                        <a href="{{ route('about.show') }}" class="text-gray-600 hover:text-gray-800">About</a>
                     </li>
                     <li>
-                        <a class="text-gray-600 hover:text-gray-800">Terms of Service</a>
+                        <a href="{{ route('terms.show') }}" class="text-gray-600 hover:text-gray-800">Terms of
+                            Service</a>
                     </li>
                     <li>
-                        <a class="text-gray-600 hover:text-gray-800">Privacy Policy</a>
-                    </li>
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800">Cookie Policy</a>
+                        <a href="{{ route('policy.show') }}" class="text-gray-600 hover:text-gray-800">Privacy
+                            Policy</a>
                     </li>
                 </nav>
             </div>

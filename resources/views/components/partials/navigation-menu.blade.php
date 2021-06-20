@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('explore.index') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
@@ -29,30 +29,9 @@
             </div>
 
             <div class="flex">
-                @auth
+
                 <div class="hidden sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                        </svg>
-                        {{ __('Feed') }}
-                    </x-jet-nav-link>
-                </div>
-                <div class="hidden sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                        {{ __('Connections') }}
-                    </x-jet-nav-link>
-                </div>
-                @endauth
-                <div class="hidden sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                    <x-jet-nav-link href="{{ route('explore.index') }}" :active="request()->routeIs('explore.index')">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -62,7 +41,7 @@
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                    <x-jet-nav-link href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -71,6 +50,31 @@
                         {{ __('Shop') }}
                     </x-jet-nav-link>
                 </div>
+
+                @auth
+                <div class="hidden sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('feed.index') }}" :active="request()->routeIs('feed.index')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                        </svg>
+                        {{ __('Feed') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('connection.index') }}"
+                        :active="request()->routeIs('connection.index')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        {{ __('Connections') }}
+                    </x-jet-nav-link>
+                </div>
+                @endauth
+
                 @guest
                 <div class="hidden sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
@@ -119,12 +123,6 @@
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link>
 
-                            @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                            <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
-                                {{ __('API Tokens') }}
-                            </x-jet-dropdown-link>
-                            @endif
-
                             <div class="border-t border-gray-100"></div>
 
                             <!-- Authentication -->
@@ -172,7 +170,8 @@
         <div class="py-1 border-t border-gray-200">
             @guest
             <div class="space-y-1">
-                <x-jet-responsive-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                <x-jet-responsive-nav-link href="{{ route('explore.index') }}"
+                    :active="request()->routeIs('explore.index')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -180,7 +179,7 @@
                     </svg>
                     {{ __('Explore') }}
                 </x-jet-responsive-nav-link>
-                <x-jet-responsive-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                <x-jet-responsive-nav-link href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -223,24 +222,8 @@
             </div>
             {{-- Authenticated menu --}}
             <div class="mt-3 space-y-1">
-
-                <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                    </svg>
-                    {{ __('Feed') }}
-                </x-jet-responsive-nav-link>
-                <x-jet-responsive-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                    {{ __('Connections') }}
-                </x-jet-responsive-nav-link>
-                <x-jet-responsive-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                <x-jet-responsive-nav-link href="{{ route('explore.index') }}"
+                    :active="request()->routeIs('explore.index')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -248,13 +231,30 @@
                     </svg>
                     {{ __('Explore') }}
                 </x-jet-responsive-nav-link>
-                <x-jet-responsive-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                <x-jet-responsive-nav-link href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
                     {{ __('Shop') }}
+                </x-jet-responsive-nav-link>
+                <x-jet-responsive-nav-link href="{{ route('feed.index') }}" :active="request()->routeIs('feed.index')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                    </svg>
+                    {{ __('Feed') }}
+                </x-jet-responsive-nav-link>
+                <x-jet-responsive-nav-link href="{{ route('connection.index') }}"
+                    :active="request()->routeIs('connection.index')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    {{ __('Connections') }}
                 </x-jet-responsive-nav-link>
 
                 <!-- Account Management -->
@@ -267,13 +267,6 @@
                     </svg>
                     {{ __('Profile') }}
                 </x-jet-responsive-nav-link>
-
-                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}"
-                    :active="request()->routeIs('api-tokens.index')">
-                    {{ __('API Tokens') }}
-                </x-jet-responsive-nav-link>
-                @endif
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

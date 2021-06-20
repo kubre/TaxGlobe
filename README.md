@@ -5,6 +5,7 @@
 -   `(20/jun 01:32am)` Init new repo with jetstream and modified styles and navbar
 -   `(20/jun 11:50pm)` Registration from old project migrated properly
 -   `(20/jun 11:51pm)` Major part of main feed design completed, several components modified
+-   `(21/jun 00:57am)` Created Controllers for top pages mapped navigation
 
 ## :rocket: Feature List
 

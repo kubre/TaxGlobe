@@ -10,7 +10,7 @@
                 Jim Doe
             </div>
         </div>
-        <div class="">
+        <div class="text-gray-500 text-sm">
             1 min
         </div>
     </div>

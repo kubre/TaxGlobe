@@ -16,8 +16,8 @@
             </div>
         </div>
     </div>
-    {{-- FAB --}}
 
+    {{-- FAB --}}
     @auth
     <x-social-media.create-fab />
     @endauth
