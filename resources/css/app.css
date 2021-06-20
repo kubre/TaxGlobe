@@ -1,3 +1,32 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.reading > p {
+    @apply mb-4;
+}
+
+.marquee div {
+    @apply transform -translate-x-full;
+    animation: marquee 15s linear infinite;
+}
+
+@media screen and (min-width: 691px) {
+    .marquee div {
+        animation: marquee 35s linear infinite;
+    }
+}
+
+@keyframes marquee {
+    0% {
+        @apply transform translate-x-full;
+    }
+
+    100% {
+        @apply transform -translate-x-full;
+    }
+}
+
+[x-cloak] {
+    display: none !important;
+}

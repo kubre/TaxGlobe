@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="space-x-8 -my-px ml-10 flex items-center flex-fill">
+                <div class="-my-px ml-4 mr-1 sm:ml-10 flex items-center flex-fill">
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"

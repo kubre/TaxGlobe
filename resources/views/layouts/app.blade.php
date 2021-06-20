@@ -26,7 +26,7 @@
     <x-jet-banner />
 
     <div class="min-h-screen bg-gray-200">
-        @livewire('navigation-menu')
+        <x-partials.navigation-menu />
 
         {{-- <!-- Page Heading -->
         @if (isset($header))
@@ -41,11 +41,15 @@
     <main>
         {{ $slot }}
     </main>
+
+    <x-partials.footer />
     </div>
 
     @stack('modals')
 
     @livewireScripts
+
+    {{ $scripts ?? '' }}
 </body>
 
 </html>
