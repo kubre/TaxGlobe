@@ -6,7 +6,6 @@ use App\Models\Post;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
-use Barryvdh\Debugbar\Facade as Debugbar;
 use Illuminate\Support\Facades\Storage;
 
 class PostForm extends Component
@@ -39,18 +38,20 @@ class PostForm extends Component
 
     public function save(Post $post)
     {
-        $file = $this->image->store('/', 'posts');
+        if (!is_null($this->image)) {
+            $file = $this->image->store('/', 'posts');
+        }
 
         $saved = $post->fill([
             'title' => $this->title,
             'body' => $this->body,
-            'image' => $file,
-            'slug' => Str::slug($this->title) . '-' . \time(),
+            'image' => $file ?? null,
+            'slug' => Str::of($this->title)->limit(80)->slug()->append('-', Str::random(12)),
             'user_id' => \auth()->id(),
             'type' => $this->type,
         ])->save();
 
-        if (!$saved) {
+        if (!$saved && !is_null($this->image)) {
             Storage::disk('posts')->delete($file);
         }
 

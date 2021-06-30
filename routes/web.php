@@ -32,8 +32,9 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('connection.index');
     Route::get('/feed', SocialMedia\FeedController::class)
         ->name('feed.index');
-    Route::get('/posts/{type}', SocialMediaComponents\PostForm::class)
+    Route::get('/posts/create/{type}', SocialMediaComponents\PostForm::class)
         ->name('posts.form');
+    Route::get('/posts/{post:slug}', SocialMedia\ArticleController::class)->name('post.show');
 });
 
 Route::view('/about', 'about')->name('about.show');
@@ -41,3 +42,5 @@ Route::view('/about', 'about')->name('about.show');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::post('/imageUpload', [SocialMedia\MediaController::class, 'uploadArticleImage'])->name('article.image.upload');

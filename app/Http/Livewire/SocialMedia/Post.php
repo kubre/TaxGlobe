@@ -9,6 +9,8 @@ class Post extends Component
 {
     public PostModel $post;
 
+    public bool $show = false;
+
     public function render()
     {
         return view('components.social-media.post');

@@ -41,7 +41,7 @@
         </x-slot>
         @endguest
 
-        <livewire:social-media.post-form type='post' isCompact='true' />
+        <livewire:social-media.post-form type='image' isCompact='true' />
 
         @foreach ($posts as $post)
         <livewire:social-media.post :post='$post' />

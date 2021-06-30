@@ -21,6 +21,8 @@
 
     {{ $head ?? '' }}
 
+    @stack('styles')
+
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
@@ -52,7 +54,7 @@
 
     @livewireScripts
 
-    {{ $scripts ?? '' }}
+    @stack('scripts')
 </body>
 
 </html>
