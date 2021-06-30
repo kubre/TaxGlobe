@@ -1,4 +1,4 @@
-<div class="{{ $show ? '' : 'border-b border-gray-300' }} py-4">
+<div class="{{ $fullPage ? '' : 'border-b border-gray-300' }} py-4">
 
     {{-- Title --}}
     <div class="px-4 lg:px-8 py-2 flex items-center justify-between">
@@ -41,9 +41,9 @@
             </div>
         @elseif($post->type === 'article')
             <div class="px-4 lg:px-8 pb-2">
-                <a {{ $show ? '' : 'href=""' }} class="flex max-w-full">
-                    <div class="w-full flex flex-col {{ $show ? '' : 'border border-gray-300 rounded-lg p-4' }}">
-                        @if ($show)
+                <a {{ $fullPage ? '' : 'href=""' }} class="flex max-w-full">
+                    <div class="w-full flex flex-col {{ $fullPage ? '' : 'border border-gray-300 rounded-lg p-4' }}">
+                        @if ($fullPage)
                             <h3 class="font-bold text-2xl">{{ $post->title }}</h3>
                             <div class="mt-4">
                                 {!! $post->body !!}
@@ -78,6 +78,7 @@
     {{-- Bootom Bar --}}
     <div class="flex justify-between px-4 lg:px-8 mt-2">
         <div class="flex space-x-2">
+            {{-- Like --}}
             <x-jet-secondary-button variant='white'>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 fill-current" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
@@ -85,7 +86,8 @@
                         d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
             </x-jet-secondary-button>
-            <x-jet-secondary-button variant='white'>
+            {{-- Comment --}}
+            <x-jet-secondary-button wire:click="loadComments" variant='white'>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -125,8 +127,8 @@
                         {{ __('Twitter') }}
                     </x-jet-dropdown-link>
                     <x-jet-dropdown-link class="flex items-center" target="_blank"
-                        href="https://www.linkedin.com/sharing/share-offsite/?url=https://kubre.in">
-                        <svg fill=" #0A66C2" stroke=" currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        href="https://www.linkedin.com/sharing/share-offsite/?url={{ route('post.show', $post->slug) }}">
+                        <svg fill="#0A66C2" stroke=" currentColor" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="0" class="w-4 h-4 mr-2" viewBox="0 0 24 24">
                             <path stroke="none"
                                 d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
@@ -188,6 +190,46 @@
             </x-jet-dropdown>
         </div>
     </div>
+
+    @if ($showComments || $fullPage)
+        <div class="mt-2 px-4 lg:px-8 ">
+            @auth
+                <form wire:submit.prevent="publishComment">
+                    <div class="flex items-center space-x-1">
+                        <div class='flex-grow' x-data="{ comment: @entangle('commentDraft').defer }">
+                            <textarea x-model='comment'
+                                class="border-gray-300 focus:border-indigo-300 rounded-md shadow-sm w-full resize-none {{ $fullPage ? 'h-28' : 'h-10' }}"
+                                x-bind:class='{ "ring ring-red-300 focus:ring focus:ring-red-300" : (comment && comment.length > 500) }'
+                                name="commentDraft" id='commentDraft' placeholder='Write a comment'
+                                wire:model.defer="commentDraft"></textarea>
+                            <div class='-mt-7 mr-2 text-gray-500 text-right'
+                                x-text='comment ? comment.length + "/500" : "0/500"'>
+                            </div>
+                        </div>
+                        <div>
+                            <x-jet-secondary-button wire:loading.attr="disabled" type='submit' variant='white' class="pr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform rotate-90" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                </svg>
+                            </x-jet-secondary-button>
+                        </div>
+                    </div>
+                    @error('commentDraft')
+                        <div class="text-red-500 text-sm mt-1">Comment is requried and should be less than 500 characters.</div>
+                    @enderror
+                </form>
+            @endauth
+            <div class="mt-2">
+                @foreach ($comments as $comment)
+                    <livewire:common.comment :comment='$comment' :wire:key="'comment-'.$post->id.'-'.$comment->id" />
+                @endforeach
+                {{ $comments->links('components.common.load-more') }}
+            </div>
+        </div>
+    @endif
+
     @once
         @push('scripts')
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

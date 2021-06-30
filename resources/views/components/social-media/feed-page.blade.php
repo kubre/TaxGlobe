@@ -1,4 +1,4 @@
-<x-app-layout>
+<div>
     <div class="flex flex items-center text-gray-900 bg-blue-100 rounded">
         <div class="px-4 py-3 whitespace-nowrap">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform -rotate-12" fill="none" viewBox="0 0 24 24"
@@ -42,8 +42,11 @@
         <livewire:social-media.post-form type='post' isCompact='true' />
 
         @foreach ($posts as $post)
-            <livewire:social-media.post :post='$post' />
+            <livewire:social-media.post :post='$post' :show='false' :wire:key="'post-'.$post->id" />
         @endforeach
+        <div class="px-4 py-2">
+            {{ $posts->links() }}
+        </div>
 
         <x-slot name="right">
             <div class="bg-white rounded-lg h-64 px-6 py-4">
@@ -77,4 +80,4 @@
             </div>
         </x-slot>
     </x-partials.grid>
-</x-app-layout>
+</div>

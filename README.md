@@ -6,6 +6,10 @@
 -   `(20/jun 11:50pm)` Registration from old project migrated properly
 -   `(20/jun 11:51pm)` Major part of main feed design completed, several components modified
 -   `(21/jun 00:57am)` Created Controllers for top pages mapped navigation
+-   `(30/jun 09:31am)` Working demo is completed
+-   `(30/jun 09:45am)` Addded ability to add images in CKEditor
+-   `(30/jun 11:56am)` Social Share added
+-   `(01/jul 00:32am)` Added comments with pagination for post and comments and replaced FeedController with FeedPage component
 
 ## :rocket: Feature List
 

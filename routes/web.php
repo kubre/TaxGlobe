@@ -30,12 +30,14 @@ Route::get('/shop', Shop\StoreFrontController::class)
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/connections', SocialMedia\ConnectionController::class)
         ->name('connection.index');
-    Route::get('/feed', SocialMedia\FeedController::class)
+    Route::get('/feed', SocialMediaComponents\FeedPage::class)
         ->name('feed.index');
     Route::get('/posts/create/{type}', SocialMediaComponents\PostForm::class)
         ->name('posts.form');
-    Route::get('/posts/{post:slug}', SocialMedia\ArticleController::class)->name('post.show');
 });
+
+Route::get('/posts/{post:slug}', SocialMedia\ArticleController::class)
+    ->name('post.show');
 
 Route::view('/about', 'about')->name('about.show');
 
