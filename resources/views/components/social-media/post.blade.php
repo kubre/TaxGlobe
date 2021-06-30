@@ -104,7 +104,8 @@
                 </x-slot>
 
                 <x-slot name="content">
-                    <x-jet-dropdown-link class="flex items-center" href="{{ route('profile.show') }}">
+                    <x-jet-dropdown-link class="flex items-center" target='_blank'
+                        href="https://www.facebook.com/sharer/sharer.php?u={{ route('post.show', $post->slug) }}">
                         <svg fill="#1877F2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             class="w-4 h-4 mr-2" viewBox="0 0 24 24">
                             <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
@@ -112,7 +113,9 @@
                         </svg>
                         {{ __('Facebook') }}
                     </x-jet-dropdown-link>
-                    <x-jet-dropdown-link class="flex items-center" href="{{ route('profile.show') }}">
+                    <x-jet-dropdown-link
+                        href="https://twitter.com/share?ref_src={{ route('post.show', $post->slug) }}"
+                        target='_blank' class="flex items-center twitter-share-button" data-show-count="true">
                         <svg fill="#1DA1F2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             class="w-4 h-4 mr-2" viewBox="0 0 24 24">
                             <path
@@ -121,8 +124,9 @@
                         </svg>
                         {{ __('Twitter') }}
                     </x-jet-dropdown-link>
-                    <x-jet-dropdown-link class="flex items-center" href="{{ route('profile.show') }}">
-                        <svg fill="#0A66C2  " stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                    <x-jet-dropdown-link class="flex items-center" target="_blank"
+                        href="https://www.linkedin.com/sharing/share-offsite/?url=https://kubre.in">
+                        <svg fill=" #0A66C2" stroke=" currentColor" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="0" class="w-4 h-4 mr-2" viewBox="0 0 24 24">
                             <path stroke="none"
                                 d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
@@ -131,7 +135,9 @@
                         </svg>
                         {{ __('Linked In') }}
                     </x-jet-dropdown-link>
-                    <x-jet-dropdown-link class="flex items-center" href="{{ route('profile.show') }}">
+                    <x-jet-dropdown-link class="flex items-center"
+                        href="https://api.whatsapp.com/send?text={{ route('post.show', $post->slug) }}"
+                        target="_blank">
                         <svg fill="#25D366" class="h-4 w-4 mr-2" role="img" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -182,4 +188,13 @@
             </x-jet-dropdown>
         </div>
     </div>
+    @once
+        @push('scripts')
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <script src="https://platform.linkedin.com/in.js" type="text/javascript">
+                lang: en_US
+            </script>
+            <script type="IN/Share" data-url="https://www.linkedin.com"></script>
+        @endpush
+    @endonce
 </div>

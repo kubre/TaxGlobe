@@ -1,11 +1,9 @@
 <x-app-layout>
     <div class="flex flex items-center text-gray-900 bg-blue-100 rounded">
         <div class="px-4 py-3 whitespace-nowrap">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 transform -rotate-12" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2"
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform -rotate-12" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
             </svg>
         </div>
@@ -24,27 +22,27 @@
 
     {{-- FAB --}}
     @auth
-    <x-social-media.create-fab />
+        <x-social-media.create-fab />
     @endauth
 
     <x-partials.grid responsiveLeft='true'>
         @auth
-        <x-slot name="left">
-            <livewire:social-media.user-card />
-        </x-slot>
+            <x-slot name="left">
+                <livewire:social-media.user-card />
+            </x-slot>
         @endauth
 
         @guest
-        <x-slot name="left">
-            <div class="bg-white rounded shadow overflow-hidden text-center">
-            </div>
-        </x-slot>
+            <x-slot name="left">
+                <div class="bg-white rounded shadow overflow-hidden text-center">
+                </div>
+            </x-slot>
         @endguest
 
-        <livewire:social-media.post-form type='image' isCompact='true' />
+        <livewire:social-media.post-form type='post' isCompact='true' />
 
         @foreach ($posts as $post)
-        <livewire:social-media.post :post='$post' />
+            <livewire:social-media.post :post='$post' />
         @endforeach
 
         <x-slot name="right">
@@ -52,26 +50,21 @@
                 <h3 class="text-xl">Tax Calendar</h3>
             </div>
             <div class="h-64">
-                <div
-                    class="bg-blue-200 flex flex-col justify-center items-center max-h-full">
+                <div class="bg-blue-200 flex flex-col justify-center items-center max-h-full">
 
-                    <div class=" mx-auto relative"
-                        x-data="{ activeSlide: 1, slides: [1, 2, 3, 4, 5] }">
+                    <div class=" mx-auto relative" x-data="{ activeSlide: 1, slides: [1, 2, 3, 4, 5] }">
                         <!-- Slides -->
                         <template x-for="slide in slides" :key="slide">
                             <div x-show="activeSlide === slide"
                                 class="p-24 font-bold text-4xl h-64 flex items-center bg-teal-500 text-white rounded-lg">
-                                <span class="w-6 text-center"
-                                    x-text="slide"></span>
+                                <span class="w-6 text-center" x-text="slide"></span>
                                 <span class="text-teal-300">/</span>
-                                <span class="w-6 text-center"
-                                    x-text="slides.length"></span>
+                                <span class="w-6 text-center" x-text="slides.length"></span>
                             </div>
                         </template>
 
                         <!-- Buttons -->
-                        <div
-                            class="absolute w-full flex items-center justify-center px-4">
+                        <div class="absolute w-full flex items-center justify-center px-4">
                             <template x-for="slide in slides" :key="slide">
                                 <button
                                     class="flex-1 w-4 h-2 mt-4 mx-2 mb-0 rounded-full overflow-hidden transition-colors duration-200 ease-out hover:bg-teal-600 hover:shadow-lg"
