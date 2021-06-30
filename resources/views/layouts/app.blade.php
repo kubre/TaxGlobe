@@ -10,13 +10,16 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Nunito:wght@400;600;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Nunito:wght@400;600;700&display=swap"
         rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
     @livewireStyles
+
+    {{ $head ?? '' }}
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>

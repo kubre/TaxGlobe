@@ -17,7 +17,7 @@ class AddDetailsToUsers extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('username', 25)->unique();
             $table->string('profession');
-            $table->char('gender', 11);
+            $table->enum('gender', ['Male', 'Female', 'Transgender', 'Other']);
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Shop;
 use App\Http\Controllers\SocialMedia;
+use App\Http\Livewire\SocialMedia as SocialMediaComponents;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +20,21 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', SocialMedia\ExploreController::class)->name('explore.index');
-Route::get('/explore', SocialMedia\ExploreController::class)->name('explore.explore');
-Route::get('/connections', SocialMedia\ConnectionController::class)->name('connection.index');
-Route::get('/feed', SocialMedia\FeedController::class)->name('feed.index');
-Route::get('/shop', Shop\StoreFrontController::class)->name('shop.index');
+Route::get('/', SocialMedia\ExploreController::class)
+    ->name('explore.index');
+Route::get('/explore', SocialMedia\ExploreController::class)
+    ->name('explore.explore');
+Route::get('/shop', Shop\StoreFrontController::class)
+    ->name('shop.index');
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/connections', SocialMedia\ConnectionController::class)
+        ->name('connection.index');
+    Route::get('/feed', SocialMedia\FeedController::class)
+        ->name('feed.index');
+    Route::get('/posts/{type}', SocialMediaComponents\PostForm::class)
+        ->name('posts.form');
+});
 
 Route::view('/about', 'about')->name('about.show');
 
