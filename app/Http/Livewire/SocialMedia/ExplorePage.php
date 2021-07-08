@@ -8,6 +8,6 @@ class ExplorePage extends Component
 {
     public function render()
     {
-        return view('livewire.social-media.explore-page');
+        return view('components.social-media.explore-page');
     }
 }

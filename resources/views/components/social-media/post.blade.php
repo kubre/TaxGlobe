@@ -2,18 +2,21 @@
 
     {{-- Title --}}
     <div class="px-4 lg:px-8 py-2 flex items-center justify-between">
-        <div class="flex items-center">
-            <img class="h-8 w-8 rounded-full object-cover" src="{{ $post->user->profile_photo_url }}"
-                alt="{{ $post->user->name }}" />
-            <div class="ml-3">
-                <span class="font-bold mr-1">{{ $post->user->name }}</span>
-                @if(!is_null($post->user->profession))
-                <span class="text-gray-500 text-xs">
-                    ({{ $post->user->profession }})
-                </span>
-                @endif
+        <a href="{{ route('user.profile', $post->user_id) }}">
+            <div class="flex items-center">
+                <img class="h-8 w-8 rounded-full object-cover" src="{{ $post->user->profile_photo_url }}"
+                    alt="{{ $post->user->name }}" />
+                <div class="ml-3">
+                    <span class="font-bold mr-1">{{ $post->user->name }}</span>
+                    @if(!is_null($post->user->profession))
+                    <span class="text-gray-500 text-xs">
+                        ({{ $post->user->profession }})
+                    </span>
+                    @endif
+                </div>
             </div>
-        </div>
+        </a>
+
         <div class="text-gray-500 text-sm">
             {{ $post->created_at->diffForHumans() }}
         </div>

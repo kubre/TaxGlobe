@@ -28,7 +28,7 @@
     <x-partials.grid responsiveLeft='true'>
         @auth
             <x-slot name="left">
-                <livewire:social-media.user-card />
+                <livewire:social-media.user-card :user='Auth::user()' />
             </x-slot>
         @endauth
 

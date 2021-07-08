@@ -84,9 +84,37 @@ class User extends Authenticatable
         $this->role === self::ROLE_USER;
     }
 
-
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'connections', 'following_id', 'follower_id');
+    }
+
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'connections', 'follower_id', 'following_id');
+    }
+
+    public function toggleFollow($user)
+    {
+        $this->followings()->toggle($user);
+    }
+
+    public function isFollowing(User $user)
+    {
+        return $this->followings()
+            ->where('following_id', $user->id)
+            ->exists();
+    }
+
+    public function hasFollower(User $user)
+    {
+        return $this->followers()
+            ->where('follower_id', $user->id)
+            ->exists();
     }
 }
