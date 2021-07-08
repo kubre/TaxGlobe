@@ -29,7 +29,7 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         $this->configurePermissions();
 
-        Fortify::authenticateUsing([new AuthenticateLoginAttempt(), 'handle']);
+        // Fortify::authenticateUsing([new AuthenticateLoginAttempt(), 'handle']);
 
         Jetstream::deleteUsersUsing(DeleteUser::class);
     }

@@ -15,9 +15,10 @@ class AddDetailsToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('username', 25)->unique();
-            $table->string('profession');
-            $table->enum('gender', ['Male', 'Female', 'Transgender', 'Other']);
+            $table->string('username', 25)->nullable()->unique();
+            $table->string('profession')->nullable();
+            $table->string('bio', 255)->nullable();
+            $table->enum('gender', ['Male', 'Female', 'Transgender', 'Other'])->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
@@ -27,7 +28,7 @@ class AddDetailsToUsers extends Migration
             $table->string('whatsapp_contact')->nullable();
             $table->unsignedBigInteger('following_count')->nullable();
             $table->unsignedBigInteger('followers_count')->nullable();
-            $table->unsignedBigInteger('points')->nullable();
+            $table->unsignedBigInteger('points')->default(0);
             $table->unsignedSmallInteger('role')->default(User::ROLE_USER);
             $table->softDeletes();
         });

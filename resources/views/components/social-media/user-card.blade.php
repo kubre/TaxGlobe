@@ -8,10 +8,16 @@
         </div>
 
         <div class="z-10">
-            <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-            <div class="font-medium text-sm text-gray-500">
-                {{ Auth::user()->username }} ({{ Auth::user()->profession }})
+            <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}
+                @if(!is_null(Auth::user()->profession))
+                    <span>{{ Auth::user()->profession }}</span>
+                @endif
             </div>
+            @if(!is_null(Auth::user()->bio))
+                <div class="font-medium text-base text-gray-800">
+                    {{ Auth::user()->bio }}
+                </div>
+            @endif
         </div>
     </div>
     <div class="grid grid-cols-2 gap-y-4 justify-between mt-6">
@@ -29,37 +35,40 @@
         </div>
         <div class="font-medium text-base text-center text-gray-500">
             <div class="text-2xl font-bold">
-                30
+                {{ Auth::user()->points }}
             </div>
             <span>Points</span>
         </div>
         <div class="font-medium text-base text-center text-gray-500">
             <div class="text-2xl font-bold">
-                12
+                @php
+                    Auth::user()->loadCount('posts')
+                @endphp 
+                {{ Auth::user()->posts_count }}
             </div>
             <span>Posts</span>
         </div>
     </div>
     <div class="py-6 px-6">
-        @if(false)
-        @csrf
-        <x-jet-button>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-            </svg>
-            {{ __('Follow') }}
-        </x-jet-button>
+        @if (false)
+            @csrf
+            <x-jet-button>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                </svg>
+                {{ __('Follow') }}
+            </x-jet-button>
         @else
-        <x-jet-button x-data='' @click="window.location = '{{ route('profile.show') }}'">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-            </svg>
-            {{ __('Edit Profile') }}
-        </x-jet-button>
+            <x-jet-button x-data='' @click="window.location = '{{ route('profile.show') }}'">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+                {{ __('Edit Profile') }}
+            </x-jet-button>
         @endif
     </div>
 </div>

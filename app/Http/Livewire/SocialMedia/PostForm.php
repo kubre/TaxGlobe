@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\SocialMedia;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
@@ -53,6 +54,10 @@ class PostForm extends Component
 
         if (!$saved && !is_null($this->image)) {
             Storage::disk('posts')->delete($file);
+        }
+
+        if ($saved) {
+            \auth()->user()->increment('points');
         }
 
         return \redirect()->route('feed.index');

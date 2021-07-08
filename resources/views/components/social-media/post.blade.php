@@ -7,9 +7,11 @@
                 alt="{{ $post->user->name }}" />
             <div class="ml-3">
                 <span class="font-bold mr-1">{{ $post->user->name }}</span>
+                @if(!is_null($post->user->profession))
                 <span class="text-gray-500 text-xs">
                     ({{ $post->user->profession }})
                 </span>
+                @endif
             </div>
         </div>
         <div class="text-gray-500 text-sm">
