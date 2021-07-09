@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateConnectionsTable extends Migration
+class CreateLikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,17 @@ class CreateConnectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('connections', function (Blueprint $table) {
-            $table->foreignId('follower_id')
-                ->index('connections_follower_index')
-                ->constrained('users')
+        Schema::create('likes', function (Blueprint $table) {
+             $table->foreignId('user_id')
+                ->index('likes_user_index')
+                ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('following_id')
-                ->index('connections_following_index')
-                ->constrained('users')
+            $table->foreignId('post_id')
+                ->index('likes_post_index')
+                ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->timestamp('followed_at')
-                ->useCurrent();
         });
     }
 
@@ -36,6 +34,6 @@ class CreateConnectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('connections');
+        Schema::dropIfExists('likes');
     }
 }

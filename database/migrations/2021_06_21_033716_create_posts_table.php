@@ -20,7 +20,8 @@ class CreatePostsTable extends Migration
             $table->mediumText('body')->nullable();
             $table->string('image')->nullable();
             $table->enum('type', ['article', 'image', 'post']);
-            $table->unsignedInteger('appreciations')->default(0);
+            $table->unsignedInteger('like_count')->default(0);
+            $table->unsignedInteger('comment_count')->default(0);
             $table->foreignId('user_id')
                 ->constrained()
                 ->cascadeOnDelete()

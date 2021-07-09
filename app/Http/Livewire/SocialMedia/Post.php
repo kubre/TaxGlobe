@@ -24,17 +24,29 @@ class Post extends Component
 
     protected $listeners = ['commentChanged' => 'loadComments'];
 
+    public $hasLiked;
+
     public $pageName = 'commentPage';
+
+    public function mount()
+    {
+        $this->hasLiked = $this->post->likedUsers->isNotEmpty();
+    }
 
     public function render()
     {
         if ($this->showComments || $this->fullPage) {
             $this->loadComments();
         }
-
         return view('components.social-media.post', [
             'comments' => $this->comments,
         ]);
+    }
+
+    public function toggleLike()
+    {
+        $this->hasLiked = $this->post->toggleLikeFrom(\auth()->id());
+        $this->emit('toggledLike', $this->post->id);
     }
 
     public function publishComment()
@@ -43,10 +55,7 @@ class Post extends Component
             'commentDraft' => ['required', 'string', 'max:500'],
         ]);
 
-        $this->post->comments()->create([
-            'body' => $this->commentDraft,
-            'user_id' => auth()->id(),
-        ]);
+        $this->post->addCommentFrom($this->commentDraft, \auth()->id());
 
         $this->resetPage();
 
@@ -62,5 +71,7 @@ class Post extends Component
             ->with('user')
             ->orderBy('id', 'DESC')
             ->simplePaginate(5, ['*'], $this->pageName);
+
+        $this->emitUp('commentsChanged');
     }
 }

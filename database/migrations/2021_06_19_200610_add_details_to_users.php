@@ -26,8 +26,6 @@ class AddDetailsToUsers extends Migration
             $table->string('professional_email')->nullable();
             $table->string('contact')->nullable();
             $table->string('whatsapp_contact')->nullable();
-            $table->unsignedBigInteger('following_count')->nullable();
-            $table->unsignedBigInteger('followers_count')->nullable();
             $table->unsignedBigInteger('points')->default(0);
             $table->unsignedSmallInteger('role')->default(User::ROLE_USER);
             $table->softDeletes();

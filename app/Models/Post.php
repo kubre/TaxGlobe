@@ -17,6 +17,26 @@ class Post extends Model
         'title', 'slug', 'body', 'image', 'type', 'user_id',
     ];
 
+    /* Central Logic */
+
+    public function toggleLikeFrom(int $userId)
+    {
+        $changes = $this->likedUsers()->toggle($userId);
+        $hasLiked = empty($changes['detached']);
+        $this->increment('like_count', $hasLiked ? 1 : -1);
+        return $hasLiked;
+    }
+
+    public function addCommentFrom(string $comment, int $userId)
+    {
+        $this->increment('comment_count');
+        return $this->comments()->create([
+            'body' => $comment,
+            'user_id' => $userId,
+        ]);
+    }
+
+    /* Relations */
 
     public function user()
     {
@@ -26,5 +46,16 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function likedUsers()
+    {
+        return $this->belongsToMany(User::class, 'likes');
+    }
+
+    public function likedBy(User $user)
+    {
+        return $this->belongsToMany(User::class, 'likes')
+            ->wherePivot('user_id', $user->id);
     }
 }

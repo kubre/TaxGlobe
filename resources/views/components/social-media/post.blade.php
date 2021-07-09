@@ -25,7 +25,7 @@
     {{-- Post Cotent --}}
     <div class="my-2">
         @if ($post->type === 'post')
-            <div class="max-w-lg flex mx-auto px-4 lg:px-0">
+            <div class="max-w-full w-full flex mx-auto px-4 lg:px-8">
                 <svg class="h-5 w-5 flex-none" viewBox="0 0 24 24" fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -84,20 +84,26 @@
     <div class="flex justify-between px-4 lg:px-8 mt-2">
         <div class="flex space-x-2">
             {{-- Like --}}
-            <x-jet-secondary-button variant='white'>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 fill-current" fill="none"
+            <x-jet-secondary-button wire:click="toggleLike" variant='white'>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1 {{ $hasLiked ? 'text-red-500 fill-current' : ''  }}" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
+                <span class="text-base">
+                    {{ number_shorten($post->like_count) }}
+                </span>
             </x-jet-secondary-button>
             {{-- Comment --}}
             <x-jet-secondary-button wire:click="loadComments" variant='white'>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
+                <span class="text-base">
+                    {{ number_shorten($post->comment_count) }}
+                </span>
             </x-jet-secondary-button>
             <x-jet-dropdown align="left" width="48">
                 <x-slot name="trigger">
@@ -244,4 +250,5 @@
             <script type="IN/Share" data-url="https://www.linkedin.com"></script>
         @endpush
     @endonce
+
 </div>

@@ -10,6 +10,9 @@
 -   `(30/jun 09:45am)` Addded ability to add images in CKEditor
 -   `(30/jun 11:56am)` Social Share added
 -   `(01/jul 00:32am)` Added comments with pagination for post and comments and replaced FeedController with FeedPage component
+-   `(08/jul 10:40pm)` Finalized register
+-   `(08/jul 10:40pm)` Added User card and follow system
+-   `(09/jul 08:58pm)` Added ability to like and count on like & comment, added index in previous migrations
 
 ## :rocket: Feature List
 
@@ -75,18 +78,3 @@
 
 -   `(09/jun 05:30pm)` Added Complete Feature List
 -   `(19/jun 10:20am)` Added details in registration form, enabled profile photo
-
-## Scratch Code
-
-```php
-public function publish(?Post $post, PostRequest $request): RedirectResponse
-{
-    $post->fill($request->merge([
-        'user_id' => auth()->id(),
-    ])->all())->save();
-
-    Alert::success('Published posts successfully on ' . $post->updated_at->format('d-M-Y h:i'));
-
-    return redirect()->back();
-}
-```

@@ -17,6 +17,7 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->string('body', 500);
             $table->foreignId('post_id')
+                ->index('comments_post_index')
                 ->constrained('posts')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();

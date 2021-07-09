@@ -5,7 +5,6 @@ namespace App\Http\Livewire\SocialMedia;
 use App\Models\Post as PostModel;
 use App\Traits\CustomWithPagination;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 class FeedPage extends Component
 {
@@ -13,11 +12,21 @@ class FeedPage extends Component
 
     public $pageName = 'postPage';
 
+    protected $listeners = [
+        'toggledLike' => '$refresh',
+        // 'commentsChanged' => '$refresh',
+    ];
+
     public function render()
     {
-        $posts = PostModel::with('user')
+        // @todo Change how like count is loaded
+        $posts = PostModel::with(['user', 'likedUsers' => function ($query) {
+            return $query->whereId(auth()->id());
+        }])
+            // ->withCount('comments', 'likedUsers')
             ->orderBy('id', 'DESC')
             ->paginate(5, ['*'], $this->pageName);
+
         return view('components.social-media.feed-page', \compact('posts'));
     }
 }
