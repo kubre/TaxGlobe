@@ -71,14 +71,15 @@
         @endif
     </div>
 
-    <div class="flex space-x-2 flex-wrap px-4 lg:px-8 pt-2">
+    {{-- @todo Tags --}}
+    {{-- <div class="flex space-x-2 flex-wrap px-4 lg:px-8 pt-2">
         <a href=""
             class="bg-gray-100 rounded-full px-2 text-gray-700 hover:text-white hover:bg-gray-700 transition border border-gray-700">#work</a>
         <a href=""
             class="bg-gray-100 rounded-full px-2 text-gray-700 hover:text-white hover:bg-gray-700 transition border border-gray-700">#tax</a>
         <a href=""
             class="bg-gray-100 rounded-full px-2 text-gray-700 hover:text-white hover:bg-gray-700 transition border border-gray-700">#ca</a>
-    </div>
+    </div> --}}
 
     {{-- Bootom Bar --}}
     <div class="flex justify-between px-4 lg:px-8 mt-2">
@@ -162,13 +163,14 @@
             </x-jet-dropdown>
         </div>
         <div class="flex space-x-2">
-            <x-jet-secondary-button variant='white'>
+            {{-- Bookmark --}}
+            {{-- <x-jet-secondary-button variant='white'>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                 </svg>
-            </x-jet-secondary-button>
+            </x-jet-secondary-button> --}}
             <x-jet-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <x-jet-secondary-button variant='white'>
@@ -189,14 +191,6 @@
                         </svg>
                         {{ __('Report Post') }}
                     </x-jet-dropdown-link>
-                    <x-jet-dropdown-link class="flex items-center" href="{{ route('profile.show') }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        {{ __('Go to Profile') }}
-                    </x-jet-dropdown-link>
                 </x-slot>
             </x-jet-dropdown>
         </div>
@@ -209,11 +203,11 @@
                     <div class="flex items-center space-x-1">
                         <div class='flex-grow' x-data="{ comment: @entangle('commentDraft').defer }">
                             <textarea x-model='comment'
-                                class="border-gray-300 focus:border-indigo-300 rounded-md shadow-sm w-full resize-none {{ $fullPage ? 'h-28' : 'h-10' }}"
+                                class="border-gray-300 focus:border-indigo-300 rounded-md shadow-sm w-full resize-none {{ $fullPage ? 'h-28' : 'h-11' }}"
                                 x-bind:class='{ "ring ring-red-300 focus:ring focus:ring-red-300" : (comment && comment.length > 500) }'
                                 name="commentDraft" id='commentDraft' placeholder='Write a comment'
                                 wire:model.defer="commentDraft"></textarea>
-                            <div class='-mt-7 mr-2 text-gray-500 text-right'
+                            <div class='-mt-8 mr-2 text-gray-500 text-right'
                                 x-text='comment ? comment.length + "/500" : "0/500"'>
                             </div>
                         </div>

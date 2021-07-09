@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', SocialMedia\ExploreController::class)
+Route::get('/', SocialMediaComponents\ExplorePage::class)
     ->name('explore.index');
-Route::get('/explore', SocialMedia\ExploreController::class)
+Route::redirect('/explore', '/')
     ->name('explore.explore');
 Route::get('/shop', Shop\StoreFrontController::class)
     ->name('shop.index');

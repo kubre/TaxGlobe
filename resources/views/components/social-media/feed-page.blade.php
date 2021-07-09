@@ -41,9 +41,16 @@
 
         <livewire:social-media.post-form type='post' isCompact='true' />
 
-        @foreach ($posts as $post)
+        @forelse ($posts as $post)
             <livewire:social-media.post :post='$post' :show='false' :wire:key="'post-'.$post->id" />
-        @endforeach
+        @empty
+            <div class="px-4 lg:px-8 py-4 mt-2">
+                <div class="text-3xl">This page seems empty!</div>
+                <div class="mt-2 text-lg">
+                    It will fill with the posts of people you admire. Start <a class="text-blue-500" href="{{ route('explore.index') }}">exploring</a> and follow people to receive their latest posts here.
+                </div>
+            </div>
+        @endforelse
         <div class="px-4 py-2">
             {{ $posts->links() }}
         </div>

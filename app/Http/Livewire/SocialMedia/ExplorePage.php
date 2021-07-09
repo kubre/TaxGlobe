@@ -2,12 +2,28 @@
 
 namespace App\Http\Livewire\SocialMedia;
 
+use App\Models\Post as PostModel;
+use App\Traits\CustomWithPagination;
 use Livewire\Component;
 
 class ExplorePage extends Component
 {
+    use CustomWithPagination;
+
+    public $pageName = 'postPage';
+
     public function render()
     {
-        return view('components.social-media.explore-page');
+        $posts = PostModel::with('user')
+        ->when(\auth()->check(), function ($query) {
+            $query->with(['likedUsers' => function ($query) {
+                $query->whereId(auth()->id());
+            }]);
+        })
+            ->orderBy('like_count', 'DESC')
+            ->orderBy('id', 'DESC')
+            ->simplePaginate(5, ['*'], $this->pageName);
+
+        return view('components.social-media.explore-page', \compact('posts'));
     }
 }

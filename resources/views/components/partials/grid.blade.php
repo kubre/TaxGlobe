@@ -11,7 +11,7 @@
         </div>
         <div class="flex-auto">
             <div
-                class="bg-white rounded-lg {{ ($isCompact ?? false) ? '' : 'min-h-screen' }}">
+                class="bg-white rounded-lg {{ ($isCompact ?? false) ? '' : '' }}">
                 {{ $slot }}
             </div>
         </div>
