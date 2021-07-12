@@ -26,7 +26,11 @@ class ProfilePage extends Component
         $posts = PostModel::with(['user',
         'likedUsers' => function ($query) {
             return $query->whereId(auth()->id());
-        }])
+        },
+        'comments' => function ($query) {
+            $query->groupBy('post_id');
+        }
+        ])
             ->where('user_id', $this->user->id)
             ->orderBy('id', 'DESC')
             ->simplePaginate(5, ['*'], $this->pageName);

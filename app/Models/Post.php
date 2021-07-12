@@ -48,6 +48,11 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function latestComment()
+    {
+        return $this->hasOne(Comment::class)->with('user')->latest();
+    }
+
     public function likedUsers()
     {
         return $this->belongsToMany(User::class, 'likes');

@@ -14,16 +14,17 @@ class ExplorePage extends Component
 
     public function render()
     {
-        $posts = PostModel::with('user')
-        ->when(\auth()->check(), function ($query) {
+        $posts = PostModel::when(\auth()->check(), function ($query) {
             $query->with(['likedUsers' => function ($query) {
                 $query->whereId(auth()->id());
             }]);
         })
+        ->with(['user', 'comments' => function ($query) {
+            $query->groupBy('post_id');
+        }])
             ->orderBy('like_count', 'DESC')
             ->orderBy('id', 'DESC')
             ->simplePaginate(5, ['*'], $this->pageName);
-
         return view('components.social-media.explore-page', \compact('posts'));
     }
 }

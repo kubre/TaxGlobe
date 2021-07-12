@@ -24,13 +24,15 @@ class Post extends Component
 
     protected $listeners = ['commentChanged' => 'loadComments'];
 
-    public $hasLiked;
+    public $hasLiked = false;
 
     public $pageName = 'commentPage';
 
     public function mount()
     {
-        $this->hasLiked = $this->post->likedUsers->isNotEmpty();
+        if (auth()->check()) {
+            $this->hasLiked = $this->post->likedUsers->isNotEmpty();
+        }
     }
 
     public function render()
@@ -45,12 +47,18 @@ class Post extends Component
 
     public function toggleLike()
     {
+        if (!auth()->check()) {
+            return;
+        }
         $this->hasLiked = $this->post->toggleLikeFrom(\auth()->id());
         $this->emit('toggledLike', $this->post->id);
     }
 
     public function publishComment()
     {
+        if (!auth()->check()) {
+            return;
+        }
         $this->validate([
             'commentDraft' => ['required', 'string', 'max:500'],
         ]);

@@ -234,6 +234,12 @@
                 {{ $comments->links('components.common.load-more') }}
             </div>
         </div>
+    @else
+        @if($post->comments->isNotEmpty())
+        <div class="mt-2 px-4 lg:px-8 ">
+            <livewire:common.comment :comment='$post->comments->first()'/>
+        </div>
+        @endif
     @endif
 
     @once

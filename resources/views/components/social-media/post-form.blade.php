@@ -54,17 +54,17 @@
                         <x-jet-input-error for='image' />
                         <textarea x-model='post'
                             class="border-gray-300 focus:border-indigo-300 rounded-md shadow-sm w-full resize-none"
-                            :class="{ 'ring ring-red-300 focus:ring focus:ring-red-300' : post.length > 150, 'h-11' : type === '{{ \App\Models\Post::TYPE_IMAGE }}' }"
+                            :class="{ 'ring ring-red-300 focus:ring focus:ring-red-300' : post.length > 500, 'h-11' : type === '{{ \App\Models\Post::TYPE_IMAGE }}' }"
                             type="text" name="title" :placeholder="type === '{{ \App\Models\Post::TYPE_IMAGE }}' ? 'Caption' : 'Write a Post'" wire:model.defer="title"
                             autofoucs></textarea>
-                        <div class='-mt-7 mr-2 text-gray-500 text-right' x-text='post.length + "/150"'>
+                        <div class='-mt-7 mr-2 text-gray-500 text-right' x-text='post.length + "/500"'>
                         </div>
                         <x-jet-input-error for='title' />
                     </div>
                 @endif
 
                 <div class="{{ $isCompact ?? false ? 'space-x-2 flex justify-between' : '' }} mt-4">
-                    <x-jet-button id='submit' x-bind:disabled='post.length > 150'>
+                    <x-jet-button id='submit' x-bind:disabled='post.length > 500'>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -73,7 +73,7 @@
                         {{ __('Publish') }}
                     </x-jet-button>
                     @if ($isCompact ?? false)
-                        <div class="space-x-2 hidden sm:flex">
+                        <div class="space-x-2 flex">
                             @if($type == \App\Models\Post::TYPE_IMAGE)
                              <x-jet-button type='button' wire:click="$set('type', '{{\App\Models\Post::TYPE_POST}}')"
                                 wire:disabled x-data='{hover: false}' @mouseover='hover = true' @mouseleave='hover = false'>

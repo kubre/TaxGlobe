@@ -27,9 +27,9 @@
             <div class="flex-auto w-full px-4">
                 <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CONTACT</h2>
                 <nav class="list-none mb-10">
-                    <li>Contact: +91 WIP...</li>
-                    <li>Email: WIP...</li>
-                    <li>Address: Aurangabad, Maharashtra</li>
+                    <li>Contact: +91 940 302 7988</li>
+                    <li>Email: </li>
+                    <li>Address: Office No. 205, 2nd Floor, Eldora, Golden City Centre, Aurangabad</li>
                 </nav>
             </div>
         </div>

@@ -24,7 +24,7 @@ class PostForm extends Component
     {
         $isImage = $this->type === 'image';
         return [
-            'title' => 'required_if:image,null|max:150',
+            'title' => 'required_if:image,null|max:500',
             'body' => 'nullable',
             'image' => [
                 function ($attribute, $value, $fail) use ($isImage) {
