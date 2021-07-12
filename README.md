@@ -14,6 +14,7 @@
 -   `(08/jul 10:40pm)` Added User card and follow system
 -   `(09/jul 08:58pm)` Added ability to like and count on like & comment, added index in previous migrations
 -   `(09/jul 10:55pm)` Added explore page and feed page logic, post appearance modifications, removed default grid component height
+-   `(12/jul 12:55pm)` Image type post upload added, youtube embed with ckeditor  fixed, Added terms and conditions, and few final touchups, increased ckeditor height, fixed marquee animation.
 
 ## :rocket: Feature List
 

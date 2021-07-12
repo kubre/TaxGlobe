@@ -7,7 +7,12 @@
 }
 
 .marquee div {
-    @apply transform -translate-x-full;
+    display: inline-block;
+    width: max-content;
+
+    padding-left: 100%;
+    /* show the marquee just outside the paragraph */
+    will-change: transform;
     animation: marquee 15s linear infinite;
 }
 
@@ -17,14 +22,13 @@
     }
 }
 
-@keyframes marquee {
-    0% {
-        @apply transform translate-x-full;
-    }
+.marquee div:hover {
+  animation-play-state: paused
+}
 
-    100% {
-        @apply transform -translate-x-full;
-    }
+@keyframes marquee {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
 }
 
 [x-cloak] {

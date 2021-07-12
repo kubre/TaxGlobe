@@ -40,9 +40,10 @@
                 </div>
             </div>
         @elseif($post->type === 'image')
-            <div class="flex justify-center h-auto w-100 px-0 lg:px-8">
+            <div class="flex flex-col space-y-2 justify-center h-auto w-100 px-0 lg:px-8">
                 <img class="object-cover rounded-none lg:rounded"
-                    src="https://images.unsplash.com/photo-1624037576929-c24689f88ae3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=640&h=640&q=80">
+                    src="{{ Storage::disk('posts')->url($post->image) }}">
+                <span class="text-gray-500 px-4">{{ $post->title }}</span>
             </div>
         @elseif($post->type === 'article')
             <div class="px-4 lg:px-8 pb-2">

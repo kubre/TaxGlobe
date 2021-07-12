@@ -23,10 +23,14 @@ class ProfilePage extends Component
 
     public function render()
     {
-        $posts = PostModel::with('user')
+        $posts = PostModel::with(['user',
+        'likedUsers' => function ($query) {
+            return $query->whereId(auth()->id());
+        }])
             ->where('user_id', $this->user->id)
             ->orderBy('id', 'DESC')
-            ->paginate(5, ['*'], $this->pageName);
+            ->simplePaginate(5, ['*'], $this->pageName);
+
         return view('components.social-media.profile-page', \compact('posts'));
     }
 }

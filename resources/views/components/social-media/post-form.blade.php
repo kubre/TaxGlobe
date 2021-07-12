@@ -1,12 +1,9 @@
 <div class="border-b">
 
     @push('styles')
-        <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-            rel="stylesheet" />
-        <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
         <style>
             .ck-editor__editable {
-                min-height: 300px;
+                min-height: 600px;
             }
 
             .focus-grow:focus {
@@ -17,9 +14,19 @@
     @endpush
 
     <x-partials.grid isCompact='{{ $isCompact }}'>
-        <div class="{{ $isCompact ?? false ? 'px-4' : 'p-8' }}" x-data='{post: ""}'>
+        <div class="{{ $isCompact ?? false ? 'px-4' : 'p-8' }}" x-data="{ post: '', type: @entangle('type').defer } ">
             <form wire:submit.prevent="save" method="post" enctype="multipart/form-data">
                 @if ($type == \App\Models\Post::TYPE_ARTICLE)
+                    <div class="flex justify-end">
+                        <x-jet-button id='submit' class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {{ __('Publish') }}
+                    </x-jet-button>
+                    </div>
                     <div>
                         <x-jet-label for="title" value="{{ __('Title') }}" />
                         <x-jet-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')"
@@ -31,20 +38,28 @@
                         <textarea id="body" class="block mt-2" wire:model.defer='body' name="body"></textarea>
                         <x-jet-input-error for='body' />
                     </div>
-                @elseif($type == \App\Models\Post::TYPE_POST)
+                @else
+                    <div class="pt-2 pb-1" x-show="type === '{{ \App\Models\Post::TYPE_IMAGE }}'">
+                        <x-common.filepond
+                            wire:model="image"
+                            allowImagePreview
+                            imagePreviewMaxHeight="200"
+                            allowFileTypeValidation
+                            acceptedFileTypes="['image/jpeg']"
+                            allowFileSizeValidation
+                            maxFileSize="2mb"
+                        />
+                    </div>
                     <div>
+                        <x-jet-input-error for='image' />
                         <textarea x-model='post'
                             class="border-gray-300 focus:border-indigo-300 rounded-md shadow-sm w-full resize-none"
-                            :class='{ "ring ring-red-300 focus:ring focus:ring-red-300" : post.length > 150 }'
-                            type="text" name="title" placeholder='Write a Post' wire:model.defer="title"
+                            :class="{ 'ring ring-red-300 focus:ring focus:ring-red-300' : post.length > 150, 'h-11' : type === '{{ \App\Models\Post::TYPE_IMAGE }}' }"
+                            type="text" name="title" :placeholder="type === '{{ \App\Models\Post::TYPE_IMAGE }}' ? 'Caption' : 'Write a Post'" wire:model.defer="title"
                             autofoucs></textarea>
                         <div class='-mt-7 mr-2 text-gray-500 text-right' x-text='post.length + "/150"'>
                         </div>
                         <x-jet-input-error for='title' />
-                    </div>
-                @elseif($type == \App\Models\Post::TYPE_IMAGE)
-                    <div class="pt-2 pb-1">
-                        <input type="file" class="filepond" wire:model='image' />
                     </div>
                 @endif
 
@@ -59,7 +74,24 @@
                     </x-jet-button>
                     @if ($isCompact ?? false)
                         <div class="space-x-2 hidden sm:flex">
-                            <x-jet-secondary-button wire:click="$set('type', '{{ \App\Models\Post::TYPE_IMAGE }}')"
+                            @if($type == \App\Models\Post::TYPE_IMAGE)
+                             <x-jet-button type='button' wire:click="$set('type', '{{\App\Models\Post::TYPE_POST}}')"
+                                wire:disabled x-data='{hover: false}' @mouseover='hover = true' @mouseleave='hover = false'>
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M16.3725 11.6213C17.9412 11.6213 19 12.7132 19 14.3309C19 15.7868 17.7843 17 16.1373 17C14.3333 17 13 15.5441 13 13.3199C13 8.26471 16.6863 6.24265 19 6L19 8.22426C17.4314 8.50735 15.6667 10.0846 15.5882 11.8235C15.6667 11.7831 15.9804 11.6213 16.3725 11.6213Z"
+                                        fill="currentColor"></path>
+                                    <path
+                                    d="M8.37255 11.6213C9.94118 11.6213 11 12.7132 11 14.3309C11 15.7868 9.78431 17 8.13725 17C6.33333 17 5 15.5441 5 13.3199C5 8.26471 8.68627 6.24265 11 6V8.22426C9.43137 8.50735 7.66667 10.0846 7.58824 11.8235C7.66667 11.7831 7.98039 11.6213 8.37255 11.6213Z"
+                                    fill="currentColor"></path>
+                                </svg> 
+                                <span class='ml-2' x-show='hover'>
+                                    {{ __('Post') }}
+                                </span>
+                            </x-jet-button>
+                            @elseif($type == \App\Models\Post::TYPE_POST)
+                            <x-jet-secondary-button wire:click="readyFileUpload"
                                 wire:disabled variant='warning' x-data='{hover: false}' @mouseover='hover = true' @mouseleave='hover = false'>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
@@ -70,6 +102,7 @@
                                     {{ __('Image') }}
                                 </span>
                             </x-jet-secondary-button>
+                            @endif
                             <x-jet-secondary-button
                                 @click="window.location = '{{ route('posts.form', \App\Models\Post::TYPE_ARTICLE) }}'"
                                 variant='success' class='self-end' type='button' x-data='{hover: false}' class="transition duration-150" @mouseover='hover = true' @mouseleave='hover = false'>
@@ -90,15 +123,10 @@
     </x-partials.grid>
 
     @push('scripts')
-
-        <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js">
-        </script>
-        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js">
-        </script>
-        <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+        @if ($type == \App\Models\Post::TYPE_ARTICLE)
+        <script src="{{ asset('js/vendor/ckeditor.js') }}">
+        </script> 
         <script>
-            FilePond.registerPlugin(FilePondPluginImagePreview);
-            FilePond.parse(document.body);
             if (document.querySelector('#body')) {
                 class MyUploadAdapter {
                     constructor(loader) {
@@ -174,7 +202,10 @@
 
                 ClassicEditor
                     .create(document.querySelector('#body'), {
-                        extraPlugins: [MyCustomUploadAdapterPlugin]
+                        extraPlugins: [MyCustomUploadAdapterPlugin],
+                        mediaEmbed: {
+                            previewsInData: true
+                        }
                     })
                     .then(function(editor) {
 
@@ -191,5 +222,6 @@
                     });
             }
         </script>
+        @endif
     @endpush
 </div>

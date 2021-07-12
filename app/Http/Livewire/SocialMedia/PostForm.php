@@ -2,8 +2,7 @@
 
 namespace App\Http\Livewire\SocialMedia;
 
-use App\Models\Post;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Post as PostModel;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
@@ -21,10 +20,25 @@ class PostForm extends Component
 
     public bool $isCompact = false;
 
-    protected $rules = [
-        'title' => 'nullable|max:150',
-        'body' => 'nullable',
-        'image' => 'nullable|image|max:2048',
+    protected function rules()
+    {
+        $isImage = $this->type === 'image';
+        return [
+            'title' => 'required_if:image,null|max:150',
+            'body' => 'nullable',
+            'image' => [
+                function ($attribute, $value, $fail) use ($isImage) {
+                    if ($isImage && is_null($value)) {
+                        $fail('At least image is required');
+                    }
+                },
+                'max:2048',
+            ],
+        ];
+    }
+
+    protected $messages = [
+        'title.required_if' => 'Post should not be empty!',
     ];
 
     public function mount(string $type = 'article')
@@ -37,8 +51,10 @@ class PostForm extends Component
         return view('components.social-media.post-form');
     }
 
-    public function save(Post $post)
+    public function save(PostModel $post)
     {
+        $this->validate();
+
         if (!is_null($this->image)) {
             $file = $this->image->store('/', 'posts');
         }
@@ -61,5 +77,15 @@ class PostForm extends Component
         }
 
         return \redirect()->route('feed.index');
+    }
+
+
+    public function readyFileUpload($imageOnly = true)
+    {
+        if ($imageOnly) {
+            $this->type = PostModel::TYPE_IMAGE;
+        }
+
+        $this->emit('initFilepond');
     }
 }
