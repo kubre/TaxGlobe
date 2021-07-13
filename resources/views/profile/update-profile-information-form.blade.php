@@ -8,8 +8,7 @@
     </x-slot>
 
     <x-slot name="form">
-        <div class="grid grid-cols-6 gap-6 col-span-6"
-            x-data="{ profession: '{{ $this->user->profession }}', sameContact: false }">
+        <div class="grid grid-cols-6 gap-6 col-span-6" x-data="updateProfileData()">
             <!-- Profile Photo -->
             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                 <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
@@ -67,24 +66,32 @@
                 <x-jet-input-error for="email" class="mt-2" />
             </div>
 
+            <div class="col-span-6 sm:col-span-4">
+                <x-jet-label for="bio" value="{{ __('Bio') }}" />
+                <x-jet-input id="bio" type="text" class="mt-1 block w-full" wire:model.defer="state.bio"
+                    autocomplete="bio" />
+                <x-jet-input-error for="bio" class="mt-2" />
+            </div>
+
             <!-- Gender -->
             <div class="col-span-6 sm:col-span-4">
                 <x-jet-label for="gender" value="{{ __('Gender') }}" />
-                <x-widgets.select id="gender" class="mt-2 w-full" name="gender"
-                :value='$this->user->gender'
+                <x-widgets.select id="gender" class="mt-2 w-full" name="gender" wire:model.defer="state.gender"
                     default='Select Gender' :options="[
                         'Male' => 'Male',
                         'Female' => 'Female',
                         'Transgender' => 'Transgender',
                         'Other' => 'Other',
-                    ]" autocomplete="gender">
+                    ]">
                 </x-widgets.select>
             </div>
 
             <!-- Profession -->
             <div class="col-span-6 sm:col-span-4">
-                <x-jet-label for="profession" x-model='profession' value="{{ __('Profession') }}" />
-                <x-widgets.select id="profession" class="block mt-1 w-full" name="profession" default='Select Profession' :value='$this->user->profession' :options="[
+                <x-jet-label for="profession" value="{{ __('Profession') }}" />
+                <x-widgets.select id="profession" class="block mt-1 w-full" name="profession"
+                    @change='verifyProfession()' x-model="profession" :options="[
+                    '' => 'Other',
                     'Professional: CA' => 'Professional: CA',
                     'Professional: CS' => 'Professional: CS',
                     'Professional: CMA' => 'Professional: CMA',
@@ -94,36 +101,37 @@
                     'Student: CS' => 'Student: CS',
                     'Student: CMA' => 'Student: CMA',
                     'Student: ADV' => 'Student: ADV',
-                    'Other' => 'Other'
-                ]" autocomplete="profession">
+                ]">
                 </x-widgets.select>
             </div>
 
             <!-- Other -->
-            <div class="col-span-6 sm:col-span-4" x-show='profession == "Other"'>
+            <div class="col-span-6 sm:col-span-4" x-show='!isProfessionListed(profession)'>
                 <x-jet-label for="profession_other" value="Specify Profession" />
-                <x-jet-input id="profession_other" class="block mt-1 w-full" type="text" name="profession_other"
-                    autocomplete="profession" :value="$this->user->profession" />
+                <x-jet-input id="profession_other" class="block mt-1 w-full" type="text" name="profession_other" x-model.lazy='profession'
+                    wire:model.defer="state.profession_other" />
             </div>
 
             <!-- Professional Email -->
             <div class="col-span-6 sm:col-span-4">
                 <x-jet-label for="professional_email" value="Professional Email" />
                 <x-jet-input id="professional_email" class="block mt-1 w-full" type="text" name="professional_email"
-                    autocomplete="email" :value="$this->user->professional_email" />
+                    wire:model.defer="state.professional_email" />
             </div>
 
             <!-- Contact -->
             <div class="col-span-6 sm:col-span-4">
                 <x-jet-label for="contact" value="Contact" />
-                <x-jet-input id="contact" class="block mt-1 w-full" type="number" name="contact" autocomplete="mobile" :value="$this->user->contact" />
+                <x-jet-input id="contact" class="block mt-1 w-full" type="number" name="contact"
+                    wire:model.defer="state.contact" />
             </div>
 
             <!-- Same Contact -->
             <div class="col-span-6 sm:col-span-4">
                 <x-jet-label for='same_contact'>
                     <div class="flex items-center">
-                        <x-jet-checkbox name='same_contact' id='same_contact' x-model='sameContact' />
+                        <x-jet-checkbox name='same_contact' id='same_contact' x-model='sameContact'
+                            wire:model.defer='state.same_contact' />
                         <div class="ml-2">Whtasapp Contact &amp; Contact is same</div>
                     </div>
                 </x-jet-label>
@@ -133,35 +141,51 @@
             <div class="col-span-6 sm:col-span-4" x-show='!sameContact' x-transition>
                 <x-jet-label for="whatsapp_contact" value="Whatsapp Contact" />
                 <x-jet-input id="whatsapp_contact" class="block mt-1 w-full" type="number" name="whatsapp_contact"
-                 autocomplete="mobile" :value="$this->user->whatasapp_contact" />
+                    wire:model.defer="state.whatsapp_contact" />
             </div>
 
             <!-- Area of Specilization -->
             <div class="col-span-6 sm:col-span-4">
                 <x-jet-label for="area" value="Area of Specialisation" />
-                <x-widgets.select id="area" class="block mt-1 w-full" name="area" :value="$this->user->area"
-                    default='Select Area' :options="[
-                    'GST' => 'GST',
-                    'Domestic Income Tax' => 'Domestic Income Tax',
-                    'International Taxation' => 'International Taxation',
-                    'Dubai VAT' => 'Dubai VAT',
-                    'Accounting' => 'Accounting',
-                    'Project Financing' => 'Project Financing',
-                    'Subsidies' => 'Subsidies',
-                    'Appeals and Assessment' => 'Appeals and Assessment',
-                ]"></x-widgets.select>
+                <x-jet-input id="area" class="block mt-1 w-full" type="text" name="area"
+                    wire:model.defer="state.area" />
+                <span class="text-gray-500 text-sm">Seprate using "<strong class="text-gray-900">,</strong>" if
+                    multiple</span>
             </div>
 
             <!-- Address -->
             <div class="col-span-6 sm:col-span-4">
                 <x-jet-label for="address" value="Address" />
-                <x-jet-input id="address" class="block mt-1 w-full" type="text"
-                    name="address" :value='$this->user->address' autocomplete="address" />
+                <x-jet-input id="address" class="block mt-1 w-full" type="text" name="address"
+                    wire:model.defer="state.address" autocomplete="address" />
             </div>
 
             <!-- State & City Picker -->
             <div class="col-span-6 sm:col-span-4">
-                <livewire:widgets.state-city-picker />
+                <div>
+                    <x-jet-label for="state" value="State" />
+                    <select wire:model.defer='state.state' x-model="state" name="state" id="state"
+                        class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full">
+
+                        <option value="">-- Select State --</option>
+                        <template x-for="eachState in Object.keys(statesData)" :key="eachState">
+                            <option :value="eachState" :selected='eachState === state' x-text="eachState">
+                            </option>
+                        </template>
+                    </select>
+                </div>
+                <div class="mt-4">
+                    <x-jet-label for="city" value="City" />
+                    <select id="city" name="city" x-model="city"
+                        class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full"
+                        wire:model.defer="state.city">
+                        <option value="">-- Select City --</option>
+                        <template x-for="eachCity in statesData[state]" :key="eachCity">
+                            <option :value="eachCity" :selected='eachCity === city' x-text="eachCity">
+                            </option>
+                        </template>
+                    </select>
+                </div>
             </div>
         </div>
     </x-slot>
@@ -176,3 +200,37 @@
         </x-jet-button>
     </x-slot>
 </x-jet-form-section>
+@push('scripts')
+    @once
+        <script>
+            function updateProfileData() {
+                return {
+                    init: function() {
+                        this.verifyProfession();
+                    },
+                    profession: @entangle('state.profession').defer,
+                    sameContact: false,
+                    state: @entangle('state.state').defer,
+                    city: @entangle('state.city').defer,
+                    statesData: JSON.parse('{!! json_encode(\App\Constants::STATES_DATA) !!}'),
+                    verifyProfession: function() {
+                        return this.profession = this.isProfessionListed(this.profession) ? this.profession : '';
+                    },
+                    isProfessionListed: function(profession) {
+                        return [
+                            'Professional: CA',
+                            'Professional: CS',
+                            'Professional: CMA',
+                            'Professional: ADV',
+                            'Professional: Tax Consultant',
+                            'Student: CA',
+                            'Student: CS',
+                            'Student: CMA',
+                            'Student: ADV',
+                        ].includes(profession);
+                    }
+                };
+            }
+        </script>
+    @endonce
+@endpush

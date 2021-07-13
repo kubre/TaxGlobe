@@ -10,11 +10,11 @@
         <div class="z-10">
             <div class="font-medium text-base text-gray-800">{{ $user->name }}
                 @if(!is_null($user->profession))
-                    <span>{{ $user->profession }}</span>
+                    <div class="text-gray-500 text-sm">({{ $user->profession }})</div>
                 @endif
             </div>
             @if(!is_null($user->bio))
-                <div class="font-medium text-base text-gray-800">
+                <div class="font-medium text-base text-gray-800 mt-1">
                     {{ $user->bio }}
                 </div>
             @endif

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Widgets;
+namespace App;
 
-use Livewire\Component;
-
-class StateCityPicker extends Component
+class Constants
 {
-    private const DATA = [
+
+    public const STATES_DATA = [
         'Andaman and Nicobar Islands' => [
             'Port Blair',
         ],
@@ -960,7 +959,7 @@ class StateCityPicker extends Component
             'Natham',
             'Nellikuppam',
             'Neyveli (TS)',
-            'O\' Valley',
+            'O Valley',
             'Oddanchatram',
             'P.N.Patti',
             'Pacode',
@@ -1291,27 +1290,4 @@ class StateCityPicker extends Component
             'Tarakeswar',
         ],
     ];
-
-    public $selectedState = null;
-
-    public $states;
-
-    public $cities;
-
-    public function mount()
-    {
-        $this->states = \array_keys(self::DATA);
-    }
-
-    public function render()
-    {
-        return view('components.widgets.state-city-picker');
-    }
-
-    public function updatedSelectedState($state)
-    {
-        if (!empty($state)) {
-            $this->cities = self::DATA[$state];
-        }
-    }
 }

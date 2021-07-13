@@ -22,16 +22,17 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
-            'profession' => ['required', 'max:100'],
+            'profession' => ['nullable', 'max:100'],
+            'bio' => ['nullable', 'max:100'],
             'profession_other' => ['required_if:profession,Other', 'max:100'],
-            'gender' => ['required', 'in:Male,Female,Transgender,Other',],
+            'gender' => ['nullable', 'in:Male,Female,Transgender,Other',],
             'address' => ['nullable', 'max:100',],
             'city' => ['nullable', 'max:100',],
             'state' => ['nullable', 'max:100',],
-            'area' => ['nullable'],
+            'area' => ['nullable', 'max:191'],
             'professional_email' => ['nullable', 'email'],
             'contact' => ['nullable', 'digits:10'],
-            'whatsapp_contact' => ['nullable', 'digits:10'], 
+            'whatsapp_contact' => ['nullable', 'digits:10'],
         ])->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
@@ -47,12 +48,15 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'email' => $input['email'],
                 'gender' => $input['gender'],
                 'address' => $input['address'],
+                'profession' => $input['profession'] === 'Other' ?
+                    $input['profession_other'] : $input['profession'],
+                'bio' => $input['bio'],
                 'city' => $input['city'],
                 'state' => $input['state'],
                 'area' => $input['area'],
                 'professional_email' => $input['professional_email'],
                 'contact' => $input['contact'],
-                'whatsapp_contact' => isset($input['same_contact']) ?
+                'whatsapp_contact' => ($input['same_contact'] ?? false) ?
                 $input['contact'] : $input['whatsapp_contact'],
             ])->save();
         }
@@ -70,7 +74,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         $user->forceFill([
             'name' => $input['name'],
             'email' => $input['email'],
-            'email_verified_at' => null,'profession' => $input['profession'] === 'Other' ?
+            'email_verified_at' => null,
+            'profession' => $input['profession'] === 'Other' ?
                 $input['profession_other'] : $input['profession'],
             'gender' => $input['gender'],
             'address' => $input['address'],
@@ -79,7 +84,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'area' => $input['area'],
             'professional_email' => $input['professional_email'],
             'contact' => $input['contact'],
-            'whatsapp_contact' => isset($input['same_contact']) ?
+            'whatsapp_contact' => ($input['same_contact'] ?? false) ?
                 $input['contact'] : $input['whatsapp_contact'],
         ])->save();
 
