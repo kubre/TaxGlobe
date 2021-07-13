@@ -14,9 +14,18 @@
 -   `(08/jul 10:40pm)` Added User card and follow system
 -   `(09/jul 08:58pm)` Added ability to like and count on like & comment, added index in previous migrations
 -   `(09/jul 10:55pm)` Added explore page and feed page logic, post appearance modifications, removed default grid component height
--   `(12/jul 12:55pm)` Image type post upload added, youtube embed with ckeditor  fixed, Added terms and conditions, and few final touchups, increased ckeditor height, fixed marquee animation.
+-   `(12/jul 12:55pm)` Image type post upload added, youtube embed with ckeditor fixed, Added terms and conditions, and few final touchups, increased ckeditor height, fixed marquee animation.
 -   `(12/jul 11:30pm)` Fixed minor bugs when not authenticated, changed post title limit to 500, latest comment always appear under post
 -   `(13/jul 02:10pm)` Update profile page completed
+-   `(13/jul 11:20pm)` removed create-fab, header image for article, Ckeditor removing spaces fixed, rendering new line in posts, image caption on top, auto-growing post textarea 
+-   `()` Edit/Delete Post
+-   `()` Search for posts
+-   `()` Search for users
+-   `()` Bottom Navigation for mobile - Feed, Explore, Create, Shop, Profile
+-   `()` Bookmarks
+-   `()` Profile: User Card, Edit profile option, Statistics (Points, Posts, Followers, Followings, Total Likes, Total Comments)
+-   `()` Followers and Followings
+-   `()` Admin Dashboard and Login
 
 ## :rocket: Feature List
 

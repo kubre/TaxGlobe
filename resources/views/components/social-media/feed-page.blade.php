@@ -1,11 +1,6 @@
 <div>
     <x-common.news />
 
-    {{-- FAB --}}
-    @auth
-        <x-social-media.create-fab />
-    @endauth
-
     <x-partials.grid responsiveLeft='true'>
         @auth
             <x-slot name="left">

@@ -8,17 +8,17 @@
                     alt="{{ $post->user->name }}" />
                 <div class="ml-3">
                     <span class="font-bold mr-1">{{ $post->user->name }}</span>
-                    @if(!is_null($post->user->profession))
-                    <span class="text-gray-500 text-xs">
-                        ({{ $post->user->profession }})
-                    </span>
+                    @if (!is_null($post->user->profession))
+                        <span class="text-gray-500 text-xs">
+                            ({{ $post->user->profession }})
+                        </span>
                     @endif
                 </div>
             </div>
         </a>
 
         <div class="text-gray-500 text-sm">
-            {{ $post->created_at->diffForHumans() }}
+            {{ $post->created_at->diffForHumans(null, false, true) }}
         </div>
     </div>
 
@@ -36,38 +36,47 @@
                         fill="#2E3A59"></path>
                 </svg>
                 <div class="px-2 text-lg">
-                    {{ $post->title }}
+                    {!! nl2br(e($post->title)) !!}
                 </div>
             </div>
         @elseif($post->type === 'image')
             <div class="flex flex-col space-y-2 justify-center h-auto w-100 px-0 lg:px-8">
+                <span class="text-gray-500 px-4">{{ $post->title }}</span>
                 <img class="object-cover rounded-none lg:rounded"
                     src="{{ Storage::disk('posts')->url($post->image) }}">
-                <span class="text-gray-500 px-4">{{ $post->title }}</span>
             </div>
         @elseif($post->type === 'article')
             <div class="px-4 lg:px-8 pb-2">
-                <a {{ $fullPage ? '' : 'href=""' }} class="flex max-w-full">
-                    <div class="w-full flex flex-col {{ $fullPage ? '' : 'border border-gray-300 rounded-lg p-4' }}">
-                        @if ($fullPage)
-                            <h3 class="font-bold text-2xl">{{ $post->title }}</h3>
-                            <div class="mt-4">
-                                {!! $post->body !!}
-                            </div>
-                        @else
+                <div class="w-full flex flex-col {{ $fullPage ? '' : 'border border-gray-300 rounded-lg p-4' }}">
+                    @if ($fullPage)
+                        <hr>
+                        @if ($post->image)
+                            <img class="object-cover rounded-none lg:rounded w-full" style="max-height: 200px"
+                                src="{{ Storage::disk('posts')->url($post->image) }}">
+                        @endif
+                        <h3 class="font-bold text-2xl mt-4">{{ $post->title }}</h3>
+
+                        <div class="mt-4">
+                            {!! $post->body !!}
+                        </div>
+                    @else
+                        <a href="{{ route('post.show', $post->slug) }}" class="flex flex-col space-y-2 max-w-full">
                             <h4 class="font-bold truncate">{{ $post->title }}</h4>
-                            <a href="{{ route('post.show', $post->slug) }}"
-                                class="mt-4 flex items-center font-bold text-blue-500 uppercase text-xs">
+                            @if ($post->image)
+                                <img class="object-cover rounded-none lg:rounded w-full" style="max-height: 200px"
+                                    src="{{ Storage::disk('posts')->url($post->image) }}">
+                            @endif
+                            <span class="mt-4 flex items-center font-bold text-blue-500 uppercase text-xs">
                                 Click to continue reading
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 5l7 7-7 7" />
                                 </svg>
-                            </a>
-                        @endif
-                    </div>
-                </a>
+                            </span>
+                        </a>
+                    @endif
+                </div>
             </div>
         @endif
     </div>
@@ -87,7 +96,8 @@
         <div class="flex space-x-2">
             {{-- Like --}}
             <x-jet-secondary-button wire:click="toggleLike" variant='white'>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1 {{ $hasLiked ? 'text-red-500 fill-current' : ''  }}" fill="none"
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 mr-1 {{ $hasLiked ? 'text-red-500 fill-current' : '' }}" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -235,10 +245,10 @@
             </div>
         </div>
     @else
-        @if($post->comments->isNotEmpty())
-        <div class="mt-2 px-4 lg:px-8 ">
-            <livewire:common.comment :comment='$post->comments->first()'/>
-        </div>
+        @if ($post->comments->isNotEmpty())
+            <div class="mt-2 px-4 lg:px-8 ">
+                <livewire:common.comment :comment='$post->comments->first()' />
+            </div>
         @endif
     @endif
 
