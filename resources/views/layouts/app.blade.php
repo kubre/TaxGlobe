@@ -52,6 +52,7 @@
 
     @stack('modals')
 
+    @include('sweetalert::alert')
     @livewireScripts
 
     @stack('scripts')

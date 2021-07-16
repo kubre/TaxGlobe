@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', SocialMediaComponents\ExplorePage::class)
+Route::get('/', SocialMediaComponents\PostList::class)
     ->name('explore.index');
 Route::redirect('/explore', '/')
     ->name('explore.explore');
@@ -30,9 +30,9 @@ Route::get('/shop', Shop\StoreFrontController::class)
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/connections', SocialMedia\ConnectionController::class)
         ->name('connection.index');
-    Route::get('/feed', SocialMediaComponents\FeedPage::class)
+    Route::get('/feed', SocialMediaComponents\PostList::class)
         ->name('feed.index');
-    Route::get('/posts/create/{type}', SocialMediaComponents\PostForm::class)
+    Route::get('/posts/create/{type}/{post?}', SocialMediaComponents\PostForm::class)
         ->name('posts.form');
     Route::get('/users/{user}', SocialMediaComponents\ProfilePage::class)
         ->name('user.profile');

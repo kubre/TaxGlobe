@@ -18,7 +18,7 @@
 -   `(12/jul 11:30pm)` Fixed minor bugs when not authenticated, changed post title limit to 500, latest comment always appear under post
 -   `(13/jul 02:10pm)` Update profile page completed
 -   `(13/jul 11:20pm)` removed create-fab, header image for article, Ckeditor removing spaces fixed, rendering new line in posts, image caption on top, auto-growing post textarea 
--   `()` Edit/Delete Post
+-   `(16/jul 01:15pm)` Edit/Delete Post, Post Policy, Replaced FeedPage and ExplorePage Components with single PostList, Added SweetAlert, profession under name in profile card
 -   `()` Search for posts
 -   `()` Search for users
 -   `()` Bottom Navigation for mobile - Feed, Explore, Create, Shop, Profile

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -16,6 +17,20 @@ class Post extends Model
     protected $fillable = [
         'title', 'slug', 'body', 'image', 'type', 'user_id',
     ];
+
+    public static function booted()
+    {
+        static::created(function ($post) {
+            $post->user()->increment('points');
+        });
+
+        static::deleted(function ($post) {
+            if (!is_null($post->image)) {
+                Storage::disk('posts')->delete($post->image);
+            }
+            $post->user()->decrement('points');
+        });
+    }
 
     /* Central Logic */
 

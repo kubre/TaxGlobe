@@ -16,11 +16,12 @@
     <x-partials.grid isCompact='{{ $isCompact }}'>
         <div class="{{ $isCompact ?? false ? 'px-4' : 'p-8' }}" x-data="postFormComponent()">
 
-            <h4 class="text-xl text-bold mb-2">
-                Publish a new {{ $type }}
+            <h4 class="text-lg text-bold mb-2">
+                {{ is_null($postId) ? 'Publish ' . \ucfirst($type) : 'Update Content' }}
             </h4>
 
-            <form wire:submit.prevent="save" method="post" enctype="multipart/form-data">
+            <form wire:submit.prevent="{{ is_null($postId) ? 'save' : 'save(' . $postId . ')' }}" method="post"
+                enctype="multipart/form-data">
                 @if ($type == \App\Models\Post::TYPE_ARTICLE)
                     <div class="flex justify-end">
                         <x-jet-button id='submit' class="">
@@ -34,28 +35,72 @@
                     </div>
                     <div>
                         <x-jet-label for="title" value="{{ __('Title *') }}" />
-                        <x-jet-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')"
-                            wire:model.defer="title" autofocus />
+                        <x-jet-input id="title" class="block mt-1 w-full" type="text" name="title" wire:model.defer="title" autofocus />
                         <x-jet-input-error for='title' />
                     </div>
                     <div class="block mt-2">
                         <x-jet-label for="image" value="{{ __('Header Image') }}" />
-                        <x-common.filepond class="mt-1" wire:model.defer="image" allowImagePreview
-                            imagePreviewMaxHeight="200" allowFileTypeValidation acceptedFileTypes="['image/jpeg']"
-                            allowFileSizeValidation maxFileSize="2mb" />
-                        <x-jet-input-error for='image' />
+                        @if (!is_null($postId))
+                            <div x-show='!showUpdateImage' class='flex flex-col space-y-2 mb-2 items-center'>
+                                <strong>Old Image</strong>
+                                <div class="w-full bg-red-50 rounded-lg py-2 flex justify-center">
+                                    <img src="{{ Storage::disk('posts')->url($oldImage) }}"
+                                        class="rounded-lg object-fit" style="max-height: 256px">
+                                </div>
+                                <x-jet-secondary-button class='mt-2' @click='showUpdateImage=true' variant='warning'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    <span>
+                                        {{ __('Upload new Image') }}
+                                    </span>
+                                </x-jet-secondary-button>
+                            </div>
+                        @endif
+                        <div class="flex flex-col space-y-2 mb-2" x-show='showUpdateImage'>
+                            <strong>Upload an Image</strong>
+                            <x-common.filepond wire:model.defer="image" allowImagePreview imagePreviewMaxHeight="200"
+                                allowFileTypeValidation acceptedFileTypes="['image/jpeg']" allowFileSizeValidation
+                                maxFileSize="2mb" />
+                            <x-jet-input-error for='image' />
+                        </div>
                     </div>
                     <div class="mt-4" wire:ignore>
                         <x-jet-label for="body" value="{{ __('Content *') }}" />
-                        <textarea id="body" class="block mt-2" wire:model.defer='body' name="body"></textarea>
+                        <textarea id="body" class="block mt-2" wire:model.defer='body'
+                            name="body">{{ $body }}</textarea>
                         <x-jet-input-error for='body' />
                     </div>
                 @else
                     <div class="pt-2 pb-1" x-show="type === '{{ \App\Models\Post::TYPE_IMAGE }}'">
-                        <x-common.filepond wire:model.defer="image" allowImagePreview imagePreviewMaxHeight="200"
-                            allowFileTypeValidation acceptedFileTypes="['image/jpeg']" allowFileSizeValidation
-                            maxFileSize="2mb" />
-                        <x-jet-input-error for='image' />
+                        @if (!is_null($postId))
+                            <div x-show='!showUpdateImage' class='flex flex-col space-y-2 mb-2 items-center'>
+                                <strong>Old Image</strong>
+                                <div class="w-full bg-red-50 rounded-lg py-2 flex justify-center">
+                                    <img src="{{ Storage::disk('posts')->url($oldImage) }}"
+                                        class="rounded-lg object-fit" style="max-height: 256px">
+                                </div>
+                                <x-jet-secondary-button class='mt-2' @click='showUpdateImage=true' variant='warning'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    <span>
+                                        {{ __('Upload new Image') }}
+                                    </span>
+                                </x-jet-secondary-button>
+                            </div>
+                        @endif
+                        <div class="flex flex-col space-y-2 mb-2" x-show='showUpdateImage'>
+                            <strong>Upload an Image</strong>
+                            <x-common.filepond wire:model.defer="image" allowImagePreview imagePreviewMaxHeight="200"
+                                allowFileTypeValidation acceptedFileTypes="['image/jpeg']" allowFileSizeValidation
+                                {{-- :files="is_null($image) ? [] : [$image]" --}} maxFileSize="2mb" />
+                            <x-jet-input-error for='image' />
+                        </div>
                     </div>
                     <div>
                         <textarea x-model='post' x-init="resize(document.getElementById('title'))"
@@ -136,14 +181,16 @@
         <script>
             function postFormComponent() {
                 return {
-                    post: '',
+                    post: @entangle('title').defer,
                     type: @entangle('type').defer,
                     resize: function(el) {
                         if (this.type === '{{ \App\Models\Post::TYPE_POST }}') {
                             el.style.height = '76px';
-                            el.style.height = (el.scrollHeight >= 74 && el.scrollHeight < 220) ? el.scrollHeight + 'px' : '220px';
+                            el.style.height = (el.scrollHeight >= 74 && el.scrollHeight < 220) ? el.scrollHeight + 'px' :
+                                '220px';
                         }
-                    }
+                    },
+                    showUpdateImage: '{{ is_null($postId) }}'
                 };
             }
         </script>

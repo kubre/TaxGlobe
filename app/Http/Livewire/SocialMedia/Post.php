@@ -5,10 +5,12 @@ namespace App\Http\Livewire\SocialMedia;
 use Livewire\Component;
 use App\Models\Post as PostModel;
 use App\Traits\CustomWithPagination;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Post extends Component
 {
     use CustomWithPagination;
+    use AuthorizesRequests;
 
     public PostModel $post;
 
@@ -69,7 +71,7 @@ class Post extends Component
 
         $this->emitSelf('commentChanged');
     }
-
+ 
     public function loadComments()
     {
         $this->commentDraft = '';

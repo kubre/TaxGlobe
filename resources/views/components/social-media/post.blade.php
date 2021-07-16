@@ -6,19 +6,20 @@
             <div class="flex items-center">
                 <img class="h-8 w-8 rounded-full object-cover" src="{{ $post->user->profile_photo_url }}"
                     alt="{{ $post->user->name }}" />
-                <div class="ml-3">
-                    <span class="font-bold mr-1">{{ $post->user->name }}</span>
-                    @if (!is_null($post->user->profession))
-                        <span class="text-gray-500 text-xs">
-                            ({{ $post->user->profession }})
-                        </span>
-                    @endif
+                <div class="ml-3 flex flex-col w-48">
+                    <span class="mr-1 font-bold text-sm truncate">
+                        {{ $post->user->name }}
+                    </span>
+                    <span class="text-gray-500 text-xs truncate">
+                        {{ $post->user->profession ?? '' }}
+                    </span>
                 </div>
             </div>
         </a>
 
-        <div class="text-gray-500 text-sm">
+        <div class="text-gray-500 text-xs">
             {{ $post->created_at->diffForHumans(null, false, true) }}
+            {{ $post->updated_at->gt($post->created_at) ? '(edited)' : '' }}
         </div>
     </div>
 
@@ -42,7 +43,7 @@
         @elseif($post->type === 'image')
             <div class="flex flex-col space-y-2 justify-center h-auto w-100 px-0 lg:px-8">
                 <span class="text-gray-500 px-4">{{ $post->title }}</span>
-                <img class="object-cover rounded-none lg:rounded"
+                <img class="object-cover rounded-none lg:rounded" style="max-height: 80vh"
                     src="{{ Storage::disk('posts')->url($post->image) }}">
             </div>
         @elseif($post->type === 'article')
@@ -194,6 +195,28 @@
                 </x-slot>
 
                 <x-slot name="content">
+                    @can('update', $post)
+                        <x-jet-dropdown-link class="flex items-center"
+                            href="{{ route('posts.form', ['post' => $post->id, 'type' => $post->type]) }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
+                            {{ __('Edit') }}
+                        </x-jet-dropdown-link>
+                    @endcan
+                    @can('delete', $post)
+                        <x-jet-dropdown-link class="flex items-center"
+                            wire:click="$emit('triggerDelete', {{ $post->id }})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                            {{ __('Delete') }}
+                        </x-jet-dropdown-link>
+                    @endcan
                     <x-jet-dropdown-link class="flex items-center text-red-500" href="{{ route('profile.show') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -251,15 +274,4 @@
             </div>
         @endif
     @endif
-
-    @once
-        @push('scripts')
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            <script src="https://platform.linkedin.com/in.js" type="text/javascript">
-                lang: en_US
-            </script>
-            <script type="IN/Share" data-url="https://www.linkedin.com"></script>
-        @endpush
-    @endonce
-
 </div>
