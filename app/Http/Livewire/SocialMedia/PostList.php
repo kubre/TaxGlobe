@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Post as PostModel;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,11 +31,14 @@ class PostList extends Component
 
     public ?User $user;
 
-    public function mount()
+    public $searchTerm;
+
+    public function mount(Request $request)
     {
         if (!isset($this->user) && Auth::check()) {
             $this->user = Auth::user();
         }
+        $this->searchTerm = $request->get('q');
         $this->routeName = Route::currentRouteName();
     }
 
@@ -63,6 +67,9 @@ class PostList extends Component
                 $query->whereId(auth()->id());
             }]);
         })
+            ->when($this->searchTerm, function ($query, $term) {
+                $query->where('title', 'LIKE', "%$term%");
+            })
             ->with(['user', 'comments' => function ($query) {
                 $query->groupBy('post_id');
             }])

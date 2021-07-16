@@ -15,6 +15,15 @@
 
         {{-- Posts --}}
         <div>
+            @if ($searchTerm)
+                @if ($searchTerm === "OR 1 == 1 --'")
+                    <small class="px-4">No SQL injections here 🤗 - vaibhav</small>
+                @endif
+                <h4 class="text-lg px-4 lg:px-8 py-4 border-b">
+                    Search for posts containing <span class="font-bold">{{ $searchTerm }}</span>.
+                </h4>
+            @endif
+
             @forelse ($posts as $post)
                 <livewire:social-media.post :post='$post' :show='false' :wire:key="'post-'.$post->id" />
             @empty

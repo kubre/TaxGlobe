@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
@@ -38,13 +39,17 @@ class Post extends Model
     {
         $changes = $this->likedUsers()->toggle($userId);
         $hasLiked = empty($changes['detached']);
+        $this->timestamps = false;
         $this->increment('like_count', $hasLiked ? 1 : -1);
+        $this->timestamps = true;
         return $hasLiked;
     }
 
     public function addCommentFrom(string $comment, int $userId)
     {
+        $this->timestamps = false;
         $this->increment('comment_count');
+        $this->timestamps = true;
         return $this->comments()->create([
             'body' => $comment,
             'user_id' => $userId,

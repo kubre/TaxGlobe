@@ -20,7 +20,7 @@
 -   `(13/jul 11:20pm)` removed create-fab, header image for article, Ckeditor removing spaces fixed, rendering new line in posts, image caption on top, auto-growing post textarea 
 -   `(16/jul 01:15pm)` Edit/Delete Post, Post Policy, Replaced FeedPage and ExplorePage Components with single PostList, Added SweetAlert, profession under name in profile card
 -   `(16/jul 05:35pm)` Replaced profile with PostList Component, Article title have 2 max line now, Article image upload showing broken image in edit when no image uploaded fixed
--   `()` Search for posts
+-   `(16/jul 07:56pm)` Search for posts added, Liking, commenting does not touches updated_at 
 -   `()` Search for users
 -   `()` Bottom Navigation for mobile - Feed, Explore, Create, Shop, Profile
 -   `()` Bookmarks
