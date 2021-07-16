@@ -190,7 +190,7 @@
                                 '220px';
                         }
                     },
-                    showUpdateImage: '{{ is_null($postId) }}'
+                    showUpdateImage: '{{ is_null($postId) || is_null($oldImage) }}'
                 };
             }
         </script>

@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('feed.index');
     Route::get('/posts/create/{type}/{post?}', SocialMediaComponents\PostForm::class)
         ->name('posts.form');
-    Route::get('/users/{user}', SocialMediaComponents\ProfilePage::class)
+    Route::get('/users/{user}', SocialMediaComponents\PostList::class)
         ->name('user.profile');
 });
 

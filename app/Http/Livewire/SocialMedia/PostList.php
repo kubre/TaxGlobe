@@ -5,7 +5,9 @@ namespace App\Http\Livewire\SocialMedia;
 use App\Traits\CustomWithPagination;
 use Livewire\Component;
 use App\Models\Post as PostModel;
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class PostList extends Component
@@ -19,14 +21,20 @@ class PostList extends Component
 
     public $dataSources = [
         'feed.index' => 'getFeedPosts',
-        'explore.index' => 'getExplorePosts'
+        'explore.index' => 'getExplorePosts',
+        'user.profile' => 'getProfilePosts',
     ];
 
     /** Stores route name to differentiate between different routes */
     public $routeName;
 
+    public ?User $user;
+
     public function mount()
     {
+        if (!isset($this->user) && Auth::check()) {
+            $this->user = Auth::user();
+        }
         $this->routeName = Route::currentRouteName();
     }
 
@@ -75,5 +83,18 @@ class PostList extends Component
                     $query->groupBy('post_id');
                 }
             ]);
+    }
+
+    public function getProfilePosts()
+    {
+        return PostModel::with(['user',
+        'likedUsers' => function ($query) {
+            return $query->whereId(auth()->id());
+        },
+        'comments' => function ($query) {
+            $query->groupBy('post_id');
+        }
+        ])
+            ->where('user_id', $this->user->id);
     }
 }

@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class UserCard extends Component
 {
-    public User $user;
+    public ?User $user;
 
     public $followersCount;
 
@@ -17,6 +17,9 @@ class UserCard extends Component
 
     public function mount()
     {
+        if (is_null($this->user)) {
+            return;
+        }
         $this->user->loadCount('followers', 'followings', 'posts');
         $this->followersCount = $this->user->followers_count;
         $this->followingsCount = $this->user->followings_count;

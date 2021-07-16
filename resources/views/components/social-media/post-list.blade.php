@@ -4,11 +4,9 @@
     <x-partials.grid responsiveLeft='true'>
 
         {{-- Left Side --}}
-        @auth
-            <x-slot name="left">
-                <livewire:social-media.user-card :user='Auth::user()' />
-            </x-slot>
-        @endauth
+        <x-slot name="left">
+            <livewire:social-media.user-card :user='$user' />
+        </x-slot>
 
         {{-- Create Posts --}}
         @if ($routeName === 'feed.index')

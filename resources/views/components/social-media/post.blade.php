@@ -61,8 +61,10 @@
                             {!! $post->body !!}
                         </div>
                     @else
-                        <a href="{{ route('post.show', $post->slug) }}" class="flex flex-col space-y-2 max-w-full">
-                            <h4 class="font-bold truncate">{{ $post->title }}</h4>
+                        <a href="{{ route('post.show', $post->slug) }}">
+                            <div class="flex flex-col space-y-2">
+                                <h4 class="font-bold w-full text-base overflow-hidden" style="max-height: 3.4em;">{{ $post->title }}
+                                </h4>
                             @if ($post->image)
                                 <img class="object-cover rounded-none lg:rounded w-full" style="max-height: 200px"
                                     src="{{ Storage::disk('posts')->url($post->image) }}">
@@ -75,6 +77,7 @@
                                         d="M9 5l7 7-7 7" />
                                 </svg>
                             </span>
+                            </div>
                         </a>
                     @endif
                 </div>
