@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Common;
 
 use Livewire\Component;
+use Str;
 
 class SearchBar extends Component
 {
@@ -15,10 +16,17 @@ class SearchBar extends Component
 
     public function searchPosts()
     {
+        if (\strlen($this->term) < 3) {
+            return;
+        }
         return redirect()->route('explore.index', ['q' => $this->term]);
     }
 
     public function searchUsers()
     {
+        if (\strlen($this->term) < 3) {
+            return;
+        }
+        return \redirect()->route('users.index', ['q' => $this->term]);
     }
 }

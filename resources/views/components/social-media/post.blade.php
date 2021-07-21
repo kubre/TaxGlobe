@@ -52,7 +52,7 @@
                     @if ($fullPage)
                         <hr>
                         @if ($post->image)
-                            <img class="object-cover rounded-none lg:rounded w-full" style="max-height: 200px"
+                            <img class="object-cover rounded-none lg:rounded w-full max-w-full"
                                 src="{{ Storage::disk('posts')->url($post->image) }}">
                         @endif
                         <h3 class="font-bold text-2xl mt-4">{{ $post->title }}</h3>
@@ -63,20 +63,21 @@
                     @else
                         <a href="{{ route('post.show', $post->slug) }}">
                             <div class="flex flex-col space-y-2">
-                                <h4 class="font-bold w-full text-base overflow-hidden" style="max-height: 3.4em;">{{ $post->title }}
+                                <h4 class="font-bold w-full text-base overflow-hidden" style="max-height: 3.4em;">
+                                    {{ $post->title }}
                                 </h4>
-                            @if ($post->image)
-                                <img class="object-cover rounded-none lg:rounded w-full" style="max-height: 200px"
-                                    src="{{ Storage::disk('posts')->url($post->image) }}">
-                            @endif
-                            <span class="mt-4 flex items-center font-bold text-blue-500 uppercase text-xs">
-                                Click to continue reading
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7" />
-                                </svg>
-                            </span>
+                                @if ($post->image)
+                                    <img class="object-cover rounded-none lg:rounded w-full" style="max-height: 200px"
+                                        src="{{ Storage::disk('posts')->url($post->image) }}">
+                                @endif
+                                <span class="mt-4 flex items-center font-bold text-blue-500 uppercase text-xs">
+                                    Click to continue reading
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
                             </div>
                         </a>
                     @endif

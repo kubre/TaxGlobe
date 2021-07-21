@@ -3,6 +3,7 @@
 use App\Http\Controllers\Shop;
 use App\Http\Controllers\SocialMedia;
 use App\Http\Livewire\SocialMedia as SocialMediaComponents;
+use App\Http\Livewire\Common;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('feed.index');
     Route::get('/posts/create/{type}/{post?}', SocialMediaComponents\PostForm::class)
         ->name('posts.form');
+    Route::get('/users', Common\UserList::class)
+        ->name('users.index');
     Route::get('/users/{user}', SocialMediaComponents\PostList::class)
         ->name('user.profile');
 });
