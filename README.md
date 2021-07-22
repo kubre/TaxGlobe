@@ -22,10 +22,11 @@
 -   `(16/jul 05:35pm)` Replaced profile with PostList Component, Article title have 2 max line now, Article image upload showing broken image in edit when no image uploaded fixed
 -   `(16/jul 07:56pm)` Search for posts added, Liking, commenting does not touches updated_at 
 -   `(21/jul 08:45pm)` Search for users added, Max-height in full article removed.
--   `()` Bottom Navigation for mobile - Feed, Explore, Create, Shop, Profile
+-   `(22/jul 06:48pm)` Bottom Navigation for small screens only added, removed responsive nav on small screens
 -   `()` Bookmarks
 -   `()` Profile: User Card, Edit profile option, Statistics (Points, Posts, Followers, Followings, Total Likes, Total Comments)
 -   `()` Followers and Followings
+-   `()` Social Share Image and description
 -   `()` Admin Dashboard and Login
 
 ## :rocket: Feature List

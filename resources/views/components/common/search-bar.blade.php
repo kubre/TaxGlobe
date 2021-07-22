@@ -1,4 +1,4 @@
-<div class="relative" x-data="{ term: @entangle('term').defer }">
+<div class="relative w-full" x-data="{ term: @entangle('term').defer }">
     <span class="absolute inset-y-0 left-0 flex items-center pl-3">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
