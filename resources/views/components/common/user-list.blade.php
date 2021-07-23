@@ -2,6 +2,9 @@
     <x-common.news />
 
     <x-partials.grid responsiveLeft='true'>
+        <x-slot name="left">
+            <livewire:social-media.user-card :user='$user' />
+        </x-slot>
 
         {{-- Posts --}}
         <div>

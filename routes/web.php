@@ -38,18 +38,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/posts/create/{type}/{post?}', SocialMediaComponents\PostForm::class)
         ->name('posts.form');
 
-    // Route::get('/dashboard', SocialMediaComponents\PostList::class)
-    //     ->name('dashboard.index');
-
     Route::get('/users', Common\UserList::class)
         ->name('users.index');
     Route::get('/users/{user}', SocialMediaComponents\PostList::class)
         ->name('user.profile');
 
-    // Route::get('/users/{user}/followers', Common\UserList::class)
-    //     ->name('users.followers');
-    // Route::get('/users/{user}/followings', Common\UserList::class)
-    //     ->name('users.followings');
+    Route::get('/users/{user}/followers', Common\UserList::class)
+        ->name('users.followers');
+    Route::get('/users/{user}/followings', Common\UserList::class)
+        ->name('users.followings');
 });
 
 Route::get('/posts/{post:slug}', SocialMedia\ArticleController::class)

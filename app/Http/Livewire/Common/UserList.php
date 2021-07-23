@@ -18,14 +18,19 @@ class UserList extends Component
 
     public $pageName = 'userPage';
 
+    public ?UserModel $user;
+
     private $dataSources = [
-        'users.index' => 'getUsers'
+        'users.index' => 'getUsers',
+        'users.followers' => 'getFollowers',
+        'users.followings' => 'getFollowings',
     ];
 
     public function mount(Request $request)
     {
         $this->searchTerm = $request->get('q');
         $this->currentRoute = Route::currentRouteName();
+        $this->user = request()->route('user');
     }
 
     public function render()
@@ -40,5 +45,17 @@ class UserList extends Component
     {
         return UserModel::where('name', 'LIKE', "%{$this->searchTerm}%")
             ->orderBy('points', 'DESC');
+    }
+
+    public function getFollowers()
+    {
+        return $this->user->followers()
+            ->orderBy('name');
+    }
+
+    public function getFollowings()
+    {
+        return $this->user->followings()
+            ->orderBy('name');
     }
 }
