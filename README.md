@@ -25,7 +25,7 @@
 -   `(22/jul 06:48pm)` Bottom Navigation for small screens only added, removed responsive nav on small screens
 -   `(23/jul 03:58pm)` Profile: User Card, Edit profile option, Statistics (Points, Posts, Followers, Followings), Bio instead in profession in small user profile, right side widgets into components, moved large footer to edit profile only and few links addded in right section.
 -   `(13/jul 04:30pm)` Followers and Followings pages added
--   `()` Social Share Image and description
+-   `(13/jul 04:50pm)` Social Share Image and description added
 -   `()` Bookmarks
 -   `()` Report Profile
 -   `()` Admin Dashboard and Login
