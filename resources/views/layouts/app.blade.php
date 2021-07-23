@@ -38,8 +38,7 @@
         </main>
 
         <x-partials.bottom-nav class="block md:hidden" />
-
-        <x-partials.footer class="mb-12 md:mb-0" />
+        <div class="py-10 block md:hidden"></div>
     </div>
 
     @stack('modals')

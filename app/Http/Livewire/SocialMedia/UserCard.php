@@ -15,15 +15,25 @@ class UserCard extends Component
 
     public $postsCount;
 
+    // public $likesCount;
+
+    // public $commentsCount;
+
     public function mount()
     {
         if (is_null($this->user)) {
             return;
         }
         $this->user->loadCount('followers', 'followings', 'posts');
+        // $this->user->loadSum('posts', 'like_count');
+        // $this->user->loadSum('posts', 'comment_count');
         $this->followersCount = $this->user->followers_count;
         $this->followingsCount = $this->user->followings_count;
         $this->postsCount = $this->user->posts_count;
+        // $this->likesCount = $this->user->posts_sum_like_count;
+        // $this->likesCount = $this->user->posts_sum_like_count;
+        
+        // dd($this->user);
     }
 
     public function render()

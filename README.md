@@ -23,10 +23,11 @@
 -   `(16/jul 07:56pm)` Search for posts added, Liking, commenting does not touches updated_at 
 -   `(21/jul 08:45pm)` Search for users added, Max-height in full article removed.
 -   `(22/jul 06:48pm)` Bottom Navigation for small screens only added, removed responsive nav on small screens
--   `()` Bookmarks
--   `()` Profile: User Card, Edit profile option, Statistics (Points, Posts, Followers, Followings, Total Likes, Total Comments)
+-   `(23/jul 03:58pm)` Profile: User Card, Edit profile option, Statistics (Points, Posts, Followers, Followings), Bio instead in profession in small user profile, right side widgets into components, moved large footer to edit profile only and few links addded in right section.
 -   `()` Followers and Followings
 -   `()` Social Share Image and description
+-   `()` Bookmarks
+-   `()` Report Profile
 -   `()` Admin Dashboard and Login
 
 ## :rocket: Feature List

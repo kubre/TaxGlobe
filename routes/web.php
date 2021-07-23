@@ -31,14 +31,25 @@ Route::get('/shop', Shop\StoreFrontController::class)
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/connections', SocialMedia\ConnectionController::class)
         ->name('connection.index');
+
     Route::get('/feed', SocialMediaComponents\PostList::class)
         ->name('feed.index');
+
     Route::get('/posts/create/{type}/{post?}', SocialMediaComponents\PostForm::class)
         ->name('posts.form');
+
+    // Route::get('/dashboard', SocialMediaComponents\PostList::class)
+    //     ->name('dashboard.index');
+
     Route::get('/users', Common\UserList::class)
         ->name('users.index');
     Route::get('/users/{user}', SocialMediaComponents\PostList::class)
         ->name('user.profile');
+
+    // Route::get('/users/{user}/followers', Common\UserList::class)
+    //     ->name('users.followers');
+    // Route::get('/users/{user}/followings', Common\UserList::class)
+    //     ->name('users.followings');
 });
 
 Route::get('/posts/{post:slug}', SocialMedia\ArticleController::class)
@@ -46,8 +57,9 @@ Route::get('/posts/{post:slug}', SocialMedia\ArticleController::class)
 
 Route::view('/about', 'about')->name('about.show');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 
 Route::post('/imageUpload', [SocialMedia\MediaController::class, 'uploadArticleImage'])->name('article.image.upload');
+
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');

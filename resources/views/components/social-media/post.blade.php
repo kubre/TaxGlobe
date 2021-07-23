@@ -11,7 +11,7 @@
                         {{ $post->user->name }}
                     </span>
                     <span class="text-gray-500 text-xs truncate">
-                        {{ $post->user->profession ?? '' }}
+                        {{ $post->user->bio ?? '' }}
                     </span>
                 </div>
             </div>

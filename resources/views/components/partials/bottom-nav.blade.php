@@ -75,7 +75,8 @@
             </x-widgets.icon-button>
 
             <!-- Account Management -->
-            <x-widgets.icon-button href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
+            <x-widgets.icon-button href="{{ route('user.profile', auth()->id()) }}"
+                :active="request()->routeIs('user.profile') &&  optional(request()->route('user'))->id === auth()->id()">
                 <img class="h-6 w-6 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
                     alt="{{ Auth::user()->name }}" />
                 {{-- <span class="hidden lg:block">{{ __('Profile') }}</span> --}}

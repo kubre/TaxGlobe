@@ -42,4 +42,6 @@
             @endif
         </div>
     </div>
+
+    <x-partials.footer />
 </x-app-layout>

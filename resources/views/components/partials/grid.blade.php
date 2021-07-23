@@ -18,6 +18,19 @@
         <div
             class="{{ ($isCompact ?? false) ? 'hidden' : 'w-full lg:w-64 flex flex-col flex-none sm:space-y-4' }}">
             {{ $right ?? '' }}
+            <div class="flex space-x-4 md:space-x-2 text-xs pt-12 md:pt-8 justify-center flex-wrap">
+                <div>
+                    <a href="{{ route('about.show') }}" class="text-gray-600 hover:text-gray-800">About</a>
+                </div>
+                <div>
+                    <a href="{{ route('terms.show') }}" class="text-gray-600 hover:text-gray-800">Terms of
+                        Service</a>
+                </div>
+                <div>
+                    <a href="{{ route('policy.show') }}" class="text-gray-600 hover:text-gray-800">Privacy
+                        Policy</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

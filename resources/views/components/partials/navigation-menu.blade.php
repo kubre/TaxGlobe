@@ -92,17 +92,6 @@
                             {{ __('Shop') }}
                         </x-jet-nav-link>
                     </div>
-                    <div class="sm:-my-px sm:ml-10 flex">
-                        <x-jet-nav-link href="{{ route('connection.index') }}"
-                            :active="request()->routeIs('connection.index')">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                            {{ __('Connections') }}
-                        </x-jet-nav-link>
-                    </div>
 
                     <div class="flex items-center ml-8">
                         <x-jet-dropdown align="right" width="48">
@@ -120,13 +109,14 @@
                                     {{ __('Manage Account') }}
                                 </div>
 
-                                <x-jet-dropdown-link class="flex items-center" href="{{ route('profile.show') }}">
+                                <x-jet-dropdown-link class="flex items-center"
+                                    href="{{ route('user.profile', auth()->id()) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
-                                    {{ __('Profile') }}
+                                    {{ __('Dashboard') }}
                                 </x-jet-dropdown-link>
 
                                 <div class="border-t border-gray-100"></div>
@@ -136,7 +126,7 @@
                                     @csrf
 
                                     <x-jet-dropdown-link class='flex items-center' href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                    this.closest('form').submit();">
+                                                                        this.closest('form').submit();">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

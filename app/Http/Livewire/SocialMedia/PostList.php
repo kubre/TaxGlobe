@@ -94,13 +94,14 @@ class PostList extends Component
 
     public function getProfilePosts()
     {
-        return PostModel::with(['user',
-        'likedUsers' => function ($query) {
-            return $query->whereId(auth()->id());
-        },
-        'comments' => function ($query) {
-            $query->groupBy('post_id');
-        }
+        return PostModel::with([
+            'user',
+            'likedUsers' => function ($query) {
+                return $query->whereId(auth()->id());
+            },
+            'comments' => function ($query) {
+                $query->groupBy('post_id');
+            }
         ])
             ->where('user_id', $this->user->id);
     }
