@@ -43,7 +43,8 @@
         @elseif($post->type === 'image')
             <div class="flex flex-col space-y-2 justify-center h-auto w-100 px-0 lg:px-8">
                 <span class="text-gray-500 px-4">{{ $post->title }}</span>
-                <img class="object-cover rounded-none lg:rounded" style="max-height: 80vh"
+                <img onclick="openImage('{{ Storage::disk('posts')->url($post->image) }}')"
+                    class="object-cover rounded-none lg:rounded" style="max-height: 80vh"
                     src="{{ Storage::disk('posts')->url($post->image) }}">
             </div>
         @elseif($post->type === 'article')
@@ -52,7 +53,8 @@
                     @if ($fullPage)
                         <hr>
                         @if ($post->image)
-                            <img class="object-cover rounded-none lg:rounded w-full max-w-full"
+                            <img onclick="openImage('{{ Storage::disk('posts')->url($post->image) }}')"
+                                class="object-cover rounded-none lg:rounded w-full max-w-full"
                                 src="{{ Storage::disk('posts')->url($post->image) }}">
                         @endif
                         <h3 class="font-bold text-2xl mt-4">{{ $post->title }}</h3>
@@ -175,19 +177,29 @@
                         </svg>
                         {{ __('Whatsapp') }}
                     </x-jet-dropdown-link>
+                    <x-jet-dropdown-link data-clipboard-text="{{ route('post.show', $post->slug) }}"
+                        class="flex items-center copy-link">
+                        <svg class="h-4 w-4 mr-2" role="img" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        {{ __('Copy Link') }}
+                    </x-jet-dropdown-link>
                 </x-slot>
             </x-jet-dropdown>
         </div>
         <div class="flex space-x-2">
             {{-- Bookmark --}}
             @auth
-            <x-jet-secondary-button variant='white' wire:click='toggleBookmark'>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 {{ $hasBookmarked ? 'text-blue-900 fill-current' : '' }}" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                </svg>
-            </x-jet-secondary-button>
+                <x-jet-secondary-button variant='white' wire:click='toggleBookmark'>
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 {{ $hasBookmarked ? 'text-blue-900 fill-current' : '' }}" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                    </svg>
+                </x-jet-secondary-button>
             @endauth
             <x-jet-dropdown align="right" width="48">
                 <x-slot name="trigger">

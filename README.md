@@ -27,6 +27,7 @@
 -   `(23/jul 04:30pm)` Followers and Followings pages added
 -   `(23/jul 04:50pm)` Social Share Image and description added
 -   `(24/jul 11:20am)` Bookmarks Added, Side Nav Added
+-   `(24/jul 01:55pm)` Changes from tushar: Image Enlargement on click, copy link button in sharing
 -   `()` Report Post
 -   `()` Admin Dashboard and Login
 

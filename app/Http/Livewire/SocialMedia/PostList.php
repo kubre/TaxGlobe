@@ -79,8 +79,7 @@ class PostList extends Component
             })
             ->with(['user', 'comments' => function ($query) {
                 $query->groupBy('post_id');
-            }])
-            ->orderBy('like_count', 'DESC');
+            }]);
     }
 
     public function getFeedPosts()

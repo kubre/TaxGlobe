@@ -63,7 +63,27 @@
         lang: en_US
     </script>
     <script type="IN/Share" data-url="https://www.linkedin.com"></script>
+    <script src="{{ asset('js/vendor/clipboard.js') }}"></script>
     <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+        var clipboard = new ClipboardJS('.copy-link');
+        clipboard.on('success', function(e) {
+            Toast.fire({
+                icon: 'success',
+                text: 'Copied link successfully!',
+                timer: 1000
+            })
+        });
         document.addEventListener('DOMContentLoaded', function() {
             Livewire.on('triggerDelete', function(postId) {
                 Swal.fire({
@@ -87,6 +107,6 @@
                     icon: 'success'
                 });
             });
-        })
+        });
     </script>
 @endpush

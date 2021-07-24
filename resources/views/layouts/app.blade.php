@@ -46,6 +46,17 @@
     @include('sweetalert::alert')
     @livewireScripts
 
+    <script>
+        function openImage(url) {
+            Swal.fire({
+                imageUrl: url,
+                imageAlt: 'Post Image',
+                showCloseButton: true,
+                width: Math.min(600, window.innerWidth),
+                confirmButtonText: 'Close'
+            });
+        }
+    </script>
     @stack('scripts')
 </body>
 
