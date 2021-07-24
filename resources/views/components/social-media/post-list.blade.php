@@ -5,7 +5,13 @@
 
         {{-- Left Side --}}
         <x-slot name="left">
-            <livewire:social-media.user-card :user='$user' />
+            <div class="flex flex-col space-y-0 md:space-y-2 mb-2 md:mb-0">
+                <livewire:social-media.user-card :user='$user' />
+                @auth
+                    <x-partials.side-nav :routeUserId="optional(request()->route('user'))->id" :routeName="$routeName"
+                        :userId="optional($user)->id" />
+                @endauth
+            </div>
         </x-slot>
 
         {{-- Create Posts --}}
@@ -29,14 +35,12 @@
             @empty
                 <div class="px-4 lg:px-8 py-4 mt-2">
                     <div class="text-3xl">This page seems empty!</div>
-                    <x-slot name="emptyMessage">
-                        <div class="mt-2 text-lg">
-                            It will fill with the posts of people you admire. Start <a class="text-blue-500"
-                                href="{{ route('explore.index') }}">exploring</a> and follow people to receive their
-                            latest posts
-                            here.
-                        </div>
-                    </x-slot>
+                    <div class="mt-2 text-lg">
+                        It will fill with the posts of people you admire. Start <a class="text-blue-500"
+                            href="{{ route('explore.index') }}">exploring</a> and follow people to receive their
+                        latest posts
+                        here.
+                    </div>
                 </div>
             @endforelse
             <div class="px-4 py-2">

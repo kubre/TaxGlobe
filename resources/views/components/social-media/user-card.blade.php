@@ -53,27 +53,29 @@
             @endif
         </div>
         <div class="grid grid-cols-2 gap-y-4 justify-between my-2">
-            <a href="{{ route('users.followers', $user->id) }}" class="font-medium text-base text-center text-gray-500">
+            <a href="{{ route('users.followers', $user->id) }}"
+                class="font-medium text-base text-center text-gray-500">
                 <div class="text-xl font-bold">
-                    {{ $followersCount }}
+                    {{ number_shorten($followersCount) }}
                 </div>
                 <span>Followers</span>
             </a>
-            <a href="{{ route('users.followings', $user->id) }}" class="font-medium text-base text-center text-gray-500">
+            <a href="{{ route('users.followings', $user->id) }}"
+                class="font-medium text-base text-center text-gray-500">
                 <div class="text-xl font-bold">
-                    {{ $followingsCount }}
+                    {{ number_shorten($followingsCount) }}
                 </div>
                 <span>Following</span>
             </a>
             <div class="font-medium text-base text-center text-gray-500">
                 <div class="text-xl font-bold">
-                    {{ $user->points }}
+                    {{ number_shorten($user->points) }}
                 </div>
                 <span>Points</span>
             </div>
             <a href="{{ route('user.profile', $user->id) }}" class="font-medium text-base text-center text-gray-500">
                 <div class="text-xl font-bold">
-                    {{ $postsCount }}
+                    {{ number_shorten($postsCount) }}
                 </div>
                 <span>Posts</span>
             </a>

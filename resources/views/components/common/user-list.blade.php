@@ -1,9 +1,11 @@
 <div>
     <x-common.news />
-
     <x-partials.grid responsiveLeft='true'>
         <x-slot name="left">
-            <livewire:social-media.user-card :user='$user' />
+            <div class="flex flex-col space-y-0 md:space-y-2 mb-2 md:mb-0">
+                <livewire:social-media.user-card :user='$user' />
+                <x-partials.side-nav :routeUserId="optional(request()->route('user'))->id" :routeName="$currentRoute" :userId="optional($user)->id" />
+            </div>
         </x-slot>
 
         {{-- Posts --}}

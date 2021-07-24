@@ -24,10 +24,10 @@
 -   `(21/jul 08:45pm)` Search for users added, Max-height in full article removed.
 -   `(22/jul 06:48pm)` Bottom Navigation for small screens only added, removed responsive nav on small screens
 -   `(23/jul 03:58pm)` Profile: User Card, Edit profile option, Statistics (Points, Posts, Followers, Followings), Bio instead in profession in small user profile, right side widgets into components, moved large footer to edit profile only and few links addded in right section.
--   `(13/jul 04:30pm)` Followers and Followings pages added
--   `(13/jul 04:50pm)` Social Share Image and description added
--   `()` Bookmarks
--   `()` Report Profile
+-   `(23/jul 04:30pm)` Followers and Followings pages added
+-   `(23/jul 04:50pm)` Social Share Image and description added
+-   `(24/jul 11:20am)` Bookmarks Added, Side Nav Added
+-   `()` Report Post
 -   `()` Admin Dashboard and Login
 
 ## :rocket: Feature List

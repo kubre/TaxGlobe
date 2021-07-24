@@ -84,21 +84,7 @@ class User extends Authenticatable
         $this->role === self::ROLE_USER;
     }
 
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
-
-    public function followers()
-    {
-        return $this->belongsToMany(User::class, 'connections', 'following_id', 'follower_id');
-    }
-
-    public function followings()
-    {
-        return $this->belongsToMany(User::class, 'connections', 'follower_id', 'following_id');
-    }
-
+    /* Functions */
     public function toggleFollow($user)
     {
         $this->followings()->toggle($user);
@@ -116,5 +102,33 @@ class User extends Authenticatable
         return $this->followers()
             ->where('follower_id', $user->id)
             ->exists();
+    }
+
+    /* Relations */
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'connections', 'following_id', 'follower_id');
+    }
+
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'connections', 'follower_id', 'following_id');
+    }
+
+    public function bookmarkedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'bookmarks');
+    }
+
+    public function hasBookmarked(Post $post)
+    {
+        return $this->belongsToMany(Post::class, 'bookmarks')
+            ->wherePivot('post_id', $post->id);
     }
 }

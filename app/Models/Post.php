@@ -45,6 +45,12 @@ class Post extends Model
         return $hasLiked;
     }
 
+    public function toggleBookmarkFrom(int $userId)
+    {
+        $changes = $this->bookmarkedUsers()->toggle($userId);
+        return empty($changes['detached']);
+    }
+
     public function addCommentFrom(string $comment, int $userId)
     {
         $this->timestamps = false;
@@ -81,6 +87,17 @@ class Post extends Model
     public function likedBy(User $user)
     {
         return $this->belongsToMany(User::class, 'likes')
+            ->wherePivot('user_id', $user->id);
+    }
+
+    public function bookmarkedUsers()
+    {
+        return $this->belongsToMany(User::class, 'bookmarks');
+    }
+
+    public function bookmarkedBy(User $user)
+    {
+        return $this->belongsToMany(User::class, 'bookmarks')
             ->wherePivot('user_id', $user->id);
     }
 }

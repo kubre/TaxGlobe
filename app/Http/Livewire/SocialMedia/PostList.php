@@ -24,6 +24,7 @@ class PostList extends Component
         'feed.index' => 'getFeedPosts',
         'explore.index' => 'getExplorePosts',
         'user.profile' => 'getProfilePosts',
+        'user.bookmarks' => 'getBookmarkedPosts',
     ];
 
     /** Stores route name to differentiate between different routes */
@@ -63,9 +64,15 @@ class PostList extends Component
     public function getExplorePosts()
     {
         return PostModel::when(\auth()->check(), function ($query) {
-            $query->with(['likedUsers' => function ($query) {
-                $query->whereId(auth()->id());
-            }]);
+            $authId = auth()->id();
+            $query->with([
+                'likedUsers' => function ($query) use ($authId) {
+                    $query->whereId($authId);
+                },
+                'bookmarkedUsers' => function ($query) use ($authId) {
+                    $query->whereId($authId);
+                },
+            ]);
         })
             ->when($this->searchTerm, function ($query, $term) {
                 $query->where('title', 'LIKE', "%$term%");
@@ -78,13 +85,17 @@ class PostList extends Component
 
     public function getFeedPosts()
     {
-        return PostModel::whereHas('user', function ($query) {
-            $query->whereIn('id', \auth()->user()->followings()->pluck('following_id')->add(\auth()->id())->toArray());
+        $authId = \auth()->id();
+        return PostModel::whereHas('user', function ($query) use ($authId) {
+            $query->whereIn('id', \auth()->user()->followings()->pluck('following_id')->add($authId)->toArray());
         })
             ->with([
                 'user',
-                'likedUsers' => function ($query) {
-                    return $query->whereId(auth()->id());
+                'likedUsers' => function ($query) use ($authId) {
+                    return $query->whereId($authId);
+                },
+                'bookmarkedUsers' => function ($query) use ($authId) {
+                    $query->whereId($authId);
                 },
                 'comments' => function ($query) {
                     $query->groupBy('post_id');
@@ -94,15 +105,36 @@ class PostList extends Component
 
     public function getProfilePosts()
     {
+        $authId = auth()->id();
         return PostModel::with([
             'user',
-            'likedUsers' => function ($query) {
-                return $query->whereId(auth()->id());
+            'likedUsers' => function ($query) use ($authId) {
+                return $query->whereId($authId);
+            },
+            'bookmarkedUsers' => function ($query) use ($authId) {
+                $query->whereId($authId);
             },
             'comments' => function ($query) {
                 $query->groupBy('post_id');
             }
-        ])
-            ->where('user_id', $this->user->id);
+        ])->where('user_id', $this->user->id);
+    }
+
+    public function getBookmarkedPosts()
+    {
+        $authId = auth()->id();
+        \abort_unless($this->user->id === $authId, 403);
+        return auth()->user()->bookmarkedPosts()->with([
+            'user',
+            'likedUsers' => function ($query) use ($authId) {
+                return $query->whereId($authId);
+            },
+            'bookmarkedUsers' => function ($query) use ($authId) {
+                $query->whereId($authId);
+            },
+            'comments' => function ($query) {
+                $query->groupBy('post_id');
+            }
+        ]);
     }
 }

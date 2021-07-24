@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('users.index');
     Route::get('/users/{user}', SocialMediaComponents\PostList::class)
         ->name('user.profile');
+    Route::get('/users/{user}/bookmarks', SocialMediaComponents\PostList::class)
+        ->name('user.bookmarks');
 
     Route::get('/users/{user}/followers', Common\UserList::class)
         ->name('users.followers');

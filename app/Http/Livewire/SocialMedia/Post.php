@@ -28,12 +28,15 @@ class Post extends Component
 
     public $hasLiked = false;
 
+    public $hasBookmarked = false;
+
     public $pageName = 'commentPage';
 
     public function mount()
     {
         if (auth()->check()) {
             $this->hasLiked = $this->post->likedUsers->isNotEmpty();
+            $this->hasBookmarked = $this->post->bookmarkedUsers->isNotEmpty();
         }
     }
 
@@ -56,6 +59,15 @@ class Post extends Component
         $this->emit('toggledLike', $this->post->id);
     }
 
+    public function toggleBookmark()
+    {
+        if (!auth()->check()) {
+            return;
+        }
+        $this->hasBookmarked = $this->post->toggleBookmarkFrom(\auth()->id());
+        $this->emit('toggledBookmark', $this->post->id);
+    }
+
     public function publishComment()
     {
         if (!auth()->check()) {
@@ -71,7 +83,7 @@ class Post extends Component
 
         $this->emitSelf('commentChanged');
     }
- 
+
     public function loadComments()
     {
         $this->commentDraft = '';
