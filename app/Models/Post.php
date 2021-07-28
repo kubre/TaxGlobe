@@ -40,6 +40,7 @@ class Post extends Model
         $changes = $this->likedUsers()->toggle($userId);
         $hasLiked = empty($changes['detached']);
         $this->timestamps = false;
+        User::whereId($userId)->increment('points', $hasLiked ? 1 : -1);
         $this->increment('like_count', $hasLiked ? 1 : -1);
         $this->timestamps = true;
         return $hasLiked;

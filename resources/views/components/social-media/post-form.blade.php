@@ -17,7 +17,7 @@
         <div class="{{ $isCompact ?? false ? 'px-4' : 'p-8' }}" x-data="postFormComponent()">
 
             <h4 class="text-lg text-bold mb-2">
-                {{ is_null($postId) ? 'Publish ' . \ucfirst($type) : 'Update Content' }}
+                {{ is_null($postId) ? 'Post ' . \ucfirst($type) : 'Update Content' }}
             </h4>
 
             <form wire:submit.prevent="{{ is_null($postId) ? 'save' : 'save(' . $postId . ')' }}" method="post"
@@ -30,7 +30,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            {{ __('Publish') }}
+                            {{ __('Post') }}
                         </x-jet-button>
                     </div>
                     <div>
@@ -123,7 +123,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        {{ __('Publish') }}
+                        {{ __('Post') }}
                     </x-jet-button>
                     @if ($isCompact ?? false)
                         <div class="space-x-2 flex">

@@ -56,13 +56,12 @@
     </x-partials.grid>
 </div>
 
-
 @push('scripts')
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    {{-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="https://platform.linkedin.com/in.js" type="text/javascript">
         lang: en_US
     </script>
-    <script type="IN/Share" data-url="https://www.linkedin.com"></script>
+    <script type="IN/Share" data-url="https://www.linkedin.com"></script> --}}
     <script src="{{ asset('js/vendor/clipboard.js') }}"></script>
     <script>
         const Toast = Swal.mixin({

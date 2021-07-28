@@ -18,7 +18,7 @@
         </a>
 
         <div class="text-gray-500 text-xs">
-            {{ $post->created_at->diffForHumans(null, false, true) }}
+            {{ $post->created_at->format('d/m/y') }}
             {{ $post->updated_at->gt($post->created_at) ? '(edited)' : '' }}
         </div>
     </div>
@@ -136,7 +136,7 @@
                 </x-slot>
 
                 <x-slot name="content">
-                    <x-jet-dropdown-link class="flex items-center" target='_blank'
+                    {{-- <x-jet-dropdown-link class="flex items-center" target='_blank'
                         href="https://www.facebook.com/sharer/sharer.php?u={{ route('post.show', $post->slug) }}">
                         <svg fill="#1877F2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             class="w-4 h-4 mr-2" viewBox="0 0 24 24">
@@ -166,7 +166,7 @@
                             <circle cx="4" cy="4" r="2" stroke="none"></circle>
                         </svg>
                         {{ __('Linked In') }}
-                    </x-jet-dropdown-link>
+                    </x-jet-dropdown-link> --}}
                     <x-jet-dropdown-link class="flex items-center"
                         href="https://api.whatsapp.com/send?text={{ route('post.show', $post->slug) }}"
                         target="_blank">
