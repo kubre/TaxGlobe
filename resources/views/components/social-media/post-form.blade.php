@@ -17,11 +17,11 @@
         <div class="{{ $isCompact ?? false ? 'px-4' : 'p-8' }}" x-data="postFormComponent()">
 
             <h4 class="text-lg text-bold mb-2">
-                {{ is_null($postId) ? 'Post ' . \ucfirst($type) : 'Update Content' }}
+                {{ is_null($postId) ? 'New Post' : 'Update Content' }}
             </h4>
 
             <form wire:submit.prevent="{{ is_null($postId) ? 'save' : 'save(' . $postId . ')' }}" method="post"
-                enctype="multipart/form-data">
+                enctype="multipart/form-data" x-cloak>
                 @if ($type == \App\Models\Post::TYPE_ARTICLE)
                     <div class="flex justify-end">
                         <x-jet-button id='submit' class="">

@@ -14,6 +14,13 @@
                 <div class="-my-px ml-4 mr-1 sm:ml-10 flex items-center flex-1">
                     <livewire:common.search-bar />
                 </div>
+
+                @auth
+                    <a href="{{ route('user.profile', Auth::id()) }}" class="block md:hidden flex items-center px-2">
+                        <img class="h-9 w-9 border border-gray-500 rounded-full object-cover"
+                            src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                    </a>
+                @endauth
             </div>
 
             <div class="hidden md:flex">
@@ -67,7 +74,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 {{ __('Create') }}
                             </x-jet-nav-link>
@@ -105,6 +112,17 @@
                         </x-jet-nav-link>
                     </div>
 
+                    <div class="sm:-my-px sm:ml-10 flex">
+                        <x-jet-nav-link href="{{ route('users.suggestions', auth()->id()) }}" :active="request()->routeIs('users.suggestions', auth()->id())">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            {{ __('Discover Users') }}
+                        </x-jet-nav-link>
+                    </div>
+
                     <div class="flex items-center ml-8">
                         <x-jet-dropdown align="right" width="48">
                             <x-slot name="trigger">
@@ -137,8 +155,9 @@
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
 
-                                    <x-jet-dropdown-link class='flex items-center' href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                                        this.closest('form').submit();">
+                                    <x-jet-dropdown-link class='flex items-center' href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                                        this.closest('form').submit();">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

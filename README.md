@@ -29,8 +29,7 @@
 -   `(24/jul 11:20am)` Bookmarks Added, Side Nav Added
 -   `(24/jul 01:55pm)` Changes from tushar: Image Enlargement on click, copy link button in sharing
 -   `(28/jul 09:05am)` Changes: Post time in date instead of diff, Change Publish text to Post, Hide Sharing Buttons, create fab in center, create button top, 1 Point on like
--   `()` User Discover Tab
--   `()` Report Post
+-   `(29/jul 06:25pm)` User Discover Tab
 -   `()` Admin Dashboard and Login
 -   `()` Tax Calendar update option
 -   `()` Post actions does not work on Article view option
@@ -38,6 +37,7 @@
 -   `()` Tax Calendar Widget, Hidden widget accessible by button on mobile
 -   `()` Book and Excel tool download sliders
 -   `()` Notifications
+-   `()` Report Post
 
 ## :rocket: Feature List
 

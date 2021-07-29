@@ -1,7 +1,7 @@
 @props(['routeUserId', 'routeName', 'userId'])
 
 @php
-$validRoutes = ['user.profile', 'user.bookmarks', 'users.followers', 'users.followings'];
+$validRoutes = ['user.profile', 'user.bookmarks', 'users.followers', 'users.followings', 'users.suggestions'];
 $showSideNav = \in_array($routeName, $validRoutes) && $routeUserId === auth()->id();
 @endphp
 <div

@@ -39,7 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('posts.form');
 
     Route::get('/users', Common\UserList::class)
-        ->name('users.index');
+        ->name('users.index'); 
+
     Route::get('/users/{user}', SocialMediaComponents\PostList::class)
         ->name('user.profile');
     Route::get('/users/{user}/bookmarks', SocialMediaComponents\PostList::class)
@@ -49,6 +50,9 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('users.followers');
     Route::get('/users/{user}/followings', Common\UserList::class)
         ->name('users.followings');
+
+    Route::get('/users/{user}/suggestions', Common\UserList::class)
+        ->name('users.suggestions');
 });
 
 Route::get('/posts/{post:slug}', SocialMedia\ArticleController::class)

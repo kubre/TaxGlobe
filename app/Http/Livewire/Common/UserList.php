@@ -24,6 +24,7 @@ class UserList extends Component
         'users.index' => 'getUsers',
         'users.followers' => 'getFollowers',
         'users.followings' => 'getFollowings',
+        'users.suggestions' => 'getSuggestions',
     ];
 
     public function mount(Request $request)
@@ -44,7 +45,7 @@ class UserList extends Component
     public function getUsers()
     {
         return UserModel::where('name', 'LIKE', "%{$this->searchTerm}%")
-            ->orderBy('points', 'DESC');
+        ->orderBy('points', 'DESC');
     }
 
     public function getFollowers()
@@ -57,5 +58,12 @@ class UserList extends Component
     {
         return $this->user->followings()
             ->orderBy('name');
+    }
+
+    public function getSuggestions()
+    {
+        abort_unless(auth()->id() === $this->user->id, 403);
+        return UserModel::inRandomOrder()
+            ->where('id', '!=', $this->user->id);
     }
 }
