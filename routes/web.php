@@ -25,12 +25,11 @@ Route::get('/', SocialMediaComponents\PostList::class)
     ->name('explore.index');
 Route::redirect('/explore', '/')
     ->name('explore.explore');
+
 Route::get('/shop', Shop\StoreFrontController::class)
     ->name('shop.index');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/connections', SocialMedia\ConnectionController::class)
-        ->name('connection.index');
 
     Route::get('/feed', SocialMediaComponents\PostList::class)
         ->name('feed.index');
@@ -39,7 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('posts.form');
 
     Route::get('/users', Common\UserList::class)
-        ->name('users.index'); 
+        ->name('users.index');
 
     Route::get('/users/{user}', SocialMediaComponents\PostList::class)
         ->name('user.profile');
@@ -55,11 +54,10 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('users.suggestions');
 });
 
-Route::get('/posts/{post:slug}', SocialMedia\ArticleController::class)
+Route::get('/posts/{slug}', SocialMediaComponents\PostList::class)
     ->name('post.show');
 
 Route::view('/about', 'about')->name('about.show');
-
 
 Route::post('/imageUpload', [SocialMedia\MediaController::class, 'uploadArticleImage'])->name('article.image.upload');
 

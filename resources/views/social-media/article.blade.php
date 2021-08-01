@@ -1,14 +1,6 @@
 <x-app-layout>
 
-    <x-slot name='head'>
-        <meta property="og:title" content="{{ $post->title }}">
-        <meta property="og:description" content="Read full on TaxGlobe.in">
-        <meta property="og:image"
-            content="{{ Storage::disk('posts')->url($post->image) ?? asset('images/logo.png') }}">
-        <meta property="og:url" content="{{ route('post.show', $post->slug) }}">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta property="og:site_name" content="TaxGlobe Professionals">
-    </x-slot>
+    
 
     <x-partials.grid responsiveLeft='true'>
         @auth

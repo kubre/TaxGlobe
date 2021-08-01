@@ -25,6 +25,7 @@ class PostList extends Component
         'explore.index' => 'getExplorePosts',
         'user.profile' => 'getProfilePosts',
         'user.bookmarks' => 'getBookmarkedPosts',
+        'post.show' => 'getPost',
     ];
 
     /** Stores route name to differentiate between different routes */
@@ -33,6 +34,8 @@ class PostList extends Component
     public ?User $user;
 
     public $searchTerm;
+
+    public $fullPage = false;
 
     public function mount(Request $request)
     {
@@ -47,11 +50,17 @@ class PostList extends Component
 
     public function render()
     {
-        return view('components.social-media.post-list', [
-            'posts' => $this->{$this->dataSources[$this->routeName]}()
-                ->orderBy('id', 'DESC')
-                ->simplePaginate(5, ['*'], $this->pageName),
-        ]);
+        $posts = $this->{$this->dataSources[$this->routeName]}()
+            ->orderBy('id', 'DESC')
+            ->simplePaginate(5, ['*'], $this->pageName);
+        $this->incrementViewCount($posts);
+        return view('components.social-media.post-list', \compact('posts'));
+    }
+
+    public function incrementViewCount($posts)
+    {
+        PostModel::whereIn('id', $posts->pluck('id'))
+            ->increment('view_count');
     }
 
     public function delete(PostModel $post)
@@ -80,6 +89,24 @@ class PostList extends Component
             ->with(['user', 'comments' => function ($query) {
                 $query->groupBy('post_id');
             }]);
+    }
+
+    public function getPost()
+    {
+        \abort_unless(request()->route('slug'), 404);
+        $this->fullPage = true;
+        return PostModel::when(\auth()->check(), function ($query) {
+            $authId = auth()->id();
+            $query->with([
+                'likedUsers' => function ($query) use ($authId) {
+                    $query->whereId($authId);
+                },
+                'bookmarkedUsers' => function ($query) use ($authId) {
+                    $query->whereId($authId);
+                },
+            ]);
+        })
+            ->where('slug', request()->route('slug'));
     }
 
     public function getFeedPosts()

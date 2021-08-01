@@ -1,6 +1,18 @@
 <div>
     <x-common.news />
 
+    @if($fullPage)
+        <x-slot name='head'>
+            <meta property="og:title" content="{{ $posts->first()->title }}">
+            <meta property="og:description" content="Read full on TaxGlobe.in">
+            <meta property="og:image"
+                content="{{ Storage::disk('posts')->url($posts->first()->image) ?? asset('images/logo.png') }}">
+            <meta property="og:url" content="{{ route('post.show', $posts->first()->slug) }}">
+            <meta name="twitter:card" content="summary_large_image">
+            <meta property="og:site_name" content="TaxGlobe Professionals">
+        </x-slot>
+    @endif
+
     <x-partials.grid :responsiveLeft="$routeName !== 'user.profile'">
 
         {{-- Left Side --}}
@@ -31,7 +43,7 @@
             @endif
 
             @forelse ($posts as $post)
-                <livewire:social-media.post :post='$post' :show='false' :wire:key="'post-'.$post->id" />
+                <livewire:social-media.post :post='$post' :show='false' :wire:key="'post-'.$post->id" :fullPage="$fullPage" />
             @empty
                 <div class="px-4 lg:px-8 py-4 mt-2">
                     <div class="text-3xl">This page seems empty!</div>
