@@ -15,6 +15,8 @@ class UserCard extends Component
 
     public $postsCount;
 
+    public $showBasicInfoOnly = false;
+
     // public $likesCount;
 
     // public $commentsCount;
@@ -32,7 +34,6 @@ class UserCard extends Component
         $this->postsCount = $this->user->posts_count;
         // $this->likesCount = $this->user->posts_sum_like_count;
         // $this->likesCount = $this->user->posts_sum_like_count;
-        
         // dd($this->user);
     }
 

@@ -31,10 +31,11 @@
 -   `(28/jul 09:05am)` Changes: Post time in date instead of diff, Change Publish text to Post, Hide Sharing Buttons, create fab in center, create button top, 1 Point on like
 -   `(29/jul 06:25pm)` User Discover Tab
 -   `(01/aug 08:14am)` Views on posts, Single post also loads using PostList
--   `()` Admin Dashboard and Login
+-   `(03/aug 06:28pm)` Admin Dashboard: Middleware, Dashboard buttons Admin Menu and view permissions
 -   `()` Tax Calendar update option
--   `()` Post actions does not work on Article view option
 -   `()` Website News edit option
+-   `()` User Administration
+-   `()` Post Administration
 -   `()` Tax Calendar Widget, Hidden widget accessible by button on mobile
 -   `()` Book and Excel tool download sliders
 -   `()` Notifications

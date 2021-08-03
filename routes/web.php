@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Shop;
 use App\Http\Controllers\SocialMedia;
+use App\Http\Livewire\Admin;
 use App\Http\Livewire\SocialMedia as SocialMediaComponents;
 use App\Http\Livewire\Common;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/users/{user}/suggestions', Common\UserList::class)
         ->name('users.suggestions');
+
+    Route::group([
+        'middleware' => 'admin',
+        'prefix' => 'admin',
+        'as' => 'admin.',
+    ], function () {
+        Route::get('dashboard', Admin\Dashboard::class)
+            ->name('dashboard');
+    });
 });
 
 Route::get('/posts/{slug}', SocialMediaComponents\PostList::class)

@@ -76,12 +76,12 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        $this->role === self::ROLE_ADMIN;
+        return $this->role === self::ROLE_ADMIN;
     }
 
     public function isUser()
     {
-        $this->role === self::ROLE_USER;
+        return $this->role === self::ROLE_USER;
     }
 
     /* Functions */
