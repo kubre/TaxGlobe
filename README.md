@@ -32,6 +32,7 @@
 -   `(29/jul 06:25pm)` User Discover Tab
 -   `(01/aug 08:14am)` Views on posts, Single post also loads using PostList
 -   `(03/aug 06:28pm)` Admin Dashboard: Middleware, Dashboard buttons Admin Menu and view permissions
+-   `(06/aug 03:50pm)` Fixed Bookmark button pushing post-nav out of bound
 -   `()` Tax Calendar update option
 -   `()` Website News edit option
 -   `()` User Administration

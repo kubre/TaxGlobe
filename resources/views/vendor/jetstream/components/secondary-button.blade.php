@@ -15,6 +15,6 @@ $classes = $types[$variant ?? 'secondary'];
 @endphp
 
 <button
-    {{ $attributes->merge(['type' => 'button', 'class' => 'inline-flex items-center px-4 py-2 rounded-full font-semibold text-xs uppercase tracking-widest shadow-sm disabled:opacity-25 transition '. $classes]) }}>
+    {{ $attributes->merge(['type' => 'button', 'class' => 'inline-flex items-center px-2 lg:px-4 py-2 rounded-full font-semibold text-xs uppercase tracking-widest shadow-sm disabled:opacity-25 transition '. $classes]) }}>
     {{ $slot }}
 </button>
