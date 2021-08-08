@@ -33,10 +33,9 @@
 -   `(01/aug 08:14am)` Views on posts, Single post also loads using PostList
 -   `(03/aug 06:28pm)` Admin Dashboard: Middleware, Dashboard buttons Admin Menu and view permissions
 -   `(06/aug 03:50pm)` Fixed Bookmark button pushing post-nav out of bound
+-   `(08/aug 02:25pm)` User Administration, Post Administration
 -   `()` Tax Calendar update option
 -   `()` Website News edit option
--   `()` User Administration
--   `()` Post Administration
 -   `()` Tax Calendar Widget, Hidden widget accessible by button on mobile
 -   `()` Book and Excel tool download sliders
 -   `()` Notifications

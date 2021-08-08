@@ -13,7 +13,8 @@
             </svg>
             {{ __('Dashboard') }}
         </x-jet-responsive-nav-link>
-        <x-jet-responsive-nav-link>
+        <x-jet-responsive-nav-link href="{{ route('admin.users.list') }}"
+            :active="request()->routeIs('admin.users.list')">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -21,7 +22,8 @@
             </svg>
             {{ __('Users') }}
         </x-jet-responsive-nav-link>
-        <x-jet-responsive-nav-link href="">
+        <x-jet-responsive-nav-link href="{{ route('admin.posts.list') }}"
+            :active="request()->routeIs('admin.posts.list')">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

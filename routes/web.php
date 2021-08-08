@@ -61,6 +61,12 @@ Route::group(['middleware' => 'auth'], function () {
     ], function () {
         Route::get('dashboard', Admin\Dashboard::class)
             ->name('dashboard');
+
+        Route::get('/users', Admin\UserManagement::class)
+            ->name('users.list');
+
+        Route::get('/posts', Admin\PostManagement::class)
+            ->name('posts.list');
     });
 });
 
