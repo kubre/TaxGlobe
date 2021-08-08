@@ -27,14 +27,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $settings = Cache::remember('settings', 86400, function () {
-            $settings = null;
             if (!Schema::hasTable('settings')) {
-                $settings = Setting::all()
-                    ->mapWithKeys(
-                        fn ($settings) => [$settings['key'] => $settings['value']]
-                    )->toArray();
+                return [];
             }
-            return $settings;
+            return Setting::all()
+                ->mapWithKeys(
+                    fn ($settings) => [$settings['key'] => $settings['value']]
+                )->toArray();
         });
 
         view()->share('settings', $settings);
