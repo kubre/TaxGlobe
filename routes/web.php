@@ -67,6 +67,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/posts', Admin\PostManagement::class)
             ->name('posts.list');
+
+        Route::get('/settings', Admin\WebsiteManagement::class)
+            ->name('website.list');
     });
 });
 

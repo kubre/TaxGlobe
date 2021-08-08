@@ -8,7 +8,7 @@
     </div>
     <div class="marquee overflow-hidden whitespace-nowrap w-full">
         <div class="w-full">
-            TaxGlobe.in is now live!
+            {{ $settings['banner'] ?? '' }}
         </div>
     </div>
 </div>

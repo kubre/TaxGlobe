@@ -17,10 +17,10 @@
 -   `(12/jul 12:55pm)` Image type post upload added, youtube embed with ckeditor fixed, Added terms and conditions, and few final touchups, increased ckeditor height, fixed marquee animation.
 -   `(12/jul 11:30pm)` Fixed minor bugs when not authenticated, changed post title limit to 500, latest comment always appear under post
 -   `(13/jul 02:10pm)` Update profile page completed
--   `(13/jul 11:20pm)` removed create-fab, header image for article, Ckeditor removing spaces fixed, rendering new line in posts, image caption on top, auto-growing post textarea 
+-   `(13/jul 11:20pm)` removed create-fab, header image for article, Ckeditor removing spaces fixed, rendering new line in posts, image caption on top, auto-growing post textarea
 -   `(16/jul 01:15pm)` Edit/Delete Post, Post Policy, Replaced FeedPage and ExplorePage Components with single PostList, Added SweetAlert, profession under name in profile card
 -   `(16/jul 05:35pm)` Replaced profile with PostList Component, Article title have 2 max line now, Article image upload showing broken image in edit when no image uploaded fixed
--   `(16/jul 07:56pm)` Search for posts added, Liking, commenting does not touches updated_at 
+-   `(16/jul 07:56pm)` Search for posts added, Liking, commenting does not touches updated_at
 -   `(21/jul 08:45pm)` Search for users added, Max-height in full article removed.
 -   `(22/jul 06:48pm)` Bottom Navigation for small screens only added, removed responsive nav on small screens
 -   `(23/jul 03:58pm)` Profile: User Card, Edit profile option, Statistics (Points, Posts, Followers, Followings), Bio instead in profession in small user profile, right side widgets into components, moved large footer to edit profile only and few links addded in right section.
@@ -34,8 +34,8 @@
 -   `(03/aug 06:28pm)` Admin Dashboard: Middleware, Dashboard buttons Admin Menu and view permissions
 -   `(06/aug 03:50pm)` Fixed Bookmark button pushing post-nav out of bound
 -   `(08/aug 02:25pm)` User Administration, Post Administration
+-   `(08/aug 10:00pm)` Website News edit option
 -   `()` Tax Calendar update option
--   `()` Website News edit option
 -   `()` Tax Calendar Widget, Hidden widget accessible by button on mobile
 -   `()` Book and Excel tool download sliders
 -   `()` Notifications

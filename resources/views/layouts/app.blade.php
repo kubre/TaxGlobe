@@ -68,6 +68,14 @@
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         })
+
+        window.addEventListener('swal', function(e) {
+            Swal.fire(e.detail);
+        });
+
+        window.addEventListener('toast', function(e) {
+            Toast.fire(e.detail);
+        });
     </script>
     @stack('scripts')
 </body>
