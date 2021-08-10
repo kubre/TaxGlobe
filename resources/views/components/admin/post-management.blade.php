@@ -10,7 +10,7 @@
         </svg>
     </x-slot>
     <div>
-        <livewire:post-table />
+        <livewire:tables.post-table />
     </div>
 
     @push('scripts')

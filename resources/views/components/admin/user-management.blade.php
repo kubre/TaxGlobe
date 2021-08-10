@@ -10,6 +10,6 @@
         </svg>
     </x-slot>
     <div class="my-4">
-        <livewire:user-table />
+        <livewire:tables.user-table />
     </div>
 </div>

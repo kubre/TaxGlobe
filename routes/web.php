@@ -70,6 +70,12 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/settings', Admin\WebsiteManagement::class)
             ->name('website.list');
+
+        Route::get('/tax-dates', Admin\TaxCalendarManagement::class)
+            ->name('tax-date.list');
+
+        Route::get('/tax-date/{taxDate?}', Admin\TaxDateForm::class)
+            ->name('tax-date.edit');
     });
 });
 

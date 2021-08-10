@@ -35,8 +35,10 @@
 -   `(06/aug 03:50pm)` Fixed Bookmark button pushing post-nav out of bound
 -   `(08/aug 02:25pm)` User Administration, Post Administration
 -   `(08/aug 10:00pm)` Website News edit option
--   `()` Tax Calendar update option
+-   `(10/aug 12:10pm)` Tax Calendar Add/Edit/Delete/Table option, Added datepicker
 -   `()` Tax Calendar Widget, Hidden widget accessible by button on mobile
+-   `()` Product Add/Edit
+-   `()` Product Table
 -   `()` Book and Excel tool download sliders
 -   `()` Notifications
 -   `()` Report Post
