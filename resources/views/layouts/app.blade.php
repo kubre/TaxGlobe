@@ -57,6 +57,17 @@
                 confirmButtonText: 'Close'
             });
         }
+
+        function alertBox(title, description) {
+            Swal.fire({
+                title: title,
+                html: description,
+                showCloseButton: true,
+                width: Math.min(600, window.innerWidth),
+                confirmButtonText: 'Close'
+            });
+        }
+        
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
