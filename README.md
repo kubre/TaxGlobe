@@ -37,7 +37,8 @@
 -   `(08/aug 10:00pm)` Website News edit option
 -   `(10/aug 12:10pm)` Tax Calendar Add/Edit/Delete/Table option, Added datepicker
 -   `(10/aug 03:50pm)` Tax Calendar Widget
--   `()` Mobile Hidden widget accessible by button (mobile only)
+-   `(10/aug 07:30pm)` Mobile Hidden widget accessible by button (mobile only), fixed x-on bug in tax calendar
+-   `()` Better Data Exports/ Icons for admin pages
 -   `()` Product Add/Edit
 -   `()` Product Table
 -   `()` Book and Excel tool download sliders

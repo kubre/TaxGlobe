@@ -1,4 +1,4 @@
-@props(['variant'])
+@props(['variant', 'isRound'])
 
 @php
 $types = [
@@ -11,10 +11,10 @@ hover:text-white hover:bg-green-700',
 'warning' => 'text-yellow-700 bg-yellow-200 text-yellow-700 border
 border-yellow-700 hover:text-white hover:bg-yellow-700',
 ];
-$classes = $types[$variant ?? 'secondary'];
+$classes = $types[$variant ?? 'secondary'] . (($isRound ?? true) ? ' rounded-full ' : '');
 @endphp
 
 <button
-    {{ $attributes->merge(['type' => 'button', 'class' => 'inline-flex items-center px-2 lg:px-4 py-2 rounded-full font-semibold text-xs uppercase tracking-widest shadow-sm disabled:opacity-25 transition '. $classes]) }}>
+    {{ $attributes->merge(['type' => 'button', 'class' => 'inline-flex items-center px-2 lg:px-4 py-2 font-semibold text-xs uppercase tracking-widest shadow-sm disabled:opacity-25 transition ' . $classes]) }}>
     {{ $slot }}
 </button>
