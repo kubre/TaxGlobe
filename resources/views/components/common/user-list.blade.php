@@ -53,7 +53,7 @@
 
         {{-- Right Side --}}
         <x-slot name="right">
-            <x-widgets.tax-calendar />
+            <livewire:widgets.tax-calendar />
             <livewire:widgets.product-slider />
         </x-slot>
     </x-partials.grid>
