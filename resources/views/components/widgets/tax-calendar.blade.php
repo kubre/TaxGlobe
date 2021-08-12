@@ -45,12 +45,19 @@
 
                 <x-slot name="content">
                     <x-jet-dropdown-link class="flex items-center"
-                        href="https://api.whatsapp.com/send?text={{ route('explore.index', [
-    'taxMonth' => $selectedMonth,
-    'taxYear' => $selectedYear,
-    'taxCategory' => $selectedCategory,
-]) }}"
-                        target="_blank">
+                        href="https://api.whatsapp.com/send?text={{ urlencode(
+    'Check the Compliance calendar for the Month of ' .
+        $selectedMonth .
+        '/' .
+        $selectedYear .
+        ': ' .
+        route('explore.index', [
+            'taxMonth' => $selectedMonth,
+            'taxYear' => $selectedYear,
+            'taxCategory' => $selectedCategory,
+        ]),
+) }}"
+                        target="_blank" ata-action="share/whatsapp/share">
                         <svg fill="#25D366" class="h-4 w-4 mr-2" role="img" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
