@@ -42,6 +42,17 @@
                     <x-common.datepicker id="date_at" class="block mt-1 w-full" name="date_at"
                         wire:model.defer="state.date_at" defaultDate="{{ $state['date_at'] ?? '' }}" />
                 </div>
+
+                <div class="col-span-6 sm:col-span-4">
+                    <x-jet-label for="category" value="{{ __('Category') }}" />
+                    <x-jet-input id="category" class="block mt-1 w-full" type="text" name="category" list="categories"
+                        wire:model.defer="state.category" autocomplete="off" />
+                    <datalist id="categories">
+                        @foreach ($previousCategories as $category)
+                            <option value="{{ $category }}">
+                        @endforeach
+                    </datalist>
+                </div>
             </x-slot>
             <x-slot name="actions">
                 <x-jet-action-message class="mr-3" on="saved">

@@ -4,12 +4,12 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\TaxDate as TaxDateModel;
 use Livewire\Component;
-use NunoMaduro\Collision\Adapters\Phpunit\State;
 
 class TaxDateForm extends Component
 {
-
     public $state = [];
+
+    public $previousCategories = [];
 
     public $taxDateId;
 
@@ -17,6 +17,7 @@ class TaxDateForm extends Component
         'state.title' => 'required|max:191',
         'state.description' => 'required|max:5000',
         'state.date_at' => 'required|date',
+        'state.category' => 'nullable|string',
     ];
 
     public $messages = [
@@ -24,6 +25,7 @@ class TaxDateForm extends Component
         'state.description.required' => 'Description is required',
         'state.date_at.required' => 'Date is required',
         'state.date_at.date' => 'Date field must be Date',
+        'state.category.string' => 'Category must be a valid value',
     ];
 
     public function mount(?TaxDateModel $taxDate)
@@ -32,6 +34,7 @@ class TaxDateForm extends Component
             $this->taxDateId = $taxDate->id;
             $this->state = $taxDate->toArray();
         }
+        $this->previousCategories = TaxDateModel::whereNotNull('category')->pluck('category')->toArray();
     }
 
     public function render()
@@ -49,6 +52,14 @@ class TaxDateForm extends Component
 
         if (!is_null($this->taxDateId)) {
             $taxDate = TaxDateModel::find($this->taxDateId);
+        }
+
+        if (isset($this->state['category'])) {
+            $this->state['category'] = \strtoupper($this->state['category']);
+
+            if (empty(trim($this->state['category']))) {
+                $this->state['category'] = null;
+            }
         }
 
         $taxDate->fill($this->state)->save();

@@ -14,12 +14,17 @@ class TaxCalendar extends Component
 
     public $selectedMonth;
     public $selectedYear;
+    public $selectedCategory = 'All';
+    public $categoriesInMonth;
 
     public function mount()
     {
         $this->finalYear = (int)(optional(Carbon::parse(TaxDate::max('date_at')))->format('Y') ?? date('Y'));
-        $this->selectedYear = (int)date('Y');
-        $this->selectedMonth = (int)date('n');
+
+        $this->selectedYear = \request()->get('taxYear', (int)date('Y'));
+        $this->selectedMonth = \request()->get('taxMonth', (int)date('n'));
+        $this->selectedCategory = \request()->get('taxCategory', 'All');
+        \abort_if(!\is_numeric($this->selectedMonth) || $this->selectedMonth < 1 || $this->selectedMonth > 12 || !\is_numeric($this->selectedYear), 404);
     }
 
     public function render()
@@ -30,8 +35,27 @@ class TaxCalendar extends Component
         $taxDates = TaxDate::query()
             ->where('date_at', '>=', $startDate)
             ->where('date_at', '<=', $endDate)
+            // ->when($this->selectedCategory !== 'All' && $this->selectedCategory !== 'No Category', function ($query) {
+            //     $query->where('category', $this->selectedCategory);
+            // })
+            // ->when($this->selectedCategory === 'No Category', function ($query) {
+            //     $query->whereNull('category');
+            // })
             ->orderBy('date_at', 'ASC')
             ->get();
+
+        $this->categoriesInMonth = $taxDates->mapWithKeys(fn ($taxDate) => [$taxDate->category => $taxDate->category])
+            ->filter()
+            ->whenEmpty(fn ($c) => \collect([
+                'All' => 'Show All',
+                'No Category' => 'No Category',
+            ]))
+            ->whenNotEmpty(fn ($c) => $c->merge([
+                'All' => 'Show All',
+                'No Category' => 'No Category',
+            ]))
+            ->toArray();
+
 
         for ($i = 2020; $i <= $this->finalYear; $i++) {
             $this->years[(string)$i] = (string)$i;
