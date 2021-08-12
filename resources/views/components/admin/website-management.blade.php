@@ -11,7 +11,7 @@
     </x-slot>
     {{-- basic info update section --}}
     <div class="my-4">
-        <x-jet-form-section submit="updatebasicsettings">
+        <x-jet-form-section submit="updateBasicSettings">
             <x-slot name="title">
                 {{ __('Basic information') }}
             </x-slot>
