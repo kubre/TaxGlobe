@@ -22,5 +22,6 @@ class PostManagement extends Component
         $this->authorize('delete', $post);
         $post->delete();
         $this->emit('refreshLivewireDatatable');
+        $this->dispatchBrowserEvent('postDeleted');
     }
 }

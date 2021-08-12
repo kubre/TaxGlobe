@@ -16,6 +16,8 @@ class TaxDateTable extends LivewireDatatable
 
     public $exportable = true;
 
+    public $hideable = 'select';
+
     public function columns()
     {
         return [
@@ -28,6 +30,7 @@ class TaxDateTable extends LivewireDatatable
             DateColumn::name('date_at')
                 ->label('Date')
                 ->width(100)
+                ->defaultSort()
                 ->filterable(),
 
             Column::name('title')
@@ -40,11 +43,21 @@ class TaxDateTable extends LivewireDatatable
                 ->searchable()
                 ->truncate(100),
 
+            Column::name('category')
+                ->filterable($this->categories)
+                ->truncate(60),
+
             Column::callback(['id'], function ($id) {
                 return view('table-views.actions-tax-date', \compact('id'));
             })
                 ->width(100)
+                ->excludeFromExport()
                 ->label('Actions'),
         ];
+    }
+
+    public function getCategoriesProperty()
+    {
+        return TaxDate::pluck('category')->filter();
     }
 }

@@ -40,7 +40,7 @@
                 Livewire.on('triggerDelete', function(taxDateId) {
                     Swal.fire({
                         title: 'Are You Sure?',
-                        text: 'You will not be able to recover this post again!',
+                        text: 'You will not be able to recover this record again!',
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',

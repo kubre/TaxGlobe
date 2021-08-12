@@ -6,7 +6,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewbox="0 0 24 24"
             stroke="currentcolor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="m12 4.354a4 4 0 110 5.292m15 21h3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
         </svg>
     </x-slot>
     {{-- basic info update section --}}
@@ -40,5 +40,5 @@
                 </x-jet-button>
             </x-slot>
         </x-jet-form-section>
-    </div> 
+    </div>
 </div>

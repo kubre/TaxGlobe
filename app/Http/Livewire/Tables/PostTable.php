@@ -16,6 +16,8 @@ class PostTable extends LivewireDatatable
 
     public $sort = 'id|desc';
 
+    public $hideable = 'select';
+
     public $exportable = true;
 
     public function builder()
@@ -44,10 +46,27 @@ class PostTable extends LivewireDatatable
             })
                 ->label('Image')
                 ->unsortable()
+                ->excludeFromExport()
                 ->width(30),
 
             Column::name('type')
                 ->filterable(['post', 'article', 'image'])
+                ->width(40),
+
+            NumberColumn::name('like_count')
+                ->filterable()
+                ->hide()
+                ->width(100),
+
+            NumberColumn::name('comment_count')
+                ->filterable()
+                ->hide()
+                ->width(100),
+
+            Column::name('user.name')
+                ->searchable()
+                ->filterable()
+                ->label('Author')
                 ->width(40),
 
             DateColumn::name('created_at')

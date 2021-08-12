@@ -12,4 +12,35 @@
     <div class="my-4">
         <livewire:tables.user-table />
     </div>
+
+
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded',
+            function() {
+                Livewire.on('triggerDelete', function(userId) {
+                    Swal.fire({
+                        title: 'Are You Sure?',
+                        text: 'You will not be able to recover this user again!',
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#aaa',
+                        confirmButtonText: 'Delete!'
+                    }).then((result) => {
+                        if (result.value) {
+                            @this.call('deleteUser', userId)
+                        }
+                    });
+                });
+
+                Livewire.on('userDeleted', function() {
+                    Swal.fire({
+                        title: 'User removed successfully!',
+                        icon: 'success'
+                    });
+                });
+            });
+    </script>
+@endpush
 </div>
