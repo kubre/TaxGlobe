@@ -77,9 +77,15 @@
 
                     @if (is_null($postId))
                         <div class="my-4">
-                            <div>{{ count($attachments) }} file/files are uploaded</div>
                             <x-jet-label for="attachments" value="{{ __('Attachments') }}" />
-                            <x-jet-input class="mt-1" type="file" multiple accept="application/pdf,image/jpeg" wire:model.defer="attachments" />
+                            <x-jet-input class="mt-1" type="file" multiple accept="application/pdf,image/jpeg"
+                                wire:model.defer="attachments" />
+                            @if (!empty($attachments))
+                                <div class="mt-2">
+                                    <strong class="mr-1">Upload Completed: </strong>
+                                    <span>{{ collect($attachments)->map->getClientOriginalName()->join(', ') }}</span>
+                                </div>
+                            @endif
                             <x-jet-input-error for="attachments.*" />
                             <x-jet-input-error for="attachments" />
                         </div>
