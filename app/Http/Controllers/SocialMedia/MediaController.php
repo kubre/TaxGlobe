@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaController extends Controller
 {
@@ -23,5 +24,10 @@ class MediaController extends Controller
         return \response()->json([
             'url' => Storage::disk('posts')->url($name),
         ]);
+    }
+
+    public function download(Media $media)
+    {
+        return response()->download($media->getPath(), $media->name);
     }
 }

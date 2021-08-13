@@ -21,6 +21,7 @@ class PostForm extends Component
     public $body;
     public $slug;
     public $image;
+    public $attachments = [];
     public $oldImage;
 
     public bool $isCompact = false;
@@ -45,6 +46,18 @@ class PostForm extends Component
                 'max:2048',
             ],
         ];
+    }
+
+    public function updatedAttachments()
+    {
+        $this->validate([
+            'attachments.*' => 'nullable|file|mimes:pdf,docx,xlsx,doc,xls|max:3000',
+            'attachments' => 'max:3',
+        ], [
+            'attachments.*.max' => 'Each file is restricted to Max 3MB size only!',
+            'attachments.*.mimes' => 'Only PDF, Word and Excel files are allowed',
+            'attachments.max' => 'Max 3 files are allowed',
+        ]);
     }
 
     public function mount(string $type, PostModel $post)
@@ -88,6 +101,17 @@ class PostForm extends Component
             'user_id' => \auth()->id(),
             'type' => $this->type,
         ])->save();
+
+        // $attachmentsPath = [];
+        if ($saved && !empty($this->attachments)) {
+            foreach ($this->attachments as $attachment) {
+                // $attachmentsPath[] = $attachment->store('/', 'attachments');
+                $post
+                    ->addMedia($attachment->getRealPath())
+                    ->usingName($attachment->getClientOriginalName())
+                    ->toMediaCollection('attachments');
+            }
+        }
 
         if (!$saved && !is_null($this->image)) {
             Storage::disk('posts')->delete($file);

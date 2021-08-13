@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Post extends Model
+class Post extends Model implements HasMedia
 {
     use SoftDeletes;
+    use InteractsWithMedia;
 
     public const TYPE_ARTICLE = 'article';
     public const TYPE_POST = 'post';
@@ -32,6 +35,14 @@ class Post extends Model
             $post->user()->decrement('points');
         });
     }
+
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('attachments')
+            ->acceptsMimeTypes(['image/jpeg', 'application/pdf']);
+    }
+
 
     /* Central Logic */
 

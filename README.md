@@ -40,11 +40,12 @@
 -   `(10/aug 07:30pm)` Mobile Hidden widget accessible by button (mobile only), fixed x-on bug in tax calendar
 -   `(12/aug 11:30am)` Categories and Share options for tax calendar
 -   `(12/aug 07:45pm)` Icons for admin pages, Hidden columns, excludes, exports, ability to delete users
--   `()` Report Post
+-   `(13/aug 02:10pm)` Post Attachments added
 -   `()` Product Add/Edit
 -   `()` Product Table
 -   `()` Book and Excel tool download sliders
 -   `()` Notifications
+-   `()` Report Post
 
 ## :rocket: Feature List
 

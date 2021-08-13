@@ -35,7 +35,8 @@
                     </div>
                     <div>
                         <x-jet-label for="title" value="{{ __('Title *') }}" />
-                        <x-jet-input id="title" class="block mt-1 w-full" type="text" name="title" wire:model.defer="title" autofocus />
+                        <x-jet-input id="title" class="block mt-1 w-full" type="text" name="title"
+                            wire:model.defer="title" autofocus />
                         <x-jet-input-error for='title' />
                     </div>
                     <div class="block mt-2">
@@ -73,6 +74,16 @@
                             name="body">{{ $body }}</textarea>
                         <x-jet-input-error for='body' />
                     </div>
+
+                    @if (is_null($postId))
+                        <div class="my-4">
+                            <div>{{ count($attachments) }} file/files are uploaded</div>
+                            <x-jet-label for="attachments" value="{{ __('Attachments') }}" />
+                            <x-jet-input class="mt-1" type="file" multiple accept="application/pdf,image/jpeg" wire:model.defer="attachments" />
+                            <x-jet-input-error for="attachments.*" />
+                            <x-jet-input-error for="attachments" />
+                        </div>
+                    @endif
                 @else
                     <div class="pt-2 pb-1" x-show="type === '{{ \App\Models\Post::TYPE_IMAGE }}'">
                         @if (!is_null($postId))

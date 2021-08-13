@@ -62,6 +62,33 @@
                         <div class="mt-4">
                             {!! $post->body !!}
                         </div>
+
+                        @php
+                            $attachments = $post->getMedia('attachments');
+                            $colors = ['red', 'green', 'blue'];
+                        @endphp
+
+                        @if ($attachments->isNotEmpty())
+                            <hr class="bg-gray-300" />
+                            <strong class="my-2 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                                </svg>
+                                Downloads
+                            </strong>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                @foreach ($attachments as $attachment)
+                                    <a href="{{ route('article.image.download', $attachment->id) }}" target="_blank" class="px-4 py-2 bg-{{ $colors[$loop->index % 4] }}-200 text-{{ $colors[$loop->index % 4] }}-900 rounded-full flex items-center text-sm">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                          </svg>
+                                        {{ $attachment->name }}
+                                    </a>
+                                @endforeach
+                            </div>
+                        @endif
                     @else
                         <a href="{{ route('post.show', $post->slug) }}">
                             <div class="flex flex-col space-y-2">
@@ -124,7 +151,7 @@
                     {{ number_shorten($post->comment_count) }}
                 </span>
             </x-jet-secondary-button>
-        
+
             <x-jet-dropdown align="left" width="48">
                 <x-slot name="trigger">
                     <x-jet-secondary-button variant='white'>
@@ -188,7 +215,7 @@
                     </x-jet-dropdown-link>
                 </x-slot>
             </x-jet-dropdown>
-            
+
             <x-jet-secondary-button class="cursor-default" variant='white'>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">

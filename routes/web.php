@@ -86,6 +86,9 @@ Route::view('/about', 'about')->name('about.show');
 
 Route::post('/imageUpload', [SocialMedia\MediaController::class, 'uploadArticleImage'])->name('article.image.upload');
 
+Route::get('/download/{media}', [SocialMedia\MediaController::class, 'download'])->name('article.image.download');
+
+
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');
 // })->name('dashboard');
