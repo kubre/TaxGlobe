@@ -30,7 +30,7 @@ Route::redirect('/explore', '/')
 Route::get('/shop', Shop\StoreFrontController::class)
     ->name('shop.index');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('/feed', SocialMediaComponents\PostList::class)
         ->name('feed.index');
@@ -68,14 +68,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/posts', Admin\PostManagement::class)
             ->name('posts.list');
 
-        Route::get('/settings', Admin\WebsiteManagement::class)
-            ->name('website.list');
-
         Route::get('/tax-dates', Admin\TaxCalendarManagement::class)
             ->name('tax-date.list');
 
+        // Route::get('/products', Admin\ProductManagement::class)
+        //     ->name('products.list');
+
         Route::get('/tax-date/{taxDate?}', Admin\TaxDateForm::class)
             ->name('tax-date.edit');
+
+        Route::get('/settings', Admin\WebsiteManagement::class)
+            ->name('website.list');
     });
 });
 
