@@ -71,8 +71,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/tax-dates', Admin\TaxCalendarManagement::class)
             ->name('tax-date.list');
 
-        // Route::get('/products', Admin\ProductManagement::class)
-        //     ->name('products.list');
+        Route::get('/products', Admin\ProductManagement::class)
+            ->name('products.list');
+
+        Route::get('/products/form/{product?}', Admin\ProductForm::class)
+            ->name('products.form');
 
         Route::get('/tax-date/{taxDate?}', Admin\TaxDateForm::class)
             ->name('tax-date.edit');

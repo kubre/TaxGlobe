@@ -40,7 +40,7 @@
             </svg>
             {{ __('Tax Calendar') }}
         </x-jet-responsive-nav-link>
-        <x-jet-responsive-nav-link href="">
+        <x-jet-responsive-nav-link href="{{ route('admin.products.list') }}" :active="request()->routeIs('admin.products.list')">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

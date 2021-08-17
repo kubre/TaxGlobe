@@ -10,7 +10,7 @@
                         @this.upload('{{ $attributes->whereStartsWith('wire:model')->first() }}', file, load, error, progress)
                     },
                     revert: (filename, load) => {
-                        post.removeFile();
+                        {{-- post.removeFile(); --}}
                         @this.removeUpload('{{ $attributes->whereStartsWith('wire:model')->first() }}', filename, load)
                     },
 

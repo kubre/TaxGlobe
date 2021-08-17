@@ -10,6 +10,36 @@
                 height: 4rem;
             }
 
+            .ck-editor__main ul li {
+                list-style-type: disc;
+                margin-left: 20px;
+            }
+
+            .ck-editor__main ol li {
+                list-style-type: decimal;
+                margin-left: 20px;
+            }
+
+            .ck-editor__main ul li {
+                list-style-type: disc;
+                margin-left: 20px;
+            }
+
+            .ck-editor__main h2 {
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+
+            .ck-editor__main h3 {
+                font-size: 1.17em;
+                font-weight: bold;
+            }
+
+            .ck-editor__main h4 {
+                font-size: 1em;
+                font-weight: bold;
+            }
+
         </style>
     @endpush
 
