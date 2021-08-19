@@ -7,7 +7,7 @@
 
         <x-jet-secondary-button variant='success'
             @click="window.location = '{{ route('posts.form', \App\Models\Post::TYPE_ARTICLE) }}'"
-            class="py-4 lg:py-2">
+            class="py-4 lg:py-2 px-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-0 md:mr-2" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -28,7 +28,7 @@
             <span class="hidden sm:inline-block">{{ __('Post') }}</span>
         </x-jet-button>
         <x-jet-secondary-button @click="window.location = '{{ route('posts.form', \App\Models\Post::TYPE_IMAGE) }}'"
-            variant='warning' class="py-4 lg:py-2">
+            variant='warning' class="py-4 lg:py-2 px-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-0 md:mr-2" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

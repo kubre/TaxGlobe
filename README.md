@@ -43,9 +43,9 @@
 -   `(13/aug 02:10pm)` Post Attachments added
 -   `(17/aug 7:35pm)` Product Add/Edit
     -   Attributes: title, images, price, discount, shortDescription, fullDescription, type(Download, Deliver)
--   `(17/aug 7:35pm)` Product Table
--   `()` Storefront
--   `()` Individual ProductPage
+-   `(17/aug 07:35pm)` Product Table
+-   `(19/aug 05:35pm)` Storefront, Product Search option
+-   `(19/aug 05:35pm)` Individual ProductPage
 -   `()` Checkout Page
 -   `()` Order Confirm and Fail page
 -   `()` Order History Page on Profile

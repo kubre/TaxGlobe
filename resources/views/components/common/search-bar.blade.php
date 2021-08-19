@@ -14,6 +14,9 @@
         <div wire:click="searchPosts" class="py-1 px-2 overlfow-hidden w-full cursor-pointer hover:bg-gray-200 rounded">
             Search Posts: <span class="font-bold" x-text="term"></span>
         </div>
+        <div wire:click="searchProducts" class="py-1 px-2 overlfow-hidden w-full cursor-pointer hover:bg-gray-200 rounded">
+            Search Products: <span class="font-bold" x-text="term"></span>
+        </div>
         @auth
             <div wire:click="searchUsers" class="py-1 px-2 overlfow-hidden w-full cursor-pointer hover:bg-gray-200 rounded">
                 Search Profiles: <span class="font-bold" x-text="term"></span>
@@ -23,6 +26,6 @@
             <div class="py-1 px-2 overlfow-hidden w-full text-gray-500 rounded">
                 Login to search profiles
             </div>
-        @endguest
+        @endguest 
     </div>
 </div>

@@ -44,4 +44,17 @@ class Product extends Model implements HasMedia
 
         $this->addMediaCollection('download');
     }
+
+    public function getFinalPriceAttribute()
+    {
+        return $this->attributes['price'] - $this->attributes['discount'];
+    }
+
+    public function getDiscountPercentageAttribute()
+    {
+        if ($this->attributes['price'] === 0) {
+            return 0;
+        }
+        return ($this->attributes['discount'] / $this->attributes['price']) * 100;
+    }
 }

@@ -1,5 +1,5 @@
 <nav {{ $attributes->merge(['class' => 'fixed inset-x-0 bottom-0 z-10 bg-white border-t border-gray-300']) }}>
-    <div class="block grid grid-cols-5 items-stretch justify-center max-w-2xl mx-auto">
+    <div class="block grid @auth grid-cols-5 @endauth @guest grid-cols-4 @endguest items-stretch justify-center max-w-2xl mx-auto">
         @guest
             <x-widgets.icon-button href="{{ route('explore.index') }}" :active="request()->routeIs('explore.index')">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"

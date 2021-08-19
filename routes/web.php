@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Shop;
+use App\Http\Livewire\Shop;
 use App\Http\Controllers\SocialMedia;
 use App\Http\Livewire\Admin;
 use App\Http\Livewire\SocialMedia as SocialMediaComponents;
 use App\Http\Livewire\Common;
+use App\Http\Livewire\Shop\Storefront;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,7 @@ Route::get('/', SocialMediaComponents\PostList::class)
 Route::redirect('/explore', '/')
     ->name('explore.explore');
 
-Route::get('/shop', Shop\StoreFrontController::class)
+Route::get('/shop', Shop\Storefront::class)
     ->name('shop.index');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
@@ -87,6 +88,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 Route::get('/posts/{slug}', SocialMediaComponents\PostList::class)
     ->name('post.show');
+
+Route::get('/products/{product:slug}', Shop\ProductDetails::class)
+    ->name('products.show');
 
 Route::view('/about', 'about')->name('about.show');
 

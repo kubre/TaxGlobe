@@ -29,4 +29,12 @@ class SearchBar extends Component
         }
         return \redirect()->route('users.index', ['q' => $this->term]);
     }
+
+    public function searchProducts()
+    {
+        if (\strlen($this->term) < 3) {
+            return;
+        }
+        return \redirect()->route('shop.index', ['q' => $this->term]);
+    }
 }
