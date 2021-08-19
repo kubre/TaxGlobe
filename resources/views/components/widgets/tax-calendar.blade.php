@@ -32,7 +32,7 @@
 
         <div class="flex justify-between items-center">
             <strong>Tax Calendar</strong>
-            <x-jet-dropdown align="left" width="48">
+            <x-jet-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <x-jet-secondary-button variant='white'>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
