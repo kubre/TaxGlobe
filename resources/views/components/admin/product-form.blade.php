@@ -81,7 +81,8 @@
                     <x-jet-label for="state.download" value="{{ __('File for download') }}" />
                     <x-jet-input class="mt-1" type="file" wire:model.defer="state.download" />
                     @isset($state['id'])
-                        <div class="text-gray-500">If you want to change downloadble file upload new file, otherwise old file will be used.</div>
+                        <div class="text-gray-500">If you want to change downloadble file upload new file, otherwise old
+                            file will be used.</div>
                     @endisset
                     <x-jet-input-error for="state.download" />
                 </div>
@@ -114,10 +115,18 @@
                             @endforeach
                         </div>
                     @endisset
-                    @isset($state['id'])
-                        <div class="text-gray-500">If you want to update images then upload new ones or just leave it empty.
-                        </div>
-                    @endisset
+                    @if(isset($state['id']) && empty($state['images']))
+                            <div class="text-gray-500 mt">
+                                Uploading new images will replace old ones.
+                            </div>
+                            <div class="flex space-x-2">
+                                @foreach ($oldImages as $image)
+                                    <div class="w-32 h-32">
+                                        <img class="rounded w-full h-full object-fill" src="{{ $image->getUrl() }}">
+                                    </div>
+                                @endforeach
+                            </div>
+                    @endif
                     <x-jet-input-error for="state.images.*" />
                     <x-jet-input-error for="state.images" />
                 </div>

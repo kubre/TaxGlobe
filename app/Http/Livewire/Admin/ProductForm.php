@@ -12,6 +12,8 @@ class ProductForm extends Component
 
     public $state = [];
 
+    public $oldImages;
+
     public $messages = [
         'state.title.required' => 'Title is required.',
         'state.images.*.image' => 'Images should be only JPG and PNG.',
@@ -54,6 +56,9 @@ class ProductForm extends Component
     public function mount(?Product $product)
     {
         $this->state = $product->toArray();
+        if ($product->exists) {
+            $this->oldImages = $product->getMedia('images');
+        }
     }
 
     public function render()

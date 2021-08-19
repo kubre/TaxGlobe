@@ -47,7 +47,17 @@
     @include('sweetalert::alert')
     @livewireScripts
 
+    <script src="{{ asset('js/vendor/clipboard.js') }}"></script>
     <script>
+        var clipboard = new ClipboardJS('.copy-link');
+        clipboard.on('success', function(e) {
+            Toast.fire({
+                icon: 'success',
+                text: 'Copied link successfully!',
+                timer: 1000
+            })
+        });
+
         function openImage(url) {
             Swal.fire({
                 imageUrl: url,
@@ -67,7 +77,7 @@
                 confirmButtonText: 'Close'
             });
         }
-        
+
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',

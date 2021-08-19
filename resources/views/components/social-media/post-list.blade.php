@@ -1,7 +1,7 @@
 <div>
     <x-common.news />
 
-    @if($fullPage)
+    @if ($fullPage)
         <x-slot name='head'>
             <meta property="og:title" content="{{ $posts->first()->title }}">
             <meta property="og:description" content="Read full on TaxGlobe.in">
@@ -43,7 +43,8 @@
             @endif
 
             @forelse ($posts as $post)
-                <livewire:social-media.post :post='$post' :show='false' :wire:key="'post-'.$post->id" :fullPage="$fullPage" />
+                <livewire:social-media.post :post='$post' :show='false' :wire:key="'post-'.$post->id"
+                    :fullPage="$fullPage" />
             @empty
                 <div class="px-4 lg:px-8 py-4 mt-2">
                     <div class="text-3xl">This page seems empty!</div>
@@ -74,16 +75,7 @@
         lang: en_US
     </script>
     <script type="IN/Share" data-url="https://www.linkedin.com"></script> --}}
-    <script src="{{ asset('js/vendor/clipboard.js') }}"></script>
-    <script> 
-        var clipboard = new ClipboardJS('.copy-link');
-        clipboard.on('success', function(e) {
-            Toast.fire({
-                icon: 'success',
-                text: 'Copied link successfully!',
-                timer: 1000
-            })
-        });
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             Livewire.on('triggerDelete', function(postId) {
                 Swal.fire({

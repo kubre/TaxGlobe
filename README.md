@@ -41,11 +41,12 @@
 -   `(12/aug 11:30am)` Categories and Share options for tax calendar
 -   `(12/aug 07:45pm)` Icons for admin pages, Hidden columns, excludes, exports, ability to delete users
 -   `(13/aug 02:10pm)` Post Attachments added
--   `(17/aug 7:35pm)` Product Add/Edit
+-   `(17/aug 07:35pm)` Product Add/Edit
     -   Attributes: title, images, price, discount, shortDescription, fullDescription, type(Download, Deliver)
 -   `(17/aug 07:35pm)` Product Table
 -   `(19/aug 05:35pm)` Storefront, Product Search option
 -   `(19/aug 05:35pm)` Individual ProductPage
+-   `(19/aug 09:45pm)` Out of stock added in UI, common share component added, Product form displays old images
 -   `()` Checkout Page
 -   `()` Order Confirm and Fail page
 -   `()` Order History Page on Profile
