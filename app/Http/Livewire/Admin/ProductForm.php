@@ -28,6 +28,9 @@ class ProductForm extends Component
         'state.price.required' => 'Price is required.',
         'state.price.number' => 'Price must be a whole number.',
         'state.price.min' => 'Price should not be less than 0',
+        'state.stock.required' => 'Stock is required.',
+        'state.stock.number' => 'Stock must be a whole number.',
+        'state.stock.min' => 'Stock should not be less than 0',
         'state.discount.required' => 'Discount is required.',
         'state.discount.number' => 'Discount must be a whole number.',
         'state.discount.min' => 'Discount should not be less than 0',
@@ -41,6 +44,7 @@ class ProductForm extends Component
             'state.short_description' => 'nullable|max:500',
             'state.full_description' => 'required',
             'state.price' => 'required|numeric|min:0',
+            'state.stock' => 'required|numeric|min:0',
             'state.discount' => 'nullable|numeric|min:0',
         ];
         if (!isset($this->state['id'])) {

@@ -28,6 +28,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'gender' => ['nullable', 'in:Male,Female,Transgender,Other',],
             'address' => ['nullable', 'max:100',],
             'city' => ['nullable', 'max:100',],
+            'pin_code' => ['nullable', 'digits:6',],
+            'shipping_notes' => ['nullable', 'max:100',],
             'state' => ['nullable', 'max:100',],
             'area' => ['nullable', 'max:191'],
             'professional_email' => ['nullable', 'email'],
@@ -39,8 +41,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user->updateProfilePhoto($input['photo']);
         }
 
-        if ($input['email'] !== $user->email &&
-            $user instanceof MustVerifyEmail) {
+        if (
+            $input['email'] !== $user->email &&
+            $user instanceof MustVerifyEmail
+        ) {
             $this->updateVerifiedUser($user, $input);
         } else {
             $user->forceFill([
@@ -54,10 +58,12 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'city' => $input['city'],
                 'state' => $input['state'],
                 'area' => $input['area'],
+                'pin_code' => $input['pin_code'],
+                'shipping_notes' => $input['shipping_notes'],
                 'professional_email' => $input['professional_email'],
                 'contact' => $input['contact'],
                 'whatsapp_contact' => ($input['same_contact'] ?? false) ?
-                $input['contact'] : $input['whatsapp_contact'],
+                    $input['contact'] : $input['whatsapp_contact'],
             ])->save();
         }
     }
@@ -82,6 +88,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'city' => $input['city'],
             'state' => $input['state'],
             'area' => $input['area'],
+            'pin_code' => $input['pin_code'],
+            'shipping_notes' => $input['shipping_notes'],
             'professional_email' => $input['professional_email'],
             'contact' => $input['contact'],
             'whatsapp_contact' => ($input['same_contact'] ?? false) ?

@@ -51,7 +51,7 @@ class Post extends Model implements HasMedia
         $changes = $this->likedUsers()->toggle($userId);
         $hasLiked = empty($changes['detached']);
         $this->timestamps = false;
-        User::whereId($userId)->increment('points', $hasLiked ? 1 : -1);
+        $this->user()->increment('points', $hasLiked ? 1 : -1);
         $this->increment('like_count', $hasLiked ? 1 : -1);
         $this->timestamps = true;
         return $hasLiked;

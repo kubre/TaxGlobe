@@ -27,7 +27,7 @@ class Product extends Model implements HasMedia
     public $casts = [
         'price' => 'int',
         'discount' => 'int',
-        'in_stock' => 'boolean',
+        'stock' => 'int',
     ];
 
     public static function booted()
@@ -48,6 +48,11 @@ class Product extends Model implements HasMedia
     public function getFinalPriceAttribute()
     {
         return $this->attributes['price'] - $this->attributes['discount'];
+    }
+
+    public function getInStockAttribute()
+    {
+        return $this->attributes['stock'] > 0;
     }
 
     public function getDiscountPercentageAttribute()

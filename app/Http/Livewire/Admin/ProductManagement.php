@@ -16,12 +16,12 @@ class ProductManagement extends Component
 
     public function toggleStock(Product $product)
     {
-        $product->in_stock = !$product->in_stock;
-        $product->save();
-        $this->emit('refreshLivewireDatatable');
-        $this->dispatchBrowserEvent('toast', [
-            'title' => 'Toggled stock status successfully!',
-            'icon' => 'success',
-        ]);
+        // $product->in_stock = !$product->in_stock;
+        // $product->save();
+        // $this->emit('refreshLivewireDatatable');
+        // $this->dispatchBrowserEvent('toast', [
+        //     'title' => 'Toggled stock status successfully!',
+        //     'icon' => 'success',
+        // ]);
     }
 }

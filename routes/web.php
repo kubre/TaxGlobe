@@ -55,6 +55,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/users/{user}/suggestions', Common\UserList::class)
         ->name('users.suggestions');
 
+    Route::get('checkout', Shop\Checkout::class)
+        ->name('shop.checkout');
+
     Route::group([
         'middleware' => 'admin',
         'prefix' => 'admin',

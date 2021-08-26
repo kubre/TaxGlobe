@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('price');
             $table->unsignedInteger('discount')->default(0);
             $table->enum('type', ['download', 'deliver', 'reserved']);
-            $table->boolean('in_stock')->default(true);
+            $table->unsignedInteger('stock');
             $table->timestamps();
             $table->softDeletes();
         });

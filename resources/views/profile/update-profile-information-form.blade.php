@@ -108,8 +108,8 @@
             <!-- Other -->
             <div class="col-span-6 sm:col-span-4" x-show='!isProfessionListed(profession)'>
                 <x-jet-label for="profession_other" value="Specify Profession" />
-                <x-jet-input id="profession_other" class="block mt-1 w-full" type="text" name="profession_other" x-model.lazy='profession'
-                    wire:model.defer="state.profession_other" />
+                <x-jet-input id="profession_other" class="block mt-1 w-full" type="text" name="profession_other"
+                    x-model.lazy='profession' wire:model.defer="state.profession_other" />
             </div>
 
             <!-- Professional Email -->
@@ -185,6 +185,21 @@
                             </option>
                         </template>
                     </select>
+                </div>
+                <!-- Pin Code -->
+                <div class="col-span-6 sm:col-span-4 mt-4">
+                    <x-jet-label for="pin_code" value="{{ __('Pin Code') }}" />
+                    <x-jet-input id="pin_code" class="block mt-1 w-full" type="text" name="pin_code"
+                        wire:model.defer="state.pin_code" />
+                    <x-jet-input-error for="pin_code" class="mt-2" />
+                </div>
+
+                <!-- Shipping Note -->
+                <div class="col-span-6 sm:col-span-4 mt-4">
+                    <x-jet-label for="shipping_notes" value="{{ __('Shipping Notes') }}" />
+                    <x-jet-input id="shipping_notes" class="block mt-1 w-full" type="text" name="shipping_notes"
+                        wire:model.defer="state.shipping_notes" />
+                    <x-jet-input-error for="shipping_notes" class="mt-2" />
                 </div>
             </div>
         </div>

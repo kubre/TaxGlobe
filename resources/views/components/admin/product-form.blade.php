@@ -149,6 +149,12 @@
                         wire:model.defer="state.discount" />
                     <x-jet-input-error for='state.discount' />
                 </div>
+                <div class="col-span-6 sm:col-span-4">
+                    <x-jet-label for="stock" value="{{ __('Units in Stock') }}" />
+                    <x-jet-input id="stock" class="block mt-1 w-full" type="number" name="stock"
+                        wire:model.defer="state.stock" />
+                    <x-jet-input-error for='state.stock' />
+                </div>
                 <div class="col-span-6 sm:col-span-4" wire:ignore>
                     <x-jet-label for="full_description" value="{{ __('Full Description') }}" class="mb-2" />
                     <textarea id="full_description" class="block" wire:model.defer='state.full_description'

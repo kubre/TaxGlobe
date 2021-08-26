@@ -1,5 +1,5 @@
 <div class="">
-    <div class="bg-blue-200 flex flex-col justify-center items-center max-h-full">
+    {{-- <div class="bg-blue-200 flex flex-col justify-center items-center max-h-full">
 
         <div class=" mx-auto relative" x-data="{ activeSlide: 1, slides: [1, 2, 3, 4, 5] }">
             <!-- Slides -->
@@ -22,5 +22,5 @@
                 </template>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
