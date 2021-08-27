@@ -58,6 +58,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('checkout', Shop\Checkout::class)
         ->name('shop.checkout');
 
+    Route::get('order-status/{order}', Shop\OrderStatus::class)
+        ->name('shop.order.status');
+
     Route::group([
         'middleware' => 'admin',
         'prefix' => 'admin',

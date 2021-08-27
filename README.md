@@ -48,7 +48,8 @@
 -   `(19/aug 05:35pm)` Individual ProductPage
 -   `(19/aug 09:45pm)` Out of stock added in UI, common share component added, Product form displays old images
 -   `(26/aug 12:22pm)` Checkout Page, added pin code and shipping notes in product table, changed stock to a number, fixed points given to wrong user.
--   `()` Order Confirm and Fail page
+-   `(27/aug 08:30pm)` Orders generation and saving order, payment integration complete, fixed table not rendering properly.
+-   `(27/aug 08:30pm)` Order Confirm and Fail page
 -   `()` Order History Page on Profile
 -   `()` Download option for Download products, Receipts downloads
 -   `()` Admin Order on dashboard

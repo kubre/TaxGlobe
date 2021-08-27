@@ -19,7 +19,7 @@
                         <tbody>
                             <tr>
                                 <td colspan="2" class="p-2">
-                                    <img class="max-h-auto lg:max-h-24 mx-auto"
+                                    <img class="max-h-32 lg:max-h-24 mx-auto"
                                         src="{{ $product->getMedia('images')->first()->getUrl() }}" />
                                 </td>
                             </tr>
@@ -89,7 +89,7 @@
 
             @if ($canBuy)
                 <div class="p-2">
-                    <x-jet-button class="w-full flex justify-center">
+                    <x-jet-button onclick="startCheckout()" class="w-full flex justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -110,4 +110,31 @@
 
         <x-slot name="right"></x-slot>
     </x-partials.grid>
+
+    @push('scripts')
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <script>
+            function startCheckout() {
+                Swal.fire({
+                    title: 'Processing Order..',
+                    html: 'Please hold on <strong>DO NOT CLOSE Window</strong>, Once this is finsihed you will gievn options for payment',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        @this.call('startCheckout');
+                        Swal.showLoading();
+                    },
+                })
+            }
+
+            window.addEventListener('order-placed', function(event) {
+                Swal.close();
+                options = event.detail.options;
+                options.handler = function(response) {
+                    @this.call('finalizeOrder', response.razorpay_payment_id, response.razorpay_signature);
+                };
+                var rzp = new Razorpay(options);
+                rzp.open();
+            });
+        </script>
+    @endpush
 </div>
