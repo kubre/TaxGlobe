@@ -1,6 +1,6 @@
 <div>
     <x-common.news />
-    <x-partials.grid responsiveLeft='true'>
+    <x-partials.grid :responsiveLeft='true'>
         <x-slot name="left">
             <div class="flex flex-col space-y-0 md:space-y-2 mb-2 md:mb-0">
                 <livewire:social-media.user-card :user='$user' />
@@ -19,11 +19,15 @@
                     <h3 class="text-lg px-4 py-2 border-b">
                         Results for users containing containing <span class="font-bold">{{ $searchTerm }}</span>.
                     </h3>
+                    <x-widgets.share align="right"
+                        whatsapp="Check out this product on taxglobe {{ route('users.index', ['q' => $searchTerm]) }}"
+                        copy="{{ route('users.index', ['q' => $searchTerm]) }}">
+                    </x-widgets.share>
                 @else
                     @if ($currentRoute === 'users.suggestions')
                         <div class="flex text-lg px-4 space-x-2 items-center lg:px-8 py-4 border-b">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                             </svg>
@@ -33,10 +37,6 @@
                         </div>
                     @endif
                 @endif
-                <x-widgets.share align="right"
-                    whatsapp="Check out this product on taxglobe {{ route('users.index', ['q' => $searchTerm]) }}"
-                    copy="{{ route('users.index', ['q' => $searchTerm]) }}">
-                </x-widgets.share>
             </div>
 
             @forelse ($users as $user)

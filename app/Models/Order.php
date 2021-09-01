@@ -25,6 +25,24 @@ class Order extends Model
         'details' => 'array',
     ];
 
+    public $statusList = [
+        'created' => 'Payment Cancelled',
+        'cancelled' => 'Cancelled',
+        'success' => 'Payment Success',
+        'failure' => 'Payment Failure',
+        'accepted' => 'Accepted Order',
+        'dispatched' => 'Dispatched',
+        'shipped' => 'Shipped',
+        'dispute' => 'Payment Dispute',
+        'initiated_return' => 'Return Initiated',
+        'return_success' => 'Return Accepted',
+        'return_success' => 'Return Success',
+    ];
+
+    public function getReadableStatusAttribute()
+    {
+        return $this->statusList[$this->status] ?? 'Unknown';
+    }
 
     public function user()
     {

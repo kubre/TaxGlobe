@@ -133,4 +133,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Post::class, 'bookmarks')
             ->wherePivot('post_id', $post->id);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

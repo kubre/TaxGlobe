@@ -26,12 +26,12 @@
                             </strong>
                             <p class="mt-2">
                                 @if ($order->product->type === 'deliver')
-                                    Please keep checking the <a href=""
+                                    Please keep checking the <a href="{{ route('shop.order.list') }}"
                                         class="bg-blue-500 text-blue-100 rounded font-bold px-2 py-1 mx-1">Orders
                                         Page</a>
                                     for updates on delivery status.
                                 @else
-                                    Visit <a href=""
+                                    Visit <a href="{{ route('shop.order.list') }}"
                                         class="bg-blue-500 text-blue-100 rounded font-bold px-2 py-1 mx-1">Orders
                                         Page</a> to download.
                                 @endif
@@ -48,7 +48,8 @@
                         <div class="flex flex-col text-center">
                             <strong>Your order for {{ $order->product->title }} has failed with Order ID:
                                 {{ $order->order_id }}.</strong>
-                            <div class="mt-2">If payment has been deducted please wait for while and if still not
+                            <div class="mt-2">If payment has been deducted please wait for while and if still
+                                not
                                 refunded please
                                 contact our support.</div>
                         </div>

@@ -12,18 +12,24 @@
             <meta property="og:site_name" content="TaxGlobe Professionals">
         </x-slot>
         <style>
-            table, figure.table {
+            table,
+            figure.table {
                 width: 100%;
             }
-            table, tr, td, th {
+
+            table,
+            tr,
+            td,
+            th {
                 padding: 4px;
                 border: 1px solid;
                 border-collapse: collapse;
             }
+
         </style>
     @endif
 
-    <x-partials.grid :responsiveLeft="$routeName !== 'user.profile'">
+    <x-partials.grid :responsiveLeft="!\in_array($routeName, ['user.profile',  'user.bookmarks'])">
 
         {{-- Left Side --}}
         <x-slot name="left">
