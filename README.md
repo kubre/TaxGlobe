@@ -51,10 +51,9 @@
 -   `(27/aug 08:30pm)` Orders generation and saving order, payment integration complete, fixed table not rendering properly.
 -   `(27/aug 08:30pm)` Order Confirm and Fail page
 -   `(01/sep 05:55pm)` Order History Page on Profile
--   `()` Download option for Download products, Receipts downloads
+-   `(09/sep 06:35pm)` Download option for Download products, Receipts downloads
 -   `()` Admin Order on dashboard
 -   `()` Admin Order status updates
--   `()` Orders Table
 -   `()` Product Review option
 -   `()` Book and Excel tool download sliders
 -   `()` Notifications

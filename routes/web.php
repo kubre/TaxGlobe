@@ -5,7 +5,7 @@ use App\Http\Controllers\SocialMedia;
 use App\Http\Livewire\Admin;
 use App\Http\Livewire\SocialMedia as SocialMediaComponents;
 use App\Http\Livewire\Common;
-use App\Http\Livewire\Shop\Storefront;
+use App\Http\Livewire\Shop\Order;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,6 +63,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('purchases', Shop\OrderList::class)
         ->name('shop.order.list');
+
+    Route::get('receipt/{order}', function (App\Models\Order $order) {
+        abort_unless(auth()->user()->isAdmin() || $order->user_id === auth()->id(), 403);
+        return view('components.shop.receipt', compact('order'));
+    })
+        ->name('shop.order.receipt');
 
     Route::group([
         'middleware' => 'admin',

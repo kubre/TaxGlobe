@@ -13,4 +13,11 @@ class Order extends Component
     {
         return view('components.shop.order');
     }
+
+    public function download()
+    {
+        \abort_unless($this->order->product->type === 'download' && $this->order->status === 'success', 403);
+        $item = $this->order->product->getMedia('download')->first();
+        return \response()->download($item->getPath(), $item->name);
+    }
 }

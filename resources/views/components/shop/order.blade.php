@@ -2,7 +2,7 @@
     <div class="flex flex-col lg:flex-row gap-x-2">
         <img class="h-36 w-full lg:w-36 object-contain"
             src="{{ $order->product->getMedia('images')->first()->getUrl() }}">
-        <div class="flex flex-col">
+        <div class="flex flex-col flex-1">
             <strong>{{ $order->product->title }}</strong>
             <div><strong>Quanity:</strong> {{ $order->quantity }}</div>
             <div><strong>Placed At:</strong>
@@ -13,8 +13,19 @@
             </div>
             <div><strong>Status:</strong> {{ $order->readable_status }}</div>
             <div><strong>Order ID:</strong> {{ $order->order_id }}</div>
-            <div class="p-1">
-                <a href="" target="_blank" class="text-blue-700 w-full block text-center">Print Receipt</a>
+            <div class="p-1 flex items-center justify-between">
+                <a href="{{ route('shop.order.receipt', $order->id) }}" class="text-blue-700" target="_blank">Print
+                    Receipt</a>
+                @if ($order->product->type === 'download' && $order->status === 'success')
+                    <x-jet-button wire:click="download">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        {{ __('Download') }}
+                    </x-jet-button>
+                @endif
             </div>
         </div>
     </div>
