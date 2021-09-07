@@ -1,12 +1,13 @@
 <div>
     <h3 class="font-bold my-2 flex items-center space-x-2">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
         </svg>
         <span>Statistics</span>
     </h3>
-    <div class="grid gap-6 grid-cols mb-8 md:grid-cols-2 xl:grid-cols-4">
+    <div class="grid gap-6 grid-cols mb-4 md:grid-cols-2 xl:grid-cols-4">
         <x-widgets.stat-card iconColors="bg-blue-200 text-blue-500" text="Total Users"
             value="{{ $statistics['total_users'] }}">
             <x-slot name="icon">
@@ -50,4 +51,24 @@
             </x-slot>
         </x-widgets.stat-card>
     </div>
+
+    <h3 class="font-bold my-2 flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Latest Placed Orders <small class="text-red-500">Please check the orders page to manage all the
+                orders</small></span>
+    </h3>
+
+    <a href="{{ route('admin.orders.list') }}" class="mb-2 no-underline">
+        <div class="grid gap-6 grid-cols md:grid-cols-2 lg:grid-cols-3">
+            @forelse ($orders as $order)
+                <livewire:shop.order :order="$order" :compact="true" />
+            @empty
+                <h3>No Orders pending now!</h3>
+            @endforelse
+        </div>
+    </a>
 </div>

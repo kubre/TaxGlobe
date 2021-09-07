@@ -9,6 +9,8 @@ class Order extends Component
 {
     public ?OrderModel $order;
 
+    public $compact = false;
+
     public function render()
     {
         return view('components.shop.order');

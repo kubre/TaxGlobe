@@ -53,7 +53,7 @@
 -   `(01/sep 05:55pm)` Order History Page on Profile
 -   `(06/sep 06:35pm)` Download option for Download products, Receipts downloads
 -   `(07/sep 12:40pm)` Admin Order Table, status update for admin, fixed toast not showing on action in admin tables
--   `()` Admin Order on dashboard
+-   `(07/sep 01:15pm)` Latest Orders on admin dashboard
 -   `()` Notifications
 -   `()` Book and Excel tool download sliders
 -   `()` Product Review option
