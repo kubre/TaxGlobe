@@ -25,9 +25,9 @@ class Order extends Model
         'details' => 'array',
     ];
 
-    public $statusList = [
+    public static $statusList = [
         'created' => 'Payment Cancelled',
-        'cancelled' => 'Cancelled',
+        'cancelled' => 'Order Cancelled',
         'success' => 'Payment Success',
         'failure' => 'Payment Failure',
         'accepted' => 'Accepted Order',
@@ -41,7 +41,7 @@ class Order extends Model
 
     public function getReadableStatusAttribute()
     {
-        return $this->statusList[$this->status] ?? 'Unknown';
+        return self::$statusList[$this->status] ?? 'Unknown';
     }
 
     public function user()

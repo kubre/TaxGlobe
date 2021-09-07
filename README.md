@@ -51,12 +51,12 @@
 -   `(27/aug 08:30pm)` Orders generation and saving order, payment integration complete, fixed table not rendering properly.
 -   `(27/aug 08:30pm)` Order Confirm and Fail page
 -   `(01/sep 05:55pm)` Order History Page on Profile
--   `(09/sep 06:35pm)` Download option for Download products, Receipts downloads
+-   `(06/sep 06:35pm)` Download option for Download products, Receipts downloads
+-   `(07/sep 12:40pm)` Admin Order Table, status update for admin, fixed toast not showing on action in admin tables
 -   `()` Admin Order on dashboard
--   `()` Admin Order status updates
--   `()` Product Review option
--   `()` Book and Excel tool download sliders
 -   `()` Notifications
+-   `()` Book and Excel tool download sliders
+-   `()` Product Review option
 -   `()` Report Post
 
 ## :rocket: Feature List

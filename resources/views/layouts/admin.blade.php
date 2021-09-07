@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex flex-row space-x-2 p-2">
-        <x-partials.admin-nav class="w-64" />
+        <x-partials.admin-nav class="w-64 flex-none" />
         <div class="flex-1 px-8">
             <h2 class="text-xl font-bold py-2 flex items-center border-b border-gray-300 space-x-2">
                 @if ($titleIcon ?? false)

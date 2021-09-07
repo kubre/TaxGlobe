@@ -32,13 +32,6 @@
                             }
                         });
                     });
-
-                    Livewire.on('postDeleted', function() {
-                        Swal.fire({
-                            title: 'Post deleted successfully!',
-                            icon: 'success'
-                        });
-                    });
                 });
         </script>
     @endpush

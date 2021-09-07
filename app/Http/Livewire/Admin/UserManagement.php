@@ -17,10 +17,12 @@ class UserManagement extends Component
 
     public function deleteUser(User $user)
     {
-        if (auth()->user()->isAdmin()) {
-            $user->delete();
-            $this->emit('refreshLivewireDatatable');
-            $this->dispatchBrowserEvent('userDeleted');
-        }
+        abort_if(!auth()->user()->isAdmin(), 403);
+        $user->delete();
+        $this->emit('refreshLivewireDatatable');
+        $this->dispatchBrowserEvent('toast', [
+            'icon' => 'success',
+            'title' => 'Deleted user!'
+        ]);
     }
 }

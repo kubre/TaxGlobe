@@ -90,6 +90,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/products', Admin\ProductManagement::class)
             ->name('products.list');
 
+        Route::get('/orders', Admin\OrderManagement::class)
+            ->name('orders.list');
+
         Route::get('/products/form/{product?}', Admin\ProductForm::class)
             ->name('products.form');
 
