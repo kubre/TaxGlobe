@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $settings = Cache::remember('settings', 86400, function () {
+        $settings = Cache::remember('settings', 21600, function () {
             if (!Schema::hasTable('settings')) {
                 return [];
             }

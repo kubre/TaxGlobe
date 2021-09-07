@@ -10,14 +10,18 @@ class WebsiteManagement extends Component
 {
     public $settings = [
         'banner' => '',
+        'shipping_cost' => 0,
     ];
 
     public $rules = [
         'settings.banner' => 'required|max:1000',
+        'settings.shipping_cost' => 'required|numeric|min:0',
     ];
 
     public $messages = [
         'settings.banner.required' => 'Banner on the website is required',
+        'settings.shipping_cost.required' => 'Shipping cost for deliverable products is required',
+        'settings.shipping_cost.numeric' => 'Shipping cost must be a number',
     ];
 
     public function mount()

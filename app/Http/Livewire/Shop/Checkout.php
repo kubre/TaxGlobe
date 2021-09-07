@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Shop;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Razorpay\Api\Api;
@@ -13,6 +14,7 @@ class Checkout extends Component
 {
     public ?Product $product;
     public $quantity;
+    public $amount;
     public $shippingDetails = [];
     public $canBuy = false;
     public ?Order $order;
@@ -40,6 +42,13 @@ class Checkout extends Component
             || empty($this->shippingDetails['city'])
             || empty($this->shippingDetails['state'])
             || empty($this->shippingDetails['address']));
+
+        $this->amount = ($this->product->final_price * $this->quantity);
+        if ($this->product->type === 'deliver') {
+            $this->shippingDetails['shipping_cost'] =
+                optional(Setting::where('key', 'shipping_cost')->first())->value ?? 0;
+            $this->amount += (int) $this->shippingDetails['shipping_cost'];
+        }
     }
 
     public function render()
@@ -53,7 +62,7 @@ class Checkout extends Component
         $secret = \env('RAZOR_SECRET');
         $api = new Api($key, $secret);
         $orderData = [
-            'amount' => $this->product->final_price * $this->quantity * 100,
+            'amount' => $this->amount * 100,
             'currency' => 'INR',
             'notes' => $this->shippingDetails,
         ];

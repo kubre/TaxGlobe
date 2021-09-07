@@ -39,8 +39,15 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td class="font-bold p-1">Shipping Cost</td>
+                                <td class="p-1">
+                                    {{ $shippingDetails['shipping_cost'] ?? 0 ?: 'Free' }}
+                                    {{-- <x-jet-input class="w-full" type="number" wire:model.debounce.1s="quantity" /> --}}
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="font-bold p-1">Payble Amount</td>
-                                <td class="p-1">₹ {{ $product->final_price * $quantity }} /-</td>
+                                <td class="p-1">₹ {{ $amount }} /-</td>
                             </tr>
                         </tbody>
                     </table>
@@ -88,14 +95,14 @@
             </div>
 
             @if ($canBuy)
-                <div class="p-2">
+                <div class="p-2 mt-2">
                     <x-jet-button onclick="startCheckout()" class="w-full flex justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                         </svg>
-                        Proceed to pay ₹ {{ $product->final_price * $quantity }}
+                        Proceed to pay ₹ {{ $amount }}
                     </x-jet-button>
                 </div>
             @else
@@ -105,6 +112,14 @@
                         Update Profile
                     </a>.
                 </div>
+            @endif
+
+            @if ($product->type === 'download')
+                <small class="mt-2 text-red-600">Please note this product is a software/download copy and no physical
+                    copy
+                    will be delivered. Once you complete the payment you will be able to download this from your <a
+                        class="underline" href="{{ route('shop.order.list') }}">purchase history</a> any
+                    time</small>
             @endif
         </div>
 

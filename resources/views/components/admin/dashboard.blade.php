@@ -58,8 +58,9 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <span>Latest Placed Orders <small class="text-red-500">Please check the orders page to manage all the
-                orders</small></span>
+        <span>Latest deliverable placed orders <small class="text-red-500">(Please check the orders page to manage all
+                the
+                orders)</small></span>
     </h3>
 
     <a href="{{ route('admin.orders.list') }}" class="mb-2 no-underline">

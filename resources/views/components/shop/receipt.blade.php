@@ -46,21 +46,64 @@
                                 <strong>TaxGlobe Order ID: </strong> {{ $order->order_id }}
                             </p>
                             <p>
-                                <strong>Order Total: </strong> ₹ {{ $order->amount }}.00 /- (Indian Ruppees) <br />
+                                <strong>Order Total: </strong> ₹ <span class="font-mono">
+                                    {{ \number_format($order->amount) }}</span> /- (Indian Ruppees) <br />
                                 <strong>Order Status: </strong> {{ $order->readable_status }}
                             </p>
                         </div>
                         <div class="border-2 border-black">
                             <h3 class="p-2 text-lg text-center font-bold border-b-2 border-black">Details</h3>
                             <div>
-                                <p class="p-2">
-                                    <strong class="block">
-                                        Item Ordered
-                                    </strong>
-                                    <em class="text-gray-700">{{ $order->product->title }}</em>
-                                    of quantity {{ $order->quantity }} unit.
-                                </p>
-                                <div class="border-t-2 border-black mt-2 p-2">
+                                <div class="flex justify-between">
+                                    <div class="px-2">
+                                        <div class="font-bold">
+                                            Item Ordered
+                                        </div>
+                                        <div class="max-w-md">
+                                            <em class="text-gray-700">{{ $order->product->title }} Lorem ipsum
+                                                dolor</em>
+                                            of quantity {{ $order->quantity }}.
+                                        </div>
+                                    </div>
+                                    <p class="px-2">
+                                        <strong class="block">
+                                            Item Price (in ₹)
+                                        </strong>
+                                        <span class="text-gray-700 font-mono text-right block">
+                                            {{ \number_format($order->amount - (int) ($order->details['shipping_cost'] ?? 0), 2) }}
+                                            /-
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p class="px-2 py-1">
+                                        <em class=" text-gray-700">Shipping
+                                            Cost</em>
+                                    </p>
+                                    <p class="px-2 py-1">
+                                        <span
+                                            class=" text-gray-700
+                                        font-mono text-right block">
+                                            {{ \number_format((int) ($order->details['shipping_cost'] ?? 0), 2) }}
+                                            /-
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="flex justify-between">
+                                    <p class="p-2">
+                                        <strong class=" text-gray-700">Order Total</stro>
+                                    </p>
+                                    <p class="p-2">
+                                        <span
+                                            class=" text-gray-700
+                                        font-mono text-right block">
+                                            {{ \number_format($order->amount, 2) }}
+                                            /-
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="
+                                    border-t-2 border-black mt-2 p-2">
                                     <strong class="block">Billing Address</strong>
                                     <p>
                                         <strong>Name: </strong> {{ $order->details['name'] ?? '' }}<br>

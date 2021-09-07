@@ -16,8 +16,12 @@ class Dashboard extends Component
     public function mount()
     {
         $this->orders = Order::where('status', 'success')
+            ->whereHas('product', function ($query) {
+                $query->where('type', 'deliver');
+            })
+            ->with(['product'])
             ->orderBy('id', 'desc')
-            ->take(4)
+            ->take(6)
             ->get();
     }
 

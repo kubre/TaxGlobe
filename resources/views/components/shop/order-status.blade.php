@@ -27,13 +27,13 @@
                             <p class="mt-2">
                                 @if ($order->product->type === 'deliver')
                                     Please keep checking the <a href="{{ route('shop.order.list') }}"
-                                        class="bg-blue-500 text-blue-100 rounded font-bold px-2 py-1 mx-1">Orders
-                                        Page</a>
+                                        class="bg-blue-500 text-blue-100 rounded font-bold px-2 py-1 mx-1">Purchase
+                                        History</a>
                                     for updates on delivery status.
                                 @else
                                     Visit <a href="{{ route('shop.order.list') }}"
-                                        class="bg-blue-500 text-blue-100 rounded font-bold px-2 py-1 mx-1">Orders
-                                        Page</a> to download.
+                                        class="bg-blue-500 text-blue-100 rounded font-bold px-2 py-1 mx-1">Purchase
+                                        History</a> to download.
                                 @endif
                             </p>
                         </div>

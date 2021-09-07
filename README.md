@@ -54,6 +54,7 @@
 -   `(06/sep 06:35pm)` Download option for Download products, Receipts downloads
 -   `(07/sep 12:40pm)` Admin Order Table, status update for admin, fixed toast not showing on action in admin tables
 -   `(07/sep 01:15pm)` Latest Orders on admin dashboard
+-   `(07/sep 15:25pm)` Shipping cost option on setting, apply shipping on orders, shipping on receipt, dashboard only displays deliverable latest products now
 -   `()` Notifications
 -   `()` Book and Excel tool download sliders
 -   `()` Product Review option

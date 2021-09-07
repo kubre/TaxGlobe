@@ -27,10 +27,11 @@ class Order extends Model
 
     public static $statusList = [
         'created' => 'Payment Cancelled',
-        'cancelled' => 'Order Cancelled',
+        'cancelled' => 'Order Cancelled (by User)',
         'success' => 'Payment Success',
         'failure' => 'Payment Failure',
-        'accepted' => 'Accepted Order',
+        'accepted' => 'Order Accepted',
+        'denied' => 'Order Cancelled (by Admin)',
         'dispatched' => 'Dispatched',
         'shipped' => 'Shipped',
         'dispute' => 'Payment Dispute',

@@ -11,7 +11,7 @@
                 {{ $order->created_at->setTimezone('Asia/Kolkata')->format('d-M-Y h:i a') }}
             </div>
             <div>
-                <strong>Amount Paid:</strong> ₹ {{ \number_format($order->amount, 2) }}/-
+                <strong>Order Total:</strong> ₹ {{ \number_format($order->amount, 2) }}/-
             </div>
             @if ($compact)
                 <div><strong>Customer:</strong> {{ $order->details['name'] ?: '--' }}

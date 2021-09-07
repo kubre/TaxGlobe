@@ -25,9 +25,15 @@
                     <x-jet-validation-errors class="mb-4" />
                 </div>
                 <div class="col-span-6 sm:col-span-4">
-                    <x-jet-label for="banner" value="{{ __('news banner') }}" />
+                    <x-jet-label for="banner" value="{{ __('News Banner') }}" />
                     <x-jet-input id="banner" class="block mt-1 w-full" type="text" name="banner"
                         wire:model.defer="settings.banner" />
+                </div>
+
+                <div class="col-span-6 sm:col-span-4">
+                    <x-jet-label for="shipping_cost" value="{{ __('Current Shipping Cost') }}" />
+                    <x-jet-input id="shipping_cost" class="block mt-1 w-full" type="text" name="shipping_cost"
+                        wire:model.defer="settings.shipping_cost" />
                 </div>
             </x-slot>
             <x-slot name="actions">
@@ -35,7 +41,7 @@
                     {{ __('saved.') }}
                 </x-jet-action-message>
 
-                <x-jet-button wire:loading.attr="disabled" wire:target="photo">
+                <x-jet-button>
                     {{ __('save') }}
                 </x-jet-button>
             </x-slot>
