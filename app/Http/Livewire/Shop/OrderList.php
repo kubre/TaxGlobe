@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Shop;
 
-use App\Models\Order;
 use App\Models\User;
 use App\Traits\CustomWithPagination;
 use Livewire\Component;
@@ -10,7 +9,9 @@ use Livewire\WithPagination;
 
 class OrderList extends Component
 {
-    use WithPagination;
+    use CustomWithPagination;
+
+    public $pageName = 'orderPage';
 
     public ?User $user;
 
@@ -25,7 +26,7 @@ class OrderList extends Component
             'orders' => $this->user->orders()
                 ->with('product.media')
                 ->orderBy('id', 'desc')
-                ->paginate(),
+                ->simplePaginate(3, ['*'], $this->pageName),
         ]);
     }
 }
