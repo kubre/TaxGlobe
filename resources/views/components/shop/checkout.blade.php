@@ -96,14 +96,28 @@
 
             @if ($canBuy)
                 <div class="p-2 mt-2">
-                    <x-jet-button onclick="startCheckout()" class="w-full flex justify-center" wire:loading.remove>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                        </svg>
-                        Proceed to pay ₹ {{ $amount }}
-                    </x-jet-button>
+                    @if ($product->final_price === 0)
+                        {{-- For free products --}}
+                        <x-jet-button wire:click="downloadFreeProduct()" class="w-full flex justify-center"
+                            wire:loading.remove>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 8h6m-5 0a3 3 0 110 6H9l3 3m-3-6h6m6 1a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Download for Free
+                        </x-jet-button>
+                    @else
+                        {{-- For paid products --}}
+                        <x-jet-button onclick="startCheckout()" class="w-full flex justify-center" wire:loading.remove>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                            </svg>
+                            Proceed to pay ₹ {{ $amount }}
+                        </x-jet-button>
+                    @endif
                 </div>
             @else
                 <div class="text-gray-500 p-2">

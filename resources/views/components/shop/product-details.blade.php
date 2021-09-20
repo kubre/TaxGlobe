@@ -113,7 +113,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                             </svg>
-                            Buy Now
+                            {{ $product->price === 0 ? 'Get for Free' : 'Buy Now' }}
                         </x-jet-button>
                     @else
                         <div class="text-center">We currently do not have specified stock, availble stock is only

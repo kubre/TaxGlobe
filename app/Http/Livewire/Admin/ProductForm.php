@@ -82,6 +82,10 @@ class ProductForm extends Component
             $product = Product::find($this->state['id']);
         }
 
+        if ((int)$this->state['price'] === 0) {
+            $this->state['discount'] = 0;
+        }
+
         $saved = $product->fill($this->state)->save();
 
         if ($saved) {

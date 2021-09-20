@@ -119,4 +119,11 @@ class Checkout extends Component
             'order' => $this->order->id,
         ]);
     }
+
+    public function downloadFreeProduct()
+    {
+        \abort_unless($this->product->type === 'download' && $this->product->final_price === 0, 403);
+        $item = $this->product->getMedia('download')->first();
+        return \response()->download($item->getPath(), $item->name);
+    }
 }

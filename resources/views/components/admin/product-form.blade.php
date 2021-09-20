@@ -115,18 +115,21 @@
                             @endforeach
                         </div>
                     @endisset
-                    @if(isset($state['id']) && empty($state['images']))
-                            <div class="text-gray-500 mt">
-                                Uploading new images will replace old ones.
-                            </div>
-                            <div class="flex space-x-2">
-                                @foreach ($oldImages as $image)
-                                    <div class="w-32 h-32">
-                                        <img class="rounded w-full h-full object-fill" src="{{ $image->getUrl() }}">
-                                    </div>
-                                @endforeach
-                            </div>
+                    @if (isset($state['id']) && empty($state['images']))
+                        <div class="text-gray-500 mt">
+                            Uploading new images will replace old ones.
+                        </div>
+                        <div class="flex space-x-2">
+                            @foreach ($oldImages as $image)
+                                <div class="w-32 h-32">
+                                    <img class="rounded w-full h-full object-fill" src="{{ $image->getUrl() }}">
+                                </div>
+                            @endforeach
+                        </div>
                     @endif
+                    <div class="text-gray-600 text-sm mt-1">
+                        600x600px or 1200x1200 JPG format images are best to suit all screen sizes.
+                    </div>
                     <x-jet-input-error for="state.images.*" />
                     <x-jet-input-error for="state.images" />
                 </div>
@@ -156,7 +159,8 @@
                     <x-jet-input-error for='state.stock' />
                 </div>
                 <div class="col-span-6 sm:col-span-4" wire:ignore>
-                    <x-jet-label for="full_description" value="{{ __('Full Description') }}" class="mb-2" />
+                    <x-jet-label for="full_description" value="{{ __('Full Description') }}"
+                        class="mb-2" />
                     <textarea id="full_description" class="block" wire:model.defer='state.full_description'
                         name="full_description">{!! $state['full_description'] ?? null !!}</textarea>
                     <x-jet-input-error for='state.full_description' />
