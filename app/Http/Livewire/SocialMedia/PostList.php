@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 class PostList extends Component
@@ -59,7 +60,8 @@ class PostList extends Component
 
     public function incrementViewCount($posts)
     {
-        PostModel::whereIn('id', $posts->pluck('id'))
+        DB::table('posts')
+            ->whereIn('id', $posts->pluck('id'))
             ->increment('view_count');
     }
 

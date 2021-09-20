@@ -13,6 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Nunito:wght@400;600;700&display=swap"
         rel="stylesheet">
 
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
