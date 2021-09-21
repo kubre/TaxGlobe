@@ -37,7 +37,7 @@
                 <livewire:social-media.user-card :user='$user' />
                 @auth
                     <x-partials.side-nav :routeUserId="optional(request()->route('user'))->id" :routeName="$routeName"
-                        :userId="optional($user)->id" />
+                        :userId="optional($user)->id"></x-partials.side-nav>
                 @endauth
             </div>
         </x-slot>
@@ -79,6 +79,9 @@
 
         {{-- Right Side --}}
         <x-slot name="right">
+            @auth
+                <livewire:widgets.notification-panel />
+            @endauth
             <livewire:widgets.tax-calendar />
             <livewire:widgets.product-slider />
         </x-slot>
