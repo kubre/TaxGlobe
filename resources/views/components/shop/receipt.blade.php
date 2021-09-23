@@ -120,7 +120,14 @@
                     </div>
                 </div>
 
-                <div class="flex justify-center items-center">
+                <div class="flex justify-center items-center gap-x-2">
+                    <x-jet-secondary-button onclick="history.back()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Go Back
+                    </x-jet-secondary-button>
                     <x-jet-button onclick="print()">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">

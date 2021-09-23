@@ -57,6 +57,7 @@
 -   `(07/sep 15:25pm)` Shipping cost option on setting, apply shipping on orders, shipping on receipt, dashboard only displays deliverable latest products now
 -   `(20/sep 08:05pm)` Free product option and better validation for products 
 -   `(21/sep 07:10pm)` Notification Interface 
+-   `(23/sep 07:00pm)` Notifications Table and Order Update Notification and ability to clear notifications
 -   `()` Book and Excel tool download sliders
 -   `()` Product Review option
 -   `()` Report Post

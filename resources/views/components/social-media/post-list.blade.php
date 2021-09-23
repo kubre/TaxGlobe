@@ -29,16 +29,24 @@
         </style>
     @endif
 
-    <x-partials.grid :responsiveLeft="!\in_array($routeName, ['user.profile',  'user.bookmarks'])">
+    <x-partials.grid>
 
         {{-- Left Side --}}
         <x-slot name="left">
-            <div class="flex flex-col space-y-0 md:space-y-2 mb-2 md:mb-0">
-                <livewire:social-media.user-card :user='$user' />
-                @auth
-                    <x-partials.side-nav :routeUserId="optional(request()->route('user'))->id" :routeName="$routeName"
-                        :userId="optional($user)->id"></x-partials.side-nav>
-                @endauth
+            <div>
+                <div
+                    class="flex-col space-y-0 md:space-y-2 mb-2 md:mb-0 {{ \in_array($routeName, ['user.profile', 'user.bookmarks']) ? 'flex' : 'hidden lg:flex' }}">
+                    <livewire:social-media.user-card :user='$user' />
+                    @auth
+                        <x-partials.side-nav :routeUserId="optional(request()->route('user'))->id" :routeName="$routeName"
+                            :userId="optional($user)->id"></x-partials.side-nav>
+                    @endauth
+                </div>
+                <div>
+                    @auth
+                        <livewire:widgets.notification-panel />
+                    @endauth
+                </div>
             </div>
         </x-slot>
 
@@ -79,9 +87,6 @@
 
         {{-- Right Side --}}
         <x-slot name="right">
-            @auth
-                <livewire:widgets.notification-panel />
-            @endauth
             <livewire:widgets.tax-calendar />
             <livewire:widgets.product-slider />
         </x-slot>

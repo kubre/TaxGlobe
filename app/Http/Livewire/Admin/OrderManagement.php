@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Order;
+use App\Notifications\OrderStatusUpdated;
 use Livewire\Component;
 
 class OrderManagement extends Component
@@ -16,10 +17,11 @@ class OrderManagement extends Component
 
     public function updateStatus($id, $status)
     {
-        Order::where('id', $id)
-            ->update([
-                'status' => $status,
-            ]);
+        $order = Order::with('user', 'product')->where('id', $id)->first();
+        $order->status = $status;
+        $order->save();
+
+        $order->user->notify(new OrderStatusUpdated($order));
 
         $this->emit('refreshLivewireDatatable');
         $this->dispatchBrowserEvent('toast', [
