@@ -72,7 +72,7 @@
             <div class="pt-2 overflow-y-auto h-44" x-data x-init>
                 @forelse ($taxDates as $taxDate)
                     @if ($selectedCategory === 'All' || $selectedCategory === $taxDate->category)
-                        <div class="py-1 px-2 bg-gray-300 border border-gray-500 rounded mb-1 cursor-pointer"
+                        <div class="py-1 px-2 bg-gray-300 rounded mb-1 cursor-pointer"
                             x-on:click='alertBox("{{ $taxDate->title }}", "{{ preg_replace("/\r|\n/", '', nl2br($taxDate->description)) }}")'>
                             <strong class="bg-gray-100 rounded px-1">{{ $taxDate->date_at->format('d') }}</strong>
                             <span class="text-gray-700">{{ $taxDate->title }} </span>
