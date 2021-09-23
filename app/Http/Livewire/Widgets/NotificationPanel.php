@@ -43,4 +43,13 @@ class NotificationPanel extends Component
             'action' => route('shop.order.receipt', $notification->data['order_id']),
         ];
     }
+
+    public function formatPostLiked($notification)
+    {
+        return (object)[
+            'message' => "Your {$notification->data['post_type']} has received some new likes",
+            'time' => $notification->created_at->diffForHumans(null, false, true),
+            'action' => route('post.show', $notification->data['post_slug']),
+        ];
+    }
 }

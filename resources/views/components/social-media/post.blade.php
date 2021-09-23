@@ -17,9 +17,15 @@
             </div>
         </a>
 
-        <div class="text-gray-500 text-xs">
+        <div class="text-gray-500 text-xs flex items-center">
             {{ $post->created_at->format('d/m/y') }}
-            {{ $post->updated_at->gt($post->created_at) ? '(edited)' : '' }}
+            @if ($post->updated_at->gt($post->created_at))
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+            @endif
         </div>
     </div>
 
@@ -249,7 +255,8 @@
                             </div>
                         </div>
                         <div>
-                            <x-jet-secondary-button wire:loading.attr="disabled" type='submit' variant='white' class="pr-3">
+                            <x-jet-secondary-button wire:loading.attr="disabled" type='submit' variant='white'
+                                class="pr-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform rotate-90" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

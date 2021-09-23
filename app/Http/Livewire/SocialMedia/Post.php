@@ -4,6 +4,7 @@ namespace App\Http\Livewire\SocialMedia;
 
 use Livewire\Component;
 use App\Models\Post as PostModel;
+use App\Notifications\PostLiked;
 use App\Traits\CustomWithPagination;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -54,6 +55,12 @@ class Post extends Component
     {
         if (!auth()->check()) {
             return;
+        }
+        if (
+            auth()->id() !== $this->post->user_id
+            && ($this->post->like_count === 0 || ($this->post->like_count % 5) === 0)
+        ) {
+            $this->post->user->notify(new PostLiked($this->post));
         }
         $this->hasLiked = $this->post->toggleLikeFrom(\auth()->id());
         $this->emit('toggledLike', $this->post->id);
