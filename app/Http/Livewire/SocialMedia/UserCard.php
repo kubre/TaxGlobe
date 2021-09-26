@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\SocialMedia;
 
 use App\Models\User;
+use App\Notifications\UserFollowed;
 use Livewire\Component;
 
 class UserCard extends Component
@@ -45,6 +46,8 @@ class UserCard extends Component
     public function follow()
     {
         \auth()->user()->toggleFollow($this->user);
+
+        $this->user->notify(new UserFollowed(auth()->user()));
 
         $this->user->loadCount('followers');
 

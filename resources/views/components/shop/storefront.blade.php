@@ -1,10 +1,13 @@
 <div>
     <x-common.news />
 
-    <x-partials.grid :responsiveLeft="true">
+    <x-partials.grid>
 
         {{-- Left Side --}}
         <x-slot name="left">
+            @auth
+                <livewire:widgets.notification-panel />
+            @endauth
         </x-slot>
 
         {{-- Products --}}

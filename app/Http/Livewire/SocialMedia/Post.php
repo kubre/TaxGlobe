@@ -4,6 +4,7 @@ namespace App\Http\Livewire\SocialMedia;
 
 use Livewire\Component;
 use App\Models\Post as PostModel;
+use App\Notifications\PostCommented;
 use App\Notifications\PostLiked;
 use App\Traits\CustomWithPagination;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -85,6 +86,8 @@ class Post extends Component
         ]);
 
         $this->post->addCommentFrom($this->commentDraft, \auth()->id());
+
+        $this->post->user->notify(new PostCommented($this->post, auth()->user()));
 
         $this->resetPage();
 

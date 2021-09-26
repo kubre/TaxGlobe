@@ -43,9 +43,9 @@
                     @endauth
                 </div>
                 <div>
-                    @auth
+                    @if (Auth::check() && Auth::id() === $user->id)
                         <livewire:widgets.notification-panel />
-                    @endauth
+                    @endif
                 </div>
             </div>
         </x-slot>

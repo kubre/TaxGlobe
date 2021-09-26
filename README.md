@@ -59,9 +59,11 @@
 -   `(21/sep 07:10pm)` Notification Interface 
 -   `(23/sep 07:00pm)` Notifications Table and Order Update Notification and ability to clear notifications
 -   `(23/sep 07:50pm)` PostLiked notifications on every 5th+1 like, post-edit icon changed
+-   `(26/sep 08:30am)` PostCommented, UserFollowed notification, fixed notifications panel visibility on certain pages and not on some
 -   `()` Book and Excel tool download sliders
 -   `()` Product Review option
 -   `()` Report Post
+-   `()` Continous posts
 
 ## :rocket: Feature List
 

@@ -1,10 +1,18 @@
 <div>
     <x-common.news />
-    <x-partials.grid :responsiveLeft='false'>
+    <x-partials.grid>
         <x-slot name="left">
-            <div class="flex flex-col space-y-0 md:space-y-2 mb-2 md:mb-0">
-                <livewire:social-media.user-card :user='$user' />
-                <x-partials.side-nav :routeUserId="auth()->id()" routeName="shop.order.list" :userId="$user->id" />
+            <div>
+                <div class="flex flex-col space-y-0 md:space-y-2 mb-2 md:mb-0">
+                    <livewire:social-media.user-card :user='$user' />
+                    <x-partials.side-nav :routeUserId="auth()->id()" routeName="shop.order.list" :userId="$user->id">
+                    </x-partials.side-nav>
+                </div>
+                <div>
+                    @auth
+                        <livewire:widgets.notification-panel />
+                    @endauth
+                </div>
             </div>
         </x-slot>
 

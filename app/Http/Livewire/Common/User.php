@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Common;
 
+use App\Notifications\UserFollowed;
 use Livewire\Component;
 
 class User extends Component
@@ -17,5 +18,6 @@ class User extends Component
     public function follow()
     {
         \auth()->user()->toggleFollow($this->user);
+        $this->user->notify(new UserFollowed(auth()->user()));
     }
 }

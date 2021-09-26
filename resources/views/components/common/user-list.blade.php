@@ -1,11 +1,21 @@
 <div>
     <x-common.news />
-    <x-partials.grid :responsiveLeft='true'>
+    <x-partials.grid>
         <x-slot name="left">
-            <div class="flex flex-col space-y-0 md:space-y-2 mb-2 md:mb-0">
-                <livewire:social-media.user-card :user='$user' />
-                <x-partials.side-nav :routeUserId="optional(request()->route('user'))->id" :routeName="$currentRoute"
-                    :userId="optional($user)->id" />
+            <div>
+                <div
+                    class="flex-col space-y-0 md:space-y-2 mb-2 md:mb-0 {{ \in_array($currentRoute, ['user.profile', 'user.bookmarks']) ? 'flex' : 'hidden lg:flex' }}">
+                    <livewire:social-media.user-card :user='$user' />
+                    @auth
+                        <x-partials.side-nav :routeUserId="optional(request()->route('user'))->id"
+                            :routeName="$currentRoute" :userId="optional($user)->id"></x-partials.side-nav>
+                    @endauth
+                </div>
+                <div>
+                    @if (Auth::check() && Auth::id() === $user->id)
+                        <livewire:widgets.notification-panel />
+                    @endif
+                </div>
             </div>
         </x-slot>
 
