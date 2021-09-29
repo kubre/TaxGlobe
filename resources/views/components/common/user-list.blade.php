@@ -12,7 +12,7 @@
                     @endauth
                 </div>
                 <div>
-                    @if (Auth::check() && Auth::id() === $user->id)
+                    @if (Auth::check() && Auth::id() === optional($user)->id)
                         <livewire:widgets.notification-panel />
                     @endif
                 </div>
