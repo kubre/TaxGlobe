@@ -26,14 +26,16 @@ class Order extends Model
     ];
 
     public static $statusList = [
+        'success' => 'Payment Success',
         'created' => 'Payment Cancelled',
         'cancelled' => 'Order Cancelled (by User)',
-        'success' => 'Payment Success',
         'failure' => 'Payment Failure',
         'accepted' => 'Order Accepted',
+        'shipped' => 'Shipped',
+        'delivered' => 'Delivered',
+        'otp' => 'OTP Already Given',
         'denied' => 'Order Cancelled (by Admin)',
         'dispatched' => 'Dispatched',
-        'shipped' => 'Shipped',
         'dispute' => 'Payment Dispute',
         'initiated_return' => 'Return Initiated',
         'return_success' => 'Return Accepted',

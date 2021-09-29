@@ -60,10 +60,18 @@
 -   `(23/sep 07:00pm)` Notifications Table and Order Update Notification and ability to clear notifications
 -   `(23/sep 07:50pm)` PostLiked notifications on every 5th+1 like, post-edit icon changed
 -   `(26/sep 08:30am)` PostCommented, UserFollowed notification, fixed notifications panel visibility on certain pages and not on some
+-   `(29/sep 09:25am)` Latest products underline; Add OTP Alredy Given, Delivered
+-   `()` Seperate address selection option
+-   `()` Notifications on profile menu in mobile
+-   `()` Demo software products
+-   `()` Download count for demo products
+-   `()` Remove spam account from discover users
+-   `()` Analystics Code
 -   `()` Book and Excel tool download sliders
 -   `()` Product Review option
 -   `()` Report Post
 -   `()` Continous posts
+-   `()` Optimize website
 
 ## :rocket: Feature List
 

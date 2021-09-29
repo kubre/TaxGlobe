@@ -11,7 +11,7 @@
         </x-slot>
 
         {{-- Products --}}
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center border-b">
             @if ($searchTerm)
                 @if ($searchTerm === " OR 1==1 --'")
                     <small class="px-4">No SQL injections here 🤗 - vaibhav</small>
@@ -20,7 +20,7 @@
                     Results for products containing <span class="font-bold">{{ $searchTerm }}</span>.
                 </h3>
             @else
-                <h3 class="text-lg font-bold px-4 py-2 border-b">
+                <h3 class="text-lg font-bold px-4 py-2">
                     Latest Products
                 </h3>
             @endif
