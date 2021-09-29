@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 
 class NotificationPanel extends Component
 {
+    public $isDesktopOnly = true;
+
     public function render()
     {
         $notifications = $this->getNotifications();

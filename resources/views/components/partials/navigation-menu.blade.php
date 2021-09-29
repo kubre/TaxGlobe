@@ -1,4 +1,4 @@
-<nav class="bg-white border-b border-gray-100">
+<nav class="bg-white border-b border-gray-100" x-data="{ isPanelOpen: false }" x-init>
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-center md:justify-between h-16">
@@ -16,10 +16,62 @@
                 </div>
 
                 @auth
-                    <a href="{{ route('user.profile', Auth::id()) }}" class="block md:hidden flex items-center px-2">
+                    <div class="flex items-center ml-2 block lg:hidden">
+                        <x-jet-dropdown align="right" width="w-80">
+                            <x-slot name="trigger">
+                                <button
+                                    class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                    <img class="h-8 w-8 rounded-full object-cover"
+                                        src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                <!-- Account Management -->
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    {{ __('Manage Account') }}
+                                </div>
+
+                                <x-jet-dropdown-link class="flex items-center"
+                                    href="{{ route('user.profile', auth()->id()) }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    {{ __('My Profile') }}
+                                </x-jet-dropdown-link>
+
+                                <!-- Authentication -->
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+
+                                    <x-jet-dropdown-link class='flex items-center' href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                                                                                                                                                                                                                                                                                                    this.closest('form').submit();">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                        </svg>
+                                        {{ __('Log Out') }}
+                                    </x-jet-dropdown-link>
+                                </form>
+
+
+                                <div class="border-t border-gray-100"></div>
+
+                                <div>
+                                    <livewire:widgets.notification-panel :isDesktopOnly="false">
+                                    </livewire:widgets.notification-panel>
+                                </div>
+                            </x-slot>
+                        </x-jet-dropdown>
+                    </div>
+                    {{-- <a href="{{ route('user.profile', Auth::id()) }}" class="block md:hidden flex items-center px-2">
                         <img class="h-9 w-9 border border-gray-500 rounded-full object-cover"
                             src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-                    </a>
+                    </a> --}}
                 @endauth
             </div>
 
@@ -71,8 +123,8 @@
                     <div class="sm:-my-px sm:ml-10 flex">
                         <x-widgets.create-button>
                             <x-jet-nav-link @click="open = !open" :active="request()->routeIs('posts.form')">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
@@ -153,11 +205,12 @@
                                 <div class="border-t border-gray-100"></div>
 
                                 @can('view-dashboard')
-                                    <x-jet-dropdown-link class="flex items-center"
-                                        href="{{ route('admin.dashboard') }}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                          </svg>
+                                    <x-jet-dropdown-link class="flex items-center" href="{{ route('admin.dashboard') }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                        </svg>
                                         {{ __('Admin Dashboard') }}
                                     </x-jet-dropdown-link>
                                 @endcan
@@ -168,7 +221,7 @@
 
                                     <x-jet-dropdown-link class='flex items-center' href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                            this.closest('form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                    this.closest('form').submit();">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

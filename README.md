@@ -61,8 +61,8 @@
 -   `(23/sep 07:50pm)` PostLiked notifications on every 5th+1 like, post-edit icon changed
 -   `(26/sep 08:30am)` PostCommented, UserFollowed notification, fixed notifications panel visibility on certain pages and not on some
 -   `(29/sep 09:25am)` Latest products underline; Add OTP Alredy Given, Delivered
+-   `(29/sep 01:50pm)` Notifications on profile menu in mobile
 -   `()` Seperate address selection option
--   `()` Notifications on profile menu in mobile
 -   `()` Demo software products
 -   `()` Download count for demo products
 -   `()` Remove spam account from discover users
