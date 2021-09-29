@@ -62,6 +62,7 @@
 -   `(26/sep 08:30am)` PostCommented, UserFollowed notification, fixed notifications panel visibility on certain pages and not on some
 -   `(29/sep 09:25am)` Latest products underline; Add OTP Alredy Given, Delivered
 -   `(29/sep 01:50pm)` Notifications on profile menu in mobile
+-   `(29/sep 08:00pm)` Notification Dot and optimize notification query
 -   `()` Seperate address selection option
 -   `()` Demo software products
 -   `()` Download count for demo products

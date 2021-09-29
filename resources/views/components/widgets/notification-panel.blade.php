@@ -24,7 +24,7 @@
                 </svg>
                 <strong>Notifications</strong>
             </div>
-            @if ($notifications->isNotEmpty())
+            @if (($notifications ?? collect([]))->isNotEmpty())
                 <x-jet-secondary-button variant="white" class="mr-4" wire:click="deleteAll">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -37,7 +37,7 @@
 
         <div class="lg:mt-1 lg:max-h-64 lg:h-64">
             <div class="pt-2 h-full overflow-y-auto">
-                @forelse ($notifications as $notif)
+                @forelse (($notifications ?? []) as $notif)
                     <a href="{{ $notif->action }}" class="py-1 px-2 bg-gray-300 rounded mb-1 cursor-pointer block">
                         <small class="bg-gray-100 rounded px-1">{{ $notif->time }}</small>
                         <span class="text-gray-700">{{ $notif->message }}</span>

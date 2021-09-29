@@ -31,7 +31,7 @@ Route::redirect('/explore', '/')
 Route::get('/shop', Shop\Storefront::class)
     ->name('shop.index');
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['middleware' => ['auth', 'verified', 'notification']], function () {
 
     Route::get('/feed', SocialMediaComponents\PostList::class)
         ->name('feed.index');
