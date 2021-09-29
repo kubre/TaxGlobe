@@ -21,8 +21,13 @@
                             <x-slot name="trigger">
                                 <button
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="h-8 w-8 rounded-full object-cover"
+                                    <img class="h-8 w-8 rounded-full object-cover relative"
                                         src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                    @if (($notifications ?? collect([]))->isNotEmpty())
+                                        <div
+                                            class="absolute h-4 w-4 -top-1 -right-1 bg-red-500 border-2 border-gray-300 rounded-full">
+                                        </div>
+                                    @endif
                                 </button>
                             </x-slot>
 
@@ -48,7 +53,7 @@
 
                                     <x-jet-dropdown-link class='flex items-center' href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                                                                    this.closest('form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                                                                        this.closest('form').submit();">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -221,7 +226,7 @@
 
                                     <x-jet-dropdown-link class='flex items-center' href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                                                                    this.closest('form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                                                                        this.closest('form').submit();">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
