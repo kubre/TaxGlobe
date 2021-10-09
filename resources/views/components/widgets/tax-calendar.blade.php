@@ -1,5 +1,5 @@
 <div x-data="{isOpen: false, selectedCategory: @entangle('selectedCategory')}"
-    class="fixed top-72 right-0 lg:static z-10 flex flex-col space-y-1 items-end">
+    class="fixed top-28 right-0 lg:static z-10 flex flex-col space-y-1 items-end">
     @push('styles')
         <style>
             @media screen and (min-width: 1024px) {
