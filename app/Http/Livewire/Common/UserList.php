@@ -37,6 +37,7 @@ class UserList extends Component
     public function render()
     {
         $users = $this->{$this->dataSources[$this->currentRoute]}()
+            ->whereNotNull('email_verified_at')
             ->simplePaginate(5, ['*'], $this->pageName);
 
         return view('components.common.user-list', \compact('users'));
@@ -45,7 +46,7 @@ class UserList extends Component
     public function getUsers()
     {
         return UserModel::where('name', 'LIKE', "%{$this->searchTerm}%")
-        ->orderBy('points', 'DESC');
+            ->orderBy('points', 'DESC');
     }
 
     public function getFollowers()
