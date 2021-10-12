@@ -65,6 +65,7 @@
 -   `(29/sep 08:00pm)` Notification Dot and optimize notification query
 -   `(10/oct 02:45pm)` Google Analytics Integration
 -   `(11/0ct 10:40pm)` Remove unverified accounts from user listing
+-   `(12/oct 07:15pm)` Fixed Google Analytics Integration
 -   `()` Seperate address selection option
 -   `()` Demo software products
 -   `()` Download count for demo products
