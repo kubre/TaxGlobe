@@ -66,7 +66,8 @@
 -   `(10/oct 02:45pm)` Google Analytics Integration
 -   `(11/0ct 10:40pm)` Remove unverified accounts from user listing
 -   `(12/oct 07:15pm)` Fixed Google Analytics Integration
--   `()` Seperate address selection option
+-   `(17/oct 13:08pm)` Seperate address selection option: Model, Form, Validation, Saving
+-   `()` Seperate address selection option: Select, Save for billing
 -   `()` Demo software products
 -   `()` Download count for demo products
 -   `()` Analystics Code

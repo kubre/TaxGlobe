@@ -70,6 +70,9 @@ Route::group(['middleware' => ['auth', 'verified', 'notification']], function ()
     })
         ->name('shop.order.receipt');
 
+    Route::get('address-form', Shop\AddressForm::class)
+        ->name('shop.address.form');
+
     Route::group([
         'middleware' => 'admin',
         'prefix' => 'admin',
