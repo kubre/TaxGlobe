@@ -56,10 +56,10 @@
                     </div>
                     <!-- Pin Code -->
                     <div class="col-span-6 sm:col-span-4 mt-4">
-                        <x-jet-label for="pincode" value="{{ __('Pin Code') }}" />
-                        <x-jet-input id="pincode" class="block mt-1 w-full" type="text" name="pin_code"
-                            wire:model.defer="state.pincode" />
-                        <x-jet-input-error for="state.pincode" class="mt-2" />
+                        <x-jet-label for="pin_code" value="{{ __('Pin Code') }}" />
+                        <x-jet-input id="pin_code" class="block mt-1 w-full" type="text" name="pin_code"
+                            wire:model.defer="state.pin_code" />
+                        <x-jet-input-error for="state.pin_code" class="mt-2" />
                     </div>
 
                     <!-- Shipping Note -->
@@ -74,6 +74,13 @@
         </x-slot>
 
         <x-slot name="actions">
+            <x-jet-secondary-button class="mr-2" onclick="history.back()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                Go Back
+            </x-jet-secondary-button>
             <x-jet-action-message class="mr-3" on="saved">
                 {{ __('Saved.') }}
             </x-jet-action-message>

@@ -18,6 +18,8 @@ class Checkout extends Component
     public $shippingDetails = [];
     public $canBuy = false;
     public ?Order $order;
+    public $addresses;
+    public $addressId;
 
     public function mount(Request $request)
     {
@@ -25,14 +27,18 @@ class Checkout extends Component
         $this->product = Product::findOrFail($request->product);
         $this->quantity = $this->product->type === 'download' ? 1 : $request->quantity;
 
+        $this->addresses = auth()->user()
+            ->addresses()
+            ->limit(10)
+            ->orderBy('id', 'DESC')
+            ->get();
+
         $this->shippingDetails['name'] = \auth()->user()->name;
         $this->shippingDetails['email'] = \auth()->user()->email;
-        $this->shippingDetails['contact'] = \auth()->user()->contact;
-        $this->shippingDetails['address'] = \auth()->user()->address;
-        $this->shippingDetails['city'] = \auth()->user()->city;
-        $this->shippingDetails['state'] = \auth()->user()->state;
-        $this->shippingDetails['pin_code'] = \auth()->user()->pin_code;
-        $this->shippingDetails['shipping_notes'] = \auth()->user()->shipping_notes;
+        if ($this->addresses->isNotEmpty()) {
+            $this->addressId = $this->addresses->first()->id;
+            $this->setAddress($this->addresses->first());
+        }
 
         \abort_if(($this->product->type === 'deliver' && $request->quantity > $this->product->stock)
             || !$this->product->in_stock, 404);
@@ -54,6 +60,21 @@ class Checkout extends Component
     public function render()
     {
         return view('components.shop.checkout');
+    }
+
+    public function setAddress($address)
+    {
+        $this->shippingDetails['contact'] = $address->contact;
+        $this->shippingDetails['address'] = $address->address;
+        $this->shippingDetails['city'] = $address->city;
+        $this->shippingDetails['state'] = $address->state;
+        $this->shippingDetails['pin_code'] = $address->pin_code;
+        $this->shippingDetails['shipping_notes'] = $address->shipping_notes;
+    }
+
+    public function updatingAddressId($value)
+    {
+        $this->setAddress($this->addresses->firstWhere('id', (int)$value));
     }
 
     public function startCheckout()

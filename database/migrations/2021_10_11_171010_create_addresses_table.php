@@ -18,8 +18,8 @@ class CreateAddressesTable extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('state');
-            $table->string('pincode')->nullable();
-            $table->string('shipping_details')->nullable();
+            $table->string('pin_code')->nullable();
+            $table->string('shipping_notes')->nullable();
             $table->string('contact');
             $table->foreignId('user_id')
                 ->index('addresses_user_id_index')

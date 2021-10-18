@@ -10,8 +10,8 @@ class Address extends Model
         'address',
         'city',
         'state',
-        'pincode',
-        'shipping_details',
+        'pin_code',
+        'shipping_notes',
         'contact',
         'user_id',
     ];

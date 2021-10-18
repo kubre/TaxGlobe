@@ -17,7 +17,7 @@ class AddressForm extends Component
         'state.address' => ['required', 'max:191', 'string'],
         'state.state' => ['required', 'max:191', 'string'],
         'state.city' => ['required', 'max:191', 'string'],
-        'state.pincode' => ['nullable', 'digits:6', 'string'],
+        'state.pin_code' => ['nullable', 'digits:6', 'string'],
         'state.shipping_details' => ['nullable', 'max:191', 'string'],
     ];
 
@@ -26,7 +26,7 @@ class AddressForm extends Component
         'state.address.*' => 'Required and fill properly!',
         'state.state.*' => 'Required and fill properly!',
         'state.city.*' => 'Required and fill properly!',
-        'state.pincode.*' => 'Required and fill properly!',
+        'state.pin_code.*' => 'Required and fill properly!',
         'state.shipping_details.*' => 'Required and fill properly!',
     ];
 

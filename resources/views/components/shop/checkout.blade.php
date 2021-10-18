@@ -2,7 +2,48 @@
     <x-common.news />
 
     <x-partials.grid>
-        <x-slot name="left"></x-slot>
+        <x-slot name="left">
+            <div class="rounded p-4 flex-1 bg-white">
+                <strong>Product Details</strong>
+                <hr>
+                <table class="table-fixed w-full">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="p-2">
+                                <img class="max-h-32 lg:max-h-24 mx-auto"
+                                    src="{{ $product->getMedia('images')->first()->getUrl() }}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold p-1">Product</td>
+                            <td class="p-1">{{ $product->title }}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold p-1">Unit Price</td>
+                            <td class="p-1">₹ {{ $product->final_price }} /-</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold p-1">Quantity</td>
+                            <td class="p-1">
+                                {{ $quantity }}
+                                {{-- <x-jet-input class="w-full" type="number" wire:model.debounce.1s="quantity" /> --}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold p-1">Shipping Cost</td>
+                            <td class="p-1">
+                                {{ $shippingDetails['shipping_cost'] ?? 0 ?: 'Free' }}
+                                {{-- <x-jet-input class="w-full" type="number" wire:model.debounce.1s="quantity" /> --}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold p-1">Payble Amount</td>
+                            <td class="p-1">₹ {{ $amount }} /-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </x-slot>
 
         <div class="bg-white rounded p-4">
             <div>
@@ -12,46 +53,6 @@
             <hr>
 
             <div class="flex flex-col lg:flex-row mt-4 gap-y-2 lg:gap-y-0 lg:gap-x-2">
-                <div class="border border-gray-300 rounded p-4 flex-1">
-                    <strong>Product Details</strong>
-                    <hr>
-                    <table class="table-fixed w-full">
-                        <tbody>
-                            <tr>
-                                <td colspan="2" class="p-2">
-                                    <img class="max-h-32 lg:max-h-24 mx-auto"
-                                        src="{{ $product->getMedia('images')->first()->getUrl() }}" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="font-bold p-1">Product</td>
-                                <td class="p-1">{{ $product->title }}</td>
-                            </tr>
-                            <tr>
-                                <td class="font-bold p-1">Unit Price</td>
-                                <td class="p-1">₹ {{ $product->final_price }} /-</td>
-                            </tr>
-                            <tr>
-                                <td class="font-bold p-1">Quantity</td>
-                                <td class="p-1">
-                                    {{ $quantity }}
-                                    {{-- <x-jet-input class="w-full" type="number" wire:model.debounce.1s="quantity" /> --}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="font-bold p-1">Shipping Cost</td>
-                                <td class="p-1">
-                                    {{ $shippingDetails['shipping_cost'] ?? 0 ?: 'Free' }}
-                                    {{-- <x-jet-input class="w-full" type="number" wire:model.debounce.1s="quantity" /> --}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="font-bold p-1">Payble Amount</td>
-                                <td class="p-1">₹ {{ $amount }} /-</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
                 <div class="border border-gray-300 rounded p-4 flex-1">
                     <strong class="p-1">Shipping/Billing Details</strong>
                     <hr>
@@ -66,29 +67,67 @@
                                 <td>{{ $shippingDetails['email'] }}</td>
                             </tr>
                             <tr>
-                                <td class="font-bold p-1">Contact</td>
-                                <td class="p-1">{{ $shippingDetails['contact'] ?: '-- REQUIRED --' }}</td>
+                                <td colspan="2" class="py-2">
+                                    <a class="text-blue-500 flex gap-x-2" href="{{ route('shop.address.form') }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                        </svg> Add new Address
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
-                                <td class="font-bold p-1">Address</td>
-                                <td class="p-1">{{ $shippingDetails['address'] ?: '-- REQUIRED --' }}</td>
+                                @if ($addresses->isEmpty())
+                                    <td colspan="2" class="text-red-500">
+                                        Please add billing/shipping address.
+                                    </td>
+                                @else
+                                    <td colspan="2" class="p-2">
+                                        <x-jet-label value="Select address" class="mb-1"></x-jet-label>
+                                        <select name="addressId" wire:model.lazy="addressId"
+                                            class="w-full border-0 ring-2 ring-gray-300 rounded">
+                                            @foreach ($addresses as $address)
+                                                <option value="{{ $address->id }}">
+                                                    {{ $address->contact . ' - ' . optional($address)->address }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                @endif
                             </tr>
-                            <tr>
-                                <td class="font-bold p-1">City</td>
-                                <td class="p-1">{{ $shippingDetails['city'] ?: '-- REQUIRED --' }}</td>
-                            </tr>
-                            <tr>
-                                <td class="font-bold p-1">PIN code</td>
-                                <td class="p-1">{{ $shippingDetails['pin_code'] }}</td>
-                            </tr>
-                            <tr>
-                                <td class="font-bold p-1">State</td>
-                                <td class="p-1">{{ $shippingDetails['state'] ?: '-- REQUIRED --' }}</td>
-                            </tr>
-                            <tr>
-                                <td class="font-bold p-1">Shipping Notes</td>
-                                <td class="p-1">{{ $shippingDetails['shipping_notes'] }}</td>
-                            </tr>
+                            @if ($addresses->isNotEmpty())
+                                <tr>
+                                    <td class="font-bold p-1">Contact</td>
+                                    <td class="p-1">{{ $shippingDetails['contact'] ?: '-- REQUIRED --' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold p-1">Address</td>
+                                    <td class="p-1">{{ $shippingDetails['address'] ?: '-- REQUIRED --' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold p-1">City</td>
+                                    <td class="p-1">{{ $shippingDetails['city'] ?: '-- REQUIRED --' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold p-1">PIN code</td>
+                                    <td class="p-1">{{ $shippingDetails['pin_code'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold p-1">State</td>
+                                    <td class="p-1">{{ $shippingDetails['state'] ?: '-- REQUIRED --' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-bold p-1">Shipping Notes</td>
+                                    <td class="p-1">{{ $shippingDetails['shipping_notes'] }}</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -118,13 +157,6 @@
                             Proceed to pay ₹ {{ $amount }}
                         </x-jet-button>
                     @endif
-                </div>
-            @else
-                <div class="text-gray-500 p-2">
-                    Note: Your missing required billing details. To update your shipping details and other information
-                    please visit <a class="text-blue-500" href="{{ route('profile.show') }}">
-                        Update Profile
-                    </a>.
                 </div>
             @endif
 
