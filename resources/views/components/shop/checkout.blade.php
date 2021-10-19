@@ -80,7 +80,8 @@
                             <tr>
                                 @if ($addresses->isEmpty())
                                     <td colspan="2" class="text-red-500">
-                                        Please add billing/shipping address.
+                                        Please add billing/shipping address. If you have already added it please refresh
+                                        this page.
                                     </td>
                                 @else
                                     <td colspan="2" class="p-2">

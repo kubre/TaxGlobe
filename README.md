@@ -68,10 +68,9 @@
 -   `(12/oct 07:15pm)` Fixed Google Analytics Integration
 -   `(17/oct 13:08pm)` Seperate address selection option: Model, Form, Validation, Saving
 -   `(18/oct 07:55pm)` Seperate address selection option: Select, Save for billing
--   `()` Demo software products
+-   `(19/oct 02:10pm)` Book and Excel tool download sliders
 -   `()` Download count for demo products
--   `()` Analystics Code
--   `()` Book and Excel tool download sliders
+-   `()` Demo software products
 -   `()` Product Review option
 -   `()` Report Post
 -   `()` Continous posts
