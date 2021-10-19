@@ -62,4 +62,12 @@ class Product extends Model implements HasMedia
         }
         return ($this->attributes['discount'] / $this->attributes['price']) * 100;
     }
+
+
+    # Relations
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

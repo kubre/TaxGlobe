@@ -128,8 +128,10 @@
             </div>
 
             <div>
-                <div>Reviews:</div>
-                No Reviews
+                <div class="font-bold text-lg">Reviews:</div>
+                <div>
+                    <livewire:shop.review-form :productId="$product->id"></livewire:shop.review-form>
+                </div>
             </div>
         </div>
         <x-slot name="right">
