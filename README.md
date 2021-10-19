@@ -71,7 +71,8 @@
 -   `(19/oct 02:10pm)` Book and Excel tool download sliders
 -   `(19/oct 04:10pm)` Product Review option: Add a review with rating
 -   `(19/oct 05:00pm)` Product Review option: view reviews
--   `()` Product Review option: See overall rating, Add review policy
+-   `(19/oct 09:35pm)` Product Review option: See overall rating
+-   `()` Product Review option: Add review policy
 -   `()` Demo software products
 -   `()` Download count for demo products
 -   `()` Report Post

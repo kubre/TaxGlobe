@@ -24,6 +24,7 @@ class Storefront extends Component
             ->when($this->searchTerm, function ($query, $term) {
                 $query->where('title', 'LIKE', "%$term%");
             })
+            ->withAvg('reviews', 'rating')
             ->orderBy('id', 'DESC')
             ->paginate(20);
         return view('components.shop.storefront', \compact('products'));

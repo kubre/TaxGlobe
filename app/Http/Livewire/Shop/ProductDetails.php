@@ -26,6 +26,7 @@ class ProductDetails extends Component
     public function render()
     {
         $reviews = $this->product->reviews()->orderBy('id', 'desc')->simplePaginate(5);
+        $this->product->loadAvg('reviews', 'rating');
         return view('components.shop.product-details', \compact('reviews'));
     }
 
