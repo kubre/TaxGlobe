@@ -70,7 +70,8 @@
 -   `(18/oct 07:55pm)` Seperate address selection option: Select, Save for billing
 -   `(19/oct 02:10pm)` Book and Excel tool download sliders
 -   `(19/oct 04:10pm)` Product Review option: Add a review with rating
--   `()` Product Review option: view reviews, see overall rating
+-   `(19/oct 05:00pm)` Product Review option: view reviews
+-   `()` Product Review option: See overall rating, Add review policy
 -   `()` Demo software products
 -   `()` Download count for demo products
 -   `()` Report Post

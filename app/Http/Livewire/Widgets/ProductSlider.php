@@ -13,7 +13,7 @@ class ProductSlider extends Component
 
     public function mount()
     {
-        $this->products = Product::inRandomOrder()->limit(5)->get();
+        $this->products = Product::with('media')->inRandomOrder()->limit(5)->get();
         $this->slides = \range(0, $this->products->count());
     }
 

@@ -272,9 +272,10 @@
             @endauth
             <div class="mt-2">
                 @foreach ($comments as $comment)
-                    <livewire:common.comment :comment='$comment' :wire:key="'comment-'.$post->id.'-'.$comment->id" />
+                    <livewire:common.comment :comment='$comment' :wire:key="'comment-'.$post->id.'-'.$comment->id">
+                    </livewire:common.comment>
                 @endforeach
-                {{ $comments->links('components.common.load-more') }}
+                {{ $comments->links() }}
             </div>
         </div>
     @else

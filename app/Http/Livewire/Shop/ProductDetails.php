@@ -4,9 +4,11 @@ namespace App\Http\Livewire\Shop;
 
 use App\Models\Product;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ProductDetails extends Component
 {
+    use WithPagination;
 
     public Product $product;
 
@@ -23,7 +25,8 @@ class ProductDetails extends Component
 
     public function render()
     {
-        return view('components.shop.product-details');
+        $reviews = $this->product->reviews()->orderBy('id', 'desc')->simplePaginate(5);
+        return view('components.shop.product-details', \compact('reviews'));
     }
 
     public function redirectCheckout()
