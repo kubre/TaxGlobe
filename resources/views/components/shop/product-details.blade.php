@@ -142,11 +142,14 @@
 
             <hr class="my-4">
             <div>
-                <div class="font-bold text-lg">Write a review</div>
-                <div>
-                    <livewire:shop.review-form :productId="$product->id"></livewire:shop.review-form>
-                </div>
-                <hr class="my-4">
+                @can('create', [App\Models\Review::class, $product->id])
+                    <div class="font-bold text-lg">Write a review</div>
+                    <div>
+                        <livewire:shop.review-form :productId="$product->id" :productSlug="$product->slug">
+                        </livewire:shop.review-form>
+                    </div>
+                    <hr class="my-4">
+                @endcan
                 <div class="font-bold text-lg">Reviews:</div>
                 <div>
                     @foreach ($reviews as $review)

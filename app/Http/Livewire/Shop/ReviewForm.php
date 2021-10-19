@@ -12,6 +12,7 @@ class ReviewForm extends Component
     public $rating;
 
     public $productId;
+    public $productSlug;
 
     public $rules = [
         'reviewDraft' => ['required', 'max:500'],
@@ -48,9 +49,6 @@ class ReviewForm extends Component
         $this->reviewDraft = '';
         $this->rating = 1;
 
-        return $this->dispatchBrowserEvent('toast', [
-            'icon' => 'success',
-            'title' => 'You review has been published!'
-        ]);
+        return \redirect()->route('products.show', $this->productSlug);
     }
 }
