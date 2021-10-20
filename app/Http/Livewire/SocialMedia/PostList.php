@@ -38,6 +38,8 @@ class PostList extends Component
 
     public $fullPage = false;
 
+    public $postLoadAmount = 10;
+
     public function mount(Request $request)
     {
         if (!isset($this->user) && Auth::check()) {
@@ -53,9 +55,14 @@ class PostList extends Component
     {
         $posts = $this->{$this->dataSources[$this->routeName]}()
             ->orderBy('id', 'DESC')
-            ->simplePaginate(5, ['*'], $this->pageName);
+            ->simplePaginate($this->postLoadAmount, ['*'], $this->pageName);
         $this->incrementViewCount($posts);
         return view('components.social-media.post-list', \compact('posts'));
+    }
+
+    public function loadMore()
+    {
+        $this->postLoadAmount += 10;
     }
 
     public function incrementViewCount($posts)

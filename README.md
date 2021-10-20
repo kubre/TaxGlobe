@@ -73,10 +73,11 @@
 -   `(19/oct 05:00pm)` Product Review option: view reviews
 -   `(19/oct 09:35pm)` Product Review option: See overall rating
 -   `(19/oct 10:55pm)` Product Review option: Add review policy
+-   `(20/oct 12:05pm)` Continous posts
+-   `()` Continous posts: Product Slider
 -   `()` Demo software products
 -   `()` Download count for demo products
 -   `()` Report Post
--   `()` Continous posts
 -   `()` Optimize website
 
 ## :rocket: Feature List
