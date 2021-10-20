@@ -74,7 +74,7 @@
 -   `(19/oct 09:35pm)` Product Review option: See overall rating
 -   `(19/oct 10:55pm)` Product Review option: Add review policy
 -   `(20/oct 12:05pm)` Continous posts
--   `()` Continous posts: Product Slider
+-   `(20/oct 01:05pm)` Continous posts: Product slider, post views are not on incremented every refresh
 -   `()` Demo software products
 -   `()` Download count for demo products
 -   `()` Report Post

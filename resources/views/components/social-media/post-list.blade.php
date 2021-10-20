@@ -69,6 +69,11 @@
             @forelse ($posts as $post)
                 <livewire:social-media.post :post='$post' :show='false' :wire:key="'post-'.$post->id"
                     :fullPage="$fullPage" />
+                @if ($loop->iteration === 6)
+                    @mobile
+                    <livewire:widgets.product-slider />
+                    @endmobile
+                @endif
             @empty
                 <div class="px-4 lg:px-8 py-4 mt-2">
                     <div class="text-3xl">This page seems empty!</div>
@@ -99,7 +104,9 @@
         {{-- Right Side --}}
         <x-slot name="right">
             <livewire:widgets.tax-calendar />
+            @desktop
             <livewire:widgets.product-slider />
+            @enddesktop
         </x-slot>
     </x-partials.grid>
 </div>

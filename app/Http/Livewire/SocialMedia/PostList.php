@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -56,7 +57,10 @@ class PostList extends Component
         $posts = $this->{$this->dataSources[$this->routeName]}()
             ->orderBy('id', 'DESC')
             ->simplePaginate($this->postLoadAmount, ['*'], $this->pageName);
-        $this->incrementViewCount($posts);
+        if (!Cache::has('view')) {
+            $this->incrementViewCount($posts);
+        }
+        Cache::put('view', true, 60);
         return view('components.social-media.post-list', \compact('posts'));
     }
 
