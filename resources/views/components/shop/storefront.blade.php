@@ -29,6 +29,21 @@
                 copy="{{ route('shop.index', ['q' => $searchTerm]) }}">
             </x-widgets.share>
         </div>
+        <div class="flex gap-x-4 items-center border-b border-gray-300 py-2 px-8" x-data x-init>
+            <span class="font-bold">Filter: </span>
+            <x-jet-secondary-button x-on:click="window.location = '{{ route('shop.index', ['c' => 'all']) }}'"
+                variant="secondary">
+                All
+            </x-jet-secondary-button>
+            <x-jet-secondary-button x-on:click="window.location = '{{ route('shop.index', ['c' => 'deliver']) }}'"
+                variant="success">
+                Books
+            </x-jet-secondary-button>
+            <x-jet-secondary-button x-on:click="window.location='{{ route('shop.index', ['c' => 'download']) }}'"
+                variant="warning">
+                Utility
+            </x-jet-secondary-button>
+        </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-8 p-4 lg:mb-16">
             @forelse ($products as $product)
                 <a href="{{ route('products.show', $product->slug) }}"
