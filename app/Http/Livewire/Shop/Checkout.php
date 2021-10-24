@@ -146,6 +146,7 @@ class Checkout extends Component
     {
         \abort_unless($this->product->type === 'download' && $this->product->final_price === 0, 403);
         $item = $this->product->getMedia('download')->first();
+        $this->product->increment('download_count');
         return \response()->download($item->getPath(), $item->name);
     }
 }

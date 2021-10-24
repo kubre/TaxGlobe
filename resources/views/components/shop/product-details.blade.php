@@ -144,6 +144,17 @@
                     @endif
                 </div>
             @endif
+            @if ($product->type === 'download')
+                <div class="flex items-center text-gray-700 p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    <span>This product has been downloaded
+                        <strong>{{ \number_format($product->download_count) }}</strong>x times.</span>
+                </div>
+            @endif
 
             <div class="description py-4 border-t border-gray-300">
                 <div class="mb-1">Details:</div>
