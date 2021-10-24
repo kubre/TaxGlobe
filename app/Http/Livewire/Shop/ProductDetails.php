@@ -37,4 +37,14 @@ class ProductDetails extends Component
             'quantity' => $this->order_quantity,
         ]);
     }
+
+    public function downloadDemo()
+    {
+        if (!auth()->check()) {
+            return \redirect()->route('login');
+        }
+        \abort_unless($this->product->type === 'download', 403);
+        $item = $this->product->getMedia('download')->first();
+        return \response()->download($item->getPath(), $item->name);
+    }
 }

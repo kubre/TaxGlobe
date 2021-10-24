@@ -76,7 +76,7 @@
 -   `(20/oct 12:05pm)` Continous posts
 -   `(20/oct 01:05pm)` Continous posts: Product slider, post views are not on incremented every refresh
 -   `(20/oct 02:45pm)` Book and Utility Filter
--   `()` Demo software products
+-   `(24/oct 08:40pm)` Demo software products: Button for demo, contact info after purchase; Changed create button style
 -   `()` Download count for demo products
 -   `()` Report Post
 -   `()` Optimize website
