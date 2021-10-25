@@ -20,16 +20,20 @@ class PostTable extends LivewireDatatable
 
     public $exportable = true;
 
+    public $showOnlyReported = false;
+
     public function builder()
     {
-        return Post::query();
+        return Post::when($this->showOnlyReported, function ($query) {
+            $query->whereNotNull('reported_at');
+        });
     }
 
     public function columns()
     {
         $disk = 'posts';
 
-        return [
+        $columns = [
             NumberColumn::name('id')
                 ->defaultSort(true)
                 ->width(120)
@@ -71,14 +75,23 @@ class PostTable extends LivewireDatatable
 
             DateColumn::name('created_at')
                 ->filterable(),
+        ];
 
+        if ($this->showOnlyReported) {
+            $columns = array_merge($columns, [
+                Column::name('reported_reason')
+                    ->filterable(Post::$reportReasons)
+                    ->width(100)
+            ]);
+        }
+        return \array_merge($columns, [
             Column::callback(['id', 'slug'], function ($id, $slug) {
                 return view('table-views.actions-post', \compact('id', 'slug'));
             })
                 ->label('Actions')
                 ->width(50)
                 ->excludeFromExport()
-                ->unsortable(),
-        ];
+                ->unsortable()
+        ]);
     }
 }

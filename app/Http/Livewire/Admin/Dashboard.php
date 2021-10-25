@@ -30,6 +30,7 @@ class Dashboard extends Component
         $this->statistics['total_posts'] = Post::count();
         $this->statistics['total_users'] = User::where('role', User::ROLE_USER)->count();
         $this->statistics['total_admins'] = User::where('role', User::ROLE_ADMIN)->count();
+        $this->statistics['total_reported_posts'] = Post::whereNotNull('reported_at')->count();
 
         return view('components.admin.dashboard')
             ->layout('layouts.admin')

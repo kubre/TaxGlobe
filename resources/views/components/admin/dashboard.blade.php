@@ -9,7 +9,7 @@
     </h3>
     <div class="grid gap-6 grid-cols mb-4 md:grid-cols-2 xl:grid-cols-4">
         <x-widgets.stat-card iconColors="bg-blue-200 text-blue-500" text="Total Users"
-            value="{{ $statistics['total_users'] }}">
+            value="{{ $statistics['total_users'] }}" route="{{ route('admin.users.list') }}">
             <x-slot name="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -20,7 +20,7 @@
         </x-widgets.stat-card>
 
         <x-widgets.stat-card iconColors="bg-indigo-200 text-indigo-500" text="Total Admins"
-            value="{{ $statistics['total_admins'] }}">
+            value="{{ $statistics['total_admins'] }}" route="{{ route('admin.users.list') }}">
             <x-slot name="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -31,7 +31,7 @@
         </x-widgets.stat-card>
 
         <x-widgets.stat-card iconColors="bg-green-200 text-green-500" text="Total Posts"
-            value="{{ $statistics['total_posts'] }}">
+            value="{{ $statistics['total_posts'] }}" route="{{ route('admin.posts.list') }}">
             <x-slot name="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -41,7 +41,8 @@
             </x-slot>
         </x-widgets.stat-card>
 
-        <x-widgets.stat-card iconColors="bg-red-200 text-red-500" text="Reported Posts" value="0">
+        <x-widgets.stat-card iconColors="bg-red-200 text-red-500" text="Reported Posts"
+            value="{{ $statistics['total_reported_posts'] }}" route="{{ route('admin.posts.reported') }}">
             <x-slot name="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -63,7 +64,7 @@
                 orders)</small></span>
     </h3>
 
-    <a href="{{ route('admin.orders.list') }}" class="mb-2 no-underline">
+    <a route="{{ route('admin.orders.list') }}" class="mb-2 no-underline">
         <div class="grid gap-6 grid-cols md:grid-cols-2 lg:grid-cols-3">
             @forelse ($orders as $order)
                 <livewire:shop.order :order="$order" :compact="true" />

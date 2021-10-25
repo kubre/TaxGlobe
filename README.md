@@ -79,7 +79,7 @@
 -   `(24/oct 08:40pm)` Demo software products: Button for demo, contact info after purchase; Changed create button style
 -   `(24/oct 09:45pm)` Download count for demo products
 -   `(25/oct 11:45am)` Report Post: Option to the report post, store report reason
--   `()` Report Post: Option to review reported posts
+-   `(25/oct 12:20pm)` Report Post: Option to review the reported posts, dashboard count for reported posts
 -   `()` Optimize website
 
 ## :rocket: Feature List

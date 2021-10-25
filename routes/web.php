@@ -87,6 +87,9 @@ Route::group(['middleware' => ['auth', 'verified', 'notification']], function ()
         Route::get('/posts', Admin\PostManagement::class)
             ->name('posts.list');
 
+        Route::get('/posts/reported', Admin\ReportedPostManagement::class)
+            ->name('posts.reported');
+
         Route::get('/tax-dates', Admin\TaxCalendarManagement::class)
             ->name('tax-date.list');
 
