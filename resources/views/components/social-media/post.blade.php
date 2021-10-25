@@ -180,6 +180,17 @@
             </x-jet-secondary-button>
         </div>
         <div class="flex space-x-2">
+            @auth
+                <x-jet-secondary-button variant="white" class="cursor-defaultu mr-auto" wire:click='toggleBookmark'>
+                    {{-- Bookmark --}}
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5 mr-2 {{ $hasBookmarked ? 'text-blue-900 fill-current' : '' }}" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                    </svg>
+                </x-jet-secondary-button>
+            @endauth
             <x-jet-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <x-jet-secondary-button variant='white'>
@@ -192,18 +203,6 @@
                 </x-slot>
 
                 <x-slot name="content">
-                    @auth
-                        <x-jet-dropdown-link class="flex items-center" wire:click='toggleBookmark'>
-                            {{-- Bookmark --}}
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5 mr-2 {{ $hasBookmarked ? 'text-blue-900 fill-current' : '' }}" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                            </svg>
-                            {{ $hasBookmarked ? __('Unsave') : __('Save') }}
-                        </x-jet-dropdown-link>
-                    @endauth
                     @can('update', $post)
                         <x-jet-dropdown-link class="flex items-center"
                             href="{{ route('posts.form', ['post' => $post->id, 'type' => $post->type]) }}">
@@ -226,7 +225,8 @@
                             {{ __('Delete') }}
                         </x-jet-dropdown-link>
                     @endcan
-                    <x-jet-dropdown-link class="flex items-center text-red-500" href="{{ route('profile.show') }}">
+                    <x-jet-dropdown-link class="flex items-center text-red-500"
+                        wire:click="$emit('triggerReport', {{ $post->id }})">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

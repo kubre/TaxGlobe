@@ -77,8 +77,9 @@
 -   `(20/oct 01:05pm)` Continous posts: Product slider, post views are not on incremented every refresh
 -   `(20/oct 02:45pm)` Book and Utility Filter
 -   `(24/oct 08:40pm)` Demo software products: Button for demo, contact info after purchase; Changed create button style
--   `(24/oct) 09:45pm` Download count for demo products
--   `()` Report Post
+-   `(24/oct 09:45pm)` Download count for demo products
+-   `(25/oct 11:45am)` Report Post: Option to the report post, store report reason
+-   `()` Report Post: Option to review reported posts
 -   `()` Optimize website
 
 ## :rocket: Feature List

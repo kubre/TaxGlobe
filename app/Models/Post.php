@@ -19,7 +19,27 @@ class Post extends Model implements HasMedia
     public const TYPE_IMAGE = 'image';
 
     protected $fillable = [
-        'title', 'slug', 'body', 'image', 'type', 'user_id',
+        'title', 'slug', 'body', 'image', 'type', 'user_id', 'reported_at', 'reported_reason'
+    ];
+
+    public $casts = [
+        'reported_at' => 'datetime',
+    ];
+
+    public static $reportReasons = [
+        'Its spam' => 'Its spam',
+        'Nudity or Sexual Activity' => 'Nudity or Sexual Activity',
+        'Hate Speech or symbols' => 'Hate Speech or symbols',
+        'Violence or dangerous orgnizations' => 'Violence or dangerous orgnizations',
+        'Sale of illegal or regulated goods' => 'Sale of illegal or regulated goods',
+        'Bullying or harassment' => 'Bullying or harassment',
+        'Intellctual property violation' => 'Intellctual property violation',
+        'Suicide or self-injury' => 'Suicide or self-injury',
+        'Eating Disorder' => 'Eating Disorder',
+        'Scam or fraud' => 'Scam or fraud',
+        'False violations' => 'False violations',
+        'Against TaxGlobes Terms and Conditions' => 'Against TaxGlobes Terms and Conditions',
+        'I just dont like it' => 'I just dont like it',
     ];
 
     public static function booted()

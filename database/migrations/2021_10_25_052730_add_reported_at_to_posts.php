@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDownloadCountToProducts extends Migration
+class AddReportedAtToPosts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddDownloadCountToProducts extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->unsignedBigInteger('download_count')->default(0);
+        Schema::table('posts', function (Blueprint $table) {
+            $table->timestamp('reported_at')->nullable()->default(null);
+            $table->string('reported_reason')->nullable()->default(null);
         });
     }
 
@@ -25,8 +26,8 @@ class AddDownloadCountToProducts extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('download_count');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropColumn('repoted_at');
         });
     }
 }

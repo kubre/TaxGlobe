@@ -135,9 +135,37 @@
                 });
             });
 
+            Livewire.on('triggerReport', function(postId) {
+                (async () => {
+                    const {
+                        value: reason
+                    } = await Swal.fire({
+                        title: 'Please state the reason to report this post?',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#aaa',
+                        confirmButtonText: 'Report',
+                        input: 'select',
+                        inputOptions: JSON.parse('{!! \json_encode(\App\Models\Post::$reportReasons) !!}'),
+                        inputPlaceholder: 'Select a reason',
+                    });
+
+                    if (reason) {
+                        @this.call('reportPost', postId, reason)
+                    }
+                })();
+            });
+
             Livewire.on('postDeleted', function() {
                 Swal.fire({
                     title: 'Post deleted successfully!',
+                    icon: 'success'
+                });
+            });
+
+            Livewire.on('postReported', function() {
+                Swal.fire({
+                    title: 'Post has been reported successfully!',
                     icon: 'success'
                 });
             });
@@ -148,7 +176,8 @@
                     hasWaitedEnoughToScroll = true;
                 }, 5000);
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50 &&
-                    hasWaitedEnoughToScroll && (document.getElementById('hasMorePages').value === '1')) {
+                    hasWaitedEnoughToScroll && (document.getElementById('hasMorePages').value ===
+                        '1')) {
                     hasWaitedEnoughToScroll = false;
                     @this.call('loadMore');
                 }

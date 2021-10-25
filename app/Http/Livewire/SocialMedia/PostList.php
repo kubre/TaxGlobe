@@ -83,6 +83,15 @@ class PostList extends Component
         $this->emit('postDeleted');
     }
 
+    public function reportPost(PostModel $post, $reason)
+    {
+        $post->fill([
+            'reported_at' => now(),
+            'reported_reason' => $reason,
+        ])->save();
+        $this->emit('postReported');
+    }
+
     public function getExplorePosts()
     {
         return PostModel::when(\auth()->check(), function ($query) {
