@@ -1,5 +1,6 @@
 <div class="">
-    <div class="bg-white relative rounded-lg max-h-full overflow-hidden py-2">
+    <div class="bg-indigo-50 lg:bg-white relative rounded-lg max-h-full overflow-hidden py-2 border-t">
+        <strong class="block px-4 text-center lg:text-left">Shop</strong>
         <div class="mx-auto relative" x-data="{ activeSlide: 0, slides: @entangle('slides').defer }">
             <!-- Slides -->
             @foreach ($products as $product)

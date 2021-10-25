@@ -1,4 +1,4 @@
-<nav class="bg-white border-b border-gray-100" x-data="{ isPanelOpen: false }" x-init>
+<nav class="bg-indigo-50" x-data="{ isPanelOpen: false }" x-init>
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-center md:justify-between h-16">
@@ -16,7 +16,7 @@
                 </div>
 
                 @auth
-                    <div class="flex items-center ml-2 block lg:hidden">
+                    <div class="flex items-center ml-2 lg:hidden">
                         <x-jet-dropdown align="right" width="w-80">
                             <x-slot name="trigger">
                                 <button
@@ -39,7 +39,7 @@
 
                                 <x-jet-dropdown-link class="flex items-center"
                                     href="{{ route('user.profile', auth()->id()) }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -53,8 +53,8 @@
 
                                     <x-jet-dropdown-link class='flex items-center' href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                                                                                                                        this.closest('form').submit();">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    this.closest('form').submit();">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -82,9 +82,9 @@
 
             <div class="hidden md:flex">
                 @guest
-                    <div class="sm:-my-px sm:ml-10 flex">
+                    <div>
                         <x-jet-nav-link href="{{ route('explore.index') }}" :active="request()->routeIs('explore.index')">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -92,9 +92,9 @@
                             {{ __('Explore') }}
                         </x-jet-nav-link>
                     </div>
-                    <div class="sm:-my-px sm:ml-10 flex">
+                    <div>
                         <x-jet-nav-link href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -102,9 +102,9 @@
                             {{ __('Shop') }}
                         </x-jet-nav-link>
                     </div>
-                    <div class="sm:-my-px sm:ml-10 flex">
+                    <div>
                         <x-jet-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -112,9 +112,9 @@
                             {{ __('Login') }}
                         </x-jet-nav-link>
                     </div>
-                    <div class="sm:-my-px sm:ml-10 flex">
+                    <div>
                         <x-jet-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -125,10 +125,10 @@
                 @endguest
 
                 @auth
-                    <div class="sm:-my-px sm:ml-10 flex">
+                    <div>
                         <x-widgets.create-button>
                             <x-jet-nav-link @click="open = !open" :active="request()->routeIs('posts.form')">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -137,9 +137,9 @@
                             </x-jet-nav-link>
                         </x-widgets.create-button>
                     </div>
-                    <div class="sm:-my-px sm:ml-10 flex">
+                    <div>
                         <x-jet-nav-link href="{{ route('feed.index') }}" :active="request()->routeIs('feed.index')">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -147,10 +147,10 @@
                             {{ __('Home') }}
                         </x-jet-nav-link>
                     </div>
-                    <div class="sm:-my-px sm:ml-10 flex">
+                    <div>
                         <x-jet-nav-link href="{{ route('explore.index') }}"
                             :active="request()->routeIs('explore.index')">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -158,9 +158,9 @@
                             {{ __('Explore') }}
                         </x-jet-nav-link>
                     </div>
-                    <div class="sm:-my-px sm:ml-10 flex">
+                    <div>
                         <x-jet-nav-link href="{{ route('shop.index') }}" :active="request()->routeIs('shop.index')">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -169,15 +169,15 @@
                         </x-jet-nav-link>
                     </div>
 
-                    <div class="sm:-my-px sm:ml-10 flex">
+                    <div>
                         <x-jet-nav-link href="{{ route('users.suggestions', auth()->id()) }}"
                             :active="request()->routeIs('users.suggestions', auth()->id())">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
-                            {{ __('Discover Users') }}
+                            {{ __('Connect') }}
                         </x-jet-nav-link>
                     </div>
 
@@ -186,7 +186,7 @@
                             <x-slot name="trigger">
                                 <button
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                    <img class="h-8 w-8 rounded-full object-cover"
+                                    <img class="h-10 w-10 rounded-full object-cover"
                                         src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             </x-slot>
@@ -226,7 +226,7 @@
 
                                     <x-jet-dropdown-link class='flex items-center' href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                                                                                                                        this.closest('form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    this.closest('form').submit();">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

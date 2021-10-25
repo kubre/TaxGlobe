@@ -1,5 +1,5 @@
-<div x-data='{ open : false }' class="relative flex">
-    <div class="flex flex-col lg:flex-row -ml-6 md:-ml-36 p-2 rounded lg:rounded-full justify-center absolute lg:space-x-4 gap-y-4 bottom-12 md:-bottom-20 bg-white shadow-lg mb-4 z-40 origin-bottom"
+<div x-data='{ open : false }' class="relative flex h-full">
+    <div class="flex flex-col lg:flex-row -ml-6 md:-ml-36 p-2 rounded lg:rounded-full justify-center absolute lg:space-x-4 gap-y-4 bottom-12 md:-bottom-20 bg-white shadow-lg mb-4 z-40 origin-bottom "
         x-cloak x-show='open' x-transition:enter="transition ease-out duration-150"
         x-transition:enter-start="opacity-0 transform scale-50" x-transition:enter-end="opacity-100 transform scale-100"
         x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 transform scale-100"

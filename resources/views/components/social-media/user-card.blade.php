@@ -1,10 +1,10 @@
-<div class="bg-white rounded shadow overflow-hidden text-center">
+<div class="bg-white rounded-lg overflow-hidden text-center">
     @if (!is_null($user))
-        <div class="flex flex-col items-center border-b border-gray-300 space-y-2 py-4 relative px-6">
+        <div class="flex flex-col items-center border-b border-gray-200 space-y-2 py-4 relative px-6">
             {{-- <div class="absolute top-0 left-0 right-0 py-10 z-0">
             </div> --}}
             <div class="flex flex-row items-center space-x-2 flex-shrink-0 mr-3 z-10">
-                <img class="h-16 w-16 rounded-full border-2 border-indigo-300 object-cover"
+                <img class="h-16 w-16 rounded-full border-2 border-indigo-200 object-cover"
                     src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
                 <div class="flex flex-col">
                     <div class="font-bold text-base">
@@ -55,7 +55,7 @@
             @endif
         </div>
         @if (!$showBasicInfoOnly)
-            <div class="grid grid-cols-2 gap-y-4 justify-between my-2">
+            <div class="grid grid-cols-2 gap-y-4 justify-between py-4">
                 <a href="{{ route('users.followers', $user->id) }}"
                     class="font-medium text-base text-center text-gray-500">
                     <div class="text-xl font-bold">

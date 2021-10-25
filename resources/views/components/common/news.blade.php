@@ -1,4 +1,4 @@
-<div class="flex flex items-center text-gray-900 bg-blue-100 rounded">
+<div class="flex flex items-center text-indigo-700 bg-indigo-100">
     <div class="px-4 py-3 whitespace-nowrap">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform -rotate-12" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">

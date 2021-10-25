@@ -44,7 +44,7 @@
 <body class="font-sans antialiased">
     <x-jet-banner />
 
-    <div class="min-h-screen bg-gray-200">
+    <div class="min-h-screen app-bg">
         <x-partials.navigation-menu />
 
         <!-- Page Content -->

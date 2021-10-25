@@ -37,7 +37,8 @@
                         </span>
                     </div>
 
-                    <x-jet-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent="$refs.photo.click()">
+                    <x-jet-secondary-button class="mt-2 mr-2" type="button"
+                        x-on:click.prevent="$refs.photo.click()">
                         {{ __('Select A New Photo') }}
                     </x-jet-secondary-button>
 
@@ -165,7 +166,7 @@
                 <div>
                     <x-jet-label for="state" value="State" />
                     <select wire:model.defer='state.state' x-model="state" name="state" id="state"
-                        class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full">
+                        class="border-0 border-b border-indigo-200 bg-indigo-50 focus:bg-indigo-100 focus:ouline-none focus:ring-0 rounded-lg w-full">
 
                         <option value="">-- Select State --</option>
                         <template x-for="eachState in Object.keys(statesData)" :key="eachState">
@@ -177,7 +178,7 @@
                 <div class="mt-4">
                     <x-jet-label for="city" value="City" />
                     <select id="city" name="city" x-model="city"
-                        class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-full"
+                        class="border-0 border-b border-indigo-200 bg-indigo-50 focus:bg-indigo-100 focus:ouline-none focus:ring-0 rounded-lg w-full"
                         wire:model.defer="state.city">
                         <option value="">-- Select City --</option>
                         <template x-for="eachCity in statesData[state]" :key="eachCity">

@@ -29,7 +29,7 @@
         </style>
     @endif
 
-    <x-partials.grid>
+    <x-partials.grid bg="gray-100">
 
         {{-- Left Side --}}
         <x-slot name="left">

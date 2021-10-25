@@ -72,15 +72,17 @@
             <div class="pt-2 overflow-y-auto h-44" x-data x-init>
                 @forelse ($taxDates as $taxDate)
                     @if ($selectedCategory === 'All' || $selectedCategory === $taxDate->category)
-                        <div class="py-1 px-2 bg-gray-300 border border-gray-500 rounded mb-1 cursor-pointer"
+                        <div class="py-2 px-2 bg-indigo-50 rounded-lg mb-1 cursor-pointer"
                             x-on:click='alertBox("{{ $taxDate->title }}", "{{ preg_replace("/\r|\n/", '', nl2br($taxDate->description)) }}")'>
-                            <strong class="bg-gray-100 rounded px-1">{{ $taxDate->date_at->format('d') }}</strong>
-                            <span class="text-gray-700">{{ $taxDate->title }} </span>
+                            <strong
+                                class="bg-white rounded-lg p-1 px-2 mr-2">{{ $taxDate->date_at->format('d') }}</strong>
+                            <span class="text-gray-500">{{ $taxDate->title }} </span>
                         </div>
                     @elseif ($selectedCategory === 'No Category' && is_null($taxDate->category))
-                        <div class="py-1 px-2 bg-gray-300 border border-gray-500 rounded mb-1 cursor-pointer"
+                        <div class="py-2 px-2 bg-indigo-50 rounded-lg mb-1 cursor-pointer"
                             x-on:click='alertBox("{{ $taxDate->title }}", "{{ preg_replace("/\r|\n/", '', nl2br($taxDate->description)) }}")'>
-                            <strong class="bg-gray-100 rounded px-1">{{ $taxDate->date_at->format('d') }}</strong>
+                            <strong
+                                class="bg-white rounded-lg p-1 px-2 mr-2">{{ $taxDate->date_at->format('d') }}</strong>
                             <span class="text-gray-700">{{ $taxDate->title }} </span>
                         </div>
                     @endif

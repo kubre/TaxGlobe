@@ -1,4 +1,4 @@
-<div class="border-b">
+<div class="">
 
     @push('styles')
         <style>
@@ -44,9 +44,9 @@
     @endpush
 
     <x-partials.grid isCompact='{{ $isCompact }}'>
-        <div class="{{ $isCompact ?? false ? 'px-4' : 'p-8' }}" x-data="postFormComponent()">
+        <div class="{{ $isCompact ?? false ? 'p-4' : 'p-8' }} mb-2" x-data="postFormComponent()">
 
-            <h4 class="text-lg text-bold mb-2">
+            <h4 class="text-lg font-bold mb-2">
                 {{ is_null($postId) ? 'New Post' : 'Update Content' }}
             </h4>
 
@@ -55,8 +55,8 @@
                 @if ($type == \App\Models\Post::TYPE_ARTICLE)
                     <div class="flex justify-end">
                         <x-jet-button id='submit' class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -100,8 +100,9 @@
                     </div>
                     <div class="mt-4" wire:ignore>
                         <x-jet-label for="body" value="{{ __('Content *') }}" />
-                        <textarea id="body" class="block mt-2" wire:model.defer='body'
-                            name="body">{{ $body }}</textarea>
+                        <textarea id="body"
+                            class="block mt-2 focus:ring-0 focus:bg-indigo-50 border-0 border-b border-gray-200"
+                            wire:model.defer='body' name="body">{{ $body }}</textarea>
                         <x-jet-input-error for='body' />
                     </div>
 
@@ -152,7 +153,7 @@
                     <div>
                         <textarea x-model='post' x-init="resize(document.getElementById('title'))"
                             @input="resize(document.getElementById('title'))" id="title"
-                            class="border-gray-300 focus:border-indigo-300 rounded-md shadow-sm w-full resize-none"
+                            class="focus:ring-0 bg-indigo-50 focus:bg-indigo-100 border-0 border-b border-indigo-200 rounded-lg w-full resize-none"
                             :class="{ 'ring ring-red-300 focus:ring focus:ring-red-300' : post.length > 500, 'h-11' : type === '{{ \App\Models\Post::TYPE_IMAGE }}' }"
                             type="text" name="title"
                             :placeholder="type === '{{ \App\Models\Post::TYPE_IMAGE }}' ? 'Caption' : 'Write a Post'"
@@ -208,8 +209,8 @@
                                 @click="window.location = '{{ route('posts.form', \App\Models\Post::TYPE_ARTICLE) }}'"
                                 variant='success' class='self-end' type='button' x-data='{hover: false}'
                                 class="transition duration-150" @mouseover='hover = true' @mouseleave='hover = false'>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                 </svg>
@@ -222,6 +223,7 @@
                 </div>
             </form>
         </div>
+
     </x-partials.grid>
 
     @push('scripts')

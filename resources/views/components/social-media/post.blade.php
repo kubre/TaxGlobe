@@ -1,4 +1,4 @@
-<div class="{{ $fullPage ? '' : 'border-b border-gray-300' }} py-4">
+<div class="{{ $fullPage ? '' : '' }} py-4 bg-white mb-2 rounded-lg">
 
     {{-- Title --}}
     <div class="px-4 lg:px-8 py-2 flex items-center justify-between">
@@ -20,7 +20,7 @@
         <div class="text-gray-500 text-xs flex items-center">
             {{ $post->created_at->format('d/m/y') }}
             @if ($post->updated_at->gt($post->created_at))
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -55,7 +55,7 @@
             </div>
         @elseif($post->type === 'article')
             <div class="px-4 lg:px-8 pb-2">
-                <div class="w-full flex flex-col {{ $fullPage ? '' : 'border border-gray-300 rounded-lg p-4' }}">
+                <div class="w-full flex flex-col {{ $fullPage ? '' : 'bg-indigo-50 rounded-lg p-4' }}">
                     @if ($fullPage)
                         <hr>
                         @if ($post->image)
@@ -108,7 +108,7 @@
                                     <img class="object-cover rounded-none lg:rounded w-full" style="max-height: 200px"
                                         src="{{ Storage::disk('posts')->url($post->image) }}">
                                 @endif
-                                <span class="mt-4 flex items-center font-bold text-blue-500 uppercase text-xs">
+                                <span class="mt-4 flex items-center font-bold text-indigo-500 uppercase text-xs">
                                     Click to continue reading
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -184,7 +184,7 @@
                 <x-jet-secondary-button variant="white" class="cursor-defaultu mr-auto" wire:click='toggleBookmark'>
                     {{-- Bookmark --}}
                     <svg xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5 mr-2 {{ $hasBookmarked ? 'text-blue-900 fill-current' : '' }}" fill="none"
+                        class="h-5 w-5 {{ $hasBookmarked ? 'text-indigo-700 fill-current' : '' }}" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
@@ -240,13 +240,13 @@
     </div>
 
     @if ($showComments || $fullPage)
-        <div class="mt-2 px-4 lg:px-8 ">
+        <div class="mt-2 pt-2 px-4 lg:px-8 border-t border-gray-300">
             @auth
                 <form wire:submit.prevent="publishComment">
-                    <div class="flex items-center space-x-1">
+                    <div class="flex items-center gap-x-1">
                         <div class='flex-grow' x-data="{ comment: @entangle('commentDraft').defer }">
                             <textarea x-model='comment'
-                                class="border-gray-300 focus:border-indigo-300 rounded-md shadow-sm w-full resize-none {{ $fullPage ? 'h-28' : 'h-11' }}"
+                                class="border-0 border-b focus:ring-0 focus:border-indigo-300 rounded-md shadow-sm w-full resize-none {{ $fullPage ? 'h-28' : 'h-11' }}"
                                 x-bind:class='{ "ring ring-red-300 focus:ring focus:ring-red-300" : (comment && comment.length > 500) }'
                                 name="commentDraft" id='commentDraft' placeholder='Write a comment'
                                 wire:model.defer="commentDraft"></textarea>
@@ -270,7 +270,7 @@
                     @enderror
                 </form>
             @endauth
-            <div class="mt-2">
+            <div class="mt-4">
                 @foreach ($comments as $comment)
                     <livewire:common.comment :comment='$comment' :wire:key="'comment-'.$post->id.'-'.$comment->id">
                     </livewire:common.comment>
@@ -280,7 +280,7 @@
         </div>
     @else
         @if ($post->comments->isNotEmpty())
-            <div class="mt-2 px-4 lg:px-8 ">
+            <div class="mt-2 pt-2 px-4 lg:px-8 border-t border-gray-200">
                 <livewire:common.comment :comment='$post->comments->first()' />
             </div>
         @endif
