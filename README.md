@@ -83,7 +83,8 @@
 -   `(25/oct 02:20pm)` Optimize website: ran npm run prod
 
 ## Fixes
-- `(25/oct 03:40pm)` Fixed review policy and ability to review
+- `(25/oct 03:40pm)` Fixed: review policy and ability to review
+- `(25/oct 03:55pm)` Fixed: Can delete review now
 ## :rocket: Feature List
 
 ### Admin Panel

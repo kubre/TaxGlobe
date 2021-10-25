@@ -175,7 +175,7 @@
                 <div>
                     @forelse ($reviews as $review)
                         <div class="py-2">
-                            <div class="flex flex-row items-center space-x-2 pt-2">
+                            <div class="flex items-center space-x-2 pt-2">
                                 <img class='h-8 w-8 rounded-full mr-2 border'
                                     src="{{ $review->user->profile_photo_url }}" alt="{{ $review->user->name }}">
                                 <div class="flex items-center">
@@ -185,7 +185,11 @@
                                     <span
                                         class="text-xs text-gray-500 mr-2">({{ $review->created_at->diffForHumans(null, false, true) }}):
                                     </span>
+                                </div>
+                            </div>
 
+                            <div class="pl-12 pt-2">
+                                <div class="flex justify-between">
                                     <span class="flex space-x-1">
                                         @for ($i = 1; $i <= 5; $i++)
                                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -196,10 +200,18 @@
                                             </svg>
                                         @endfor
                                     </span>
+                                    @can('delete', $review)
+                                        <x-jet-dropdown-link class="flex items-center"
+                                            wire:click="deleteReview({{ $review->id }})">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="text-red-500 h-5 w-5" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </x-jet-dropdown-link>
+                                    @endcan
                                 </div>
-                            </div>
-                            <div class="ml-12">
-                                {{ $review->body }}
+                                <p>{{ $review->body }}</p>
                             </div>
                         </div>
                     @empty

@@ -3,12 +3,15 @@
 namespace App\Http\Livewire\Shop;
 
 use App\Models\Product;
+use App\Models\Review;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ProductDetails extends Component
 {
     use WithPagination;
+    use AuthorizesRequests;
 
     public Product $product;
 
@@ -47,5 +50,15 @@ class ProductDetails extends Component
         $item = $this->product->getMedia('download')->first();
         $this->product->increment('download_count');
         return \response()->download($item->getPath(), $item->name);
+    }
+
+    public function deleteReview(Review $review)
+    {
+        $this->authorize('delete', $review);
+        $review->delete();
+        return $this->emit('toast', [
+            'title' => 'Removed review successfully!',
+            'icon' => 'success',
+        ]);
     }
 }
