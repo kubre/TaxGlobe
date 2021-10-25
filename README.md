@@ -80,7 +80,7 @@
 -   `(24/oct 09:45pm)` Download count for demo products
 -   `(25/oct 11:45am)` Report Post: Option to the report post, store report reason
 -   `(25/oct 12:20pm)` Report Post: Option to review the reported posts, dashboard count for reported posts
--   `()` Optimize website
+-   `(25/oct 02:20pm)` Optimize website: ran npm run prod
 
 ## :rocket: Feature List
 
