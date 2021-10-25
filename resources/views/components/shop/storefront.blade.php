@@ -108,9 +108,10 @@
                     </div>
                 </div>
             @endforelse
-            <div class="px-4 py-2">
-                {{ $products->links() }}
-            </div>
+
+        </div>
+        <div class="px-4 py-2">
+            {{ $products->links() }}
         </div>
 
         {{-- Right Side --}}

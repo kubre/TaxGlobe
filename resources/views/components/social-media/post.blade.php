@@ -275,7 +275,7 @@
                     <livewire:common.comment :comment='$comment' :wire:key="'comment-'.$post->id.'-'.$comment->id">
                     </livewire:common.comment>
                 @endforeach
-                {{ $comments->links() }}
+                {{ $comments->links('vendor.livewire.simple-tailwind') }}
             </div>
         </div>
     @else
