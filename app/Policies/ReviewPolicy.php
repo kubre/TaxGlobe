@@ -40,14 +40,16 @@ class ReviewPolicy
      * @param  \App\Models\User  $user
      * @return mixed
      */
-    public function create(User $user, $productId)
+    public function create(User $user, $product)
     {
-        return Order::whereUserId($user->id)
-            ->whereProductId($productId)
-            ->count() > 0
-            && Review::whereUserId($user->id)
-            ->whereProductId($productId)
+        $isNotReviewed = Review::whereUserId($user->id)
+            ->whereProductId($product->id)
             ->count() == 0;
+        return (Order::whereUserId($user->id)
+            ->whereProductId($product->id)
+            ->whereIn('status', ['success', 'delivered', 'otp', 'return_accepted', 'return_success'])
+            ->count() > 0
+            && $isNotReviewed) || ($product->price === 0 && $isNotReviewed);
     }
 
     /**

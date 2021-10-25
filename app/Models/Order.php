@@ -38,7 +38,7 @@ class Order extends Model
         'dispatched' => 'Dispatched',
         'dispute' => 'Payment Dispute',
         'initiated_return' => 'Return Initiated',
-        'return_success' => 'Return Accepted',
+        'return_accepted' => 'Return Accepted',
         'return_success' => 'Return Success',
     ];
 

@@ -82,6 +82,8 @@
 -   `(25/oct 12:20pm)` Report Post: Option to review the reported posts, dashboard count for reported posts
 -   `(25/oct 02:20pm)` Optimize website: ran npm run prod
 
+## Fixes
+- `(25/oct 03:40pm)` Fixed review policy and ability to review
 ## :rocket: Feature List
 
 ### Admin Panel

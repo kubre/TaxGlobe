@@ -163,7 +163,7 @@
 
             <hr class="my-4">
             <div>
-                @can('create', [App\Models\Review::class, $product->id])
+                @can('create', [App\Models\Review::class, $product])
                     <div class="font-bold text-lg">Write a review</div>
                     <div>
                         <livewire:shop.review-form :productId="$product->id" :productSlug="$product->slug">
@@ -173,7 +173,7 @@
                 @endcan
                 <div class="font-bold text-lg">Reviews:</div>
                 <div>
-                    @foreach ($reviews as $review)
+                    @forelse ($reviews as $review)
                         <div class="py-2">
                             <div class="flex flex-row items-center space-x-2 pt-2">
                                 <img class='h-8 w-8 rounded-full mr-2 border'
@@ -202,7 +202,9 @@
                                 {{ $review->body }}
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="py-2">No reviews yet</div>
+                    @endforelse
                     {{ $reviews->links('components.common.load-more') }}
                 </div>
             </div>
