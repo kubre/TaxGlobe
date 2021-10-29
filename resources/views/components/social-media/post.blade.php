@@ -190,52 +190,65 @@
                             d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                     </svg>
                 </x-jet-secondary-button>
-            @endauth
-            <x-jet-dropdown align="right" width="48">
-                <x-slot name="trigger">
-                    <x-jet-secondary-button variant='white'>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                        </svg>
-                    </x-jet-secondary-button>
-                </x-slot>
+                <x-jet-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        <x-jet-secondary-button variant='white'>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                            </svg>
+                        </x-jet-secondary-button>
+                    </x-slot>
 
-                <x-slot name="content">
-                    @can('update', $post)
-                        <x-jet-dropdown-link class="flex items-center"
-                            href="{{ route('posts.form', ['post' => $post->id, 'type' => $post->type]) }}">
+                    <x-slot name="content">
+                        @can('update', $post)
+                            <x-jet-dropdown-link class="flex items-center"
+                                href="{{ route('posts.form', ['post' => $post->id, 'type' => $post->type]) }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                </svg>
+                                {{ __('Edit') }}
+                            </x-jet-dropdown-link>
+                        @endcan
+                        @can('delete', $post)
+                            <x-jet-dropdown-link class="flex items-center"
+                                wire:click="$emit('triggerDelete', {{ $post->id }})">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                                {{ __('Delete') }}
+                            </x-jet-dropdown-link>
+                        @endcan
+                        <x-jet-dropdown-link class="flex items-center text-red-500"
+                            wire:click="$emit('triggerReport', {{ $post->id }})">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                             </svg>
-                            {{ __('Edit') }}
+                            {{ __('Report Post') }}
                         </x-jet-dropdown-link>
-                    @endcan
-                    @can('delete', $post)
-                        <x-jet-dropdown-link class="flex items-center"
-                            wire:click="$emit('triggerDelete', {{ $post->id }})">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                            {{ __('Delete') }}
-                        </x-jet-dropdown-link>
-                    @endcan
-                    <x-jet-dropdown-link class="flex items-center text-red-500"
-                        wire:click="$emit('triggerReport', {{ $post->id }})">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                        </svg>
-                        {{ __('Report Post') }}
-                    </x-jet-dropdown-link>
-                </x-slot>
-            </x-jet-dropdown>
+                        @can('pin', \App\Models\Post::class)
+                            <x-jet-dropdown-link class="flex items-center"
+                                wire:click="$emit('triggerPin', '{{ $post->slug }}')">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path
+                                        d="M13.1032 1.53098C9.91944 0.827342 8.15807 0.818684 5.06084 1.53098L4.30159 11.478C2.5835 11.9122 1.71398 12.5587 1 13.9648H7.77249L9.04233 23L10.9048 13.9648H17C16.481 12.6906 15.4807 12.1651 13.8677 11.478L13.1032 1.53098Z"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                </svg>
+                                {{ __('Pin Post') }}
+                            </x-jet-dropdown-link>
+                        @endcan
+                    </x-slot>
+                </x-jet-dropdown>
+            @endauth
+
         </div>
     </div>
 

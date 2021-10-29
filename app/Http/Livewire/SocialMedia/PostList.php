@@ -5,6 +5,7 @@ namespace App\Http\Livewire\SocialMedia;
 use App\Traits\CustomWithPagination;
 use Livewire\Component;
 use App\Models\Post as PostModel;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -41,6 +42,10 @@ class PostList extends Component
 
     public $postLoadAmount = 10;
 
+    public $pageName = 'postPage';
+
+    public $pinnedPosts;
+
     public function mount(Request $request)
     {
         if (!isset($this->user) && Auth::check()) {
@@ -48,11 +53,10 @@ class PostList extends Component
         }
         $this->searchTerm = $request->get('q');
         $this->routeName = Route::currentRouteName();
+        $this->pinnedPosts = \collect(\json_decode(Cache::get('settings')['pinned_posts'] ?? ''));
     }
 
-    public $pageName = 'postPage';
-
-    public function render()
+    public function render(Request $request)
     {
         $posts = $this->{$this->dataSources[$this->routeName]}()
             ->orderBy('id', 'DESC')
@@ -81,6 +85,66 @@ class PostList extends Component
         $this->authorize('delete', $post);
         $post->delete();
         $this->emit('postDeleted');
+    }
+
+    public function pin($postSlug, $pinTitle)
+    {
+        $settings = Cache::get('settings');
+        if (\is_null($settings)) {
+            return
+                $this->dispatchBrowserEvent('toast', [
+                    'icon' => 'warning',
+                    'title' => 'Please login again!',
+                ]);
+        }
+
+        $pinnedPosts = collect(\json_decode($settings['pinned_posts'] ?? ''));
+
+        if ($pinnedPosts->has($postSlug)) {
+            return $this->dispatchBrowserEvent('toast', [
+                'icon' => 'info',
+                'title' => 'This post is already pinned!',
+            ]);
+        }
+
+        Setting::upsert([
+            'key' => 'pinned_posts',
+            'value' => $pinnedPosts->put($postSlug, $pinTitle)->toJson(),
+        ], ['key'], ['value']);
+
+        Cache::forget('settings');
+
+        return $this->dispatchBrowserEvent('toast', [
+            'icon' => 'success',
+            'title' => 'Pined post successfully!',
+        ]);
+    }
+
+    public function deletePin($postSlug)
+    {
+        $settings = Cache::get('settings');
+        if (\is_null($settings)) {
+            return
+                $this->dispatchBrowserEvent('toast', [
+                    'icon' => 'warning',
+                    'title' => 'Please login again!',
+                ]);
+        }
+        $pinnedPosts = collect(\json_decode($settings['pinned_posts'] ?? ''));
+
+        $pinnedPosts->forget($postSlug);
+
+        Setting::upsert([
+            'key' => 'pinned_posts',
+            'value' => $pinnedPosts->toJson(),
+        ], ['key'], ['value']);
+
+        Cache::forget('settings');
+
+        return $this->dispatchBrowserEvent('toast', [
+            'icon' => 'success',
+            'title' => 'Removed pin successfully!',
+        ]);
     }
 
     public function reportPost(PostModel $post, $reason)

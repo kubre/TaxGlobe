@@ -81,10 +81,13 @@
 -   `(25/oct 11:45am)` Report Post: Option to the report post, store report reason
 -   `(25/oct 12:20pm)` Report Post: Option to review the reported posts, dashboard count for reported posts
 -   `(25/oct 02:20pm)` Optimize website: ran npm run prod
+-   `(29/oct 11:55am)` Can pin and unpin posts now
 
 ## Fixes
 - `(25/oct 03:40pm)` Fixed: review policy and ability to review
 - `(25/oct 03:55pm)` Fixed: Can delete review now
+- `(25/oct 09:40pm)` Website design changed
+
 ## :rocket: Feature List
 
 ### Admin Panel

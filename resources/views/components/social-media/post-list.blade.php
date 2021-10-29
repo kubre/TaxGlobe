@@ -66,10 +66,54 @@
                 </h4>
             @endif
 
+            @if (\in_array($routeName, ['explore.index', 'feed.index']) && $pinnedPosts->isNotEmpty())
+                <div class="bg-gray-200 p-2 rounded-lg mb-2" x-data="{open: true}">
+                    <div class="flex items-center" x-on:click="open = !open">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path
+                                d="M13.1032 1.53098C9.91944 0.827342 8.15807 0.818684 5.06084 1.53098L4.30159 11.478C2.5835 11.9122 1.71398 12.5587 1 13.9648H7.77249L9.04233 23L10.9048 13.9648H17C16.481 12.6906 15.4807 12.1651 13.8677 11.478L13.1032 1.53098Z"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                        </svg>
+                        <span>
+                            <span>Posts pinned by Administrator</span>
+                            <span class='underline cursor-pointer' x-text="open ? 'Hide' : 'Show'"></span>
+                        </span>
+                    </div>
+                    <div class="relative overflow-hidden max-h-0 transition-all duration-500 grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-2 pt-1"
+                        x-ref="pinned" x-bind:style=" open ? 'max-height: ' + $refs.pinned.scrollHeight + 'px' : ''">
+                        @foreach ($pinnedPosts as $slug => $title)
+                            <div class="bg-white rounded-lg p-2 flex items-center">
+                                <a class="flex items-center gap-x-2 flex-grow" href="{{ route('post.show', $slug) }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-none" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                                    </svg>
+                                    <span>{{ Str::words($title, 6) }}</span>
+                                </a>
+                                @can('pin', \App\Models\Post::class)
+                                    <span wire:click="deletePin('{{ $slug }}')"
+                                        class="flex-none px-2 cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </span>
+                                @endcan
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @else
+
+            @endif
+
             @forelse ($posts as $post)
                 <livewire:social-media.post :post='$post' :show='false' :wire:key="'post-'.$post->id"
                     :fullPage="$fullPage" />
-                @if ($loop->iteration === 6)
+                @if ($loop->iteration === 6 || $loop->iteration === 15)
                     @mobile
                     <livewire:widgets.product-slider />
                     @endmobile
@@ -135,6 +179,26 @@
                 });
             });
 
+            Livewire.on('triggerPin', function(postSlug) {
+                (async () => {
+                    const {
+                        value: pinTitle
+                    } = await Swal.fire({
+                        title: 'Pin this post',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#aaa',
+                        confirmButtonText: 'Pin',
+                        input: 'text',
+                        inputPlaceholder: 'Add a Title',
+                    });
+
+                    if (pinTitle) {
+                        @this.call('pin', postSlug, pinTitle)
+                    }
+                })();
+            });
+
             Livewire.on('triggerReport', function(postId) {
                 (async () => {
                     const {
@@ -159,6 +223,13 @@
             Livewire.on('postDeleted', function() {
                 Swal.fire({
                     title: 'Post deleted successfully!',
+                    icon: 'success'
+                });
+            });
+
+            Livewire.on('postPinned', function() {
+                Swal.fire({
+                    title: 'Toggled pin status of post.',
                     icon: 'success'
                 });
             });

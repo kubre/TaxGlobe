@@ -91,4 +91,9 @@ class PostPolicy
     {
         //
     }
+
+    public function pin(User $user)
+    {
+        return $user->isAdmin();
+    }
 }
