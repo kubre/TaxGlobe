@@ -55,6 +55,10 @@ Route::group(['middleware' => ['auth', 'verified', 'notification']], function ()
     Route::get('/users/{user}/suggestions', Common\UserList::class)
         ->name('users.suggestions');
 
+    Route::get('/users/{user}/{post:slug}/likes', Common\UserList::class)
+        // ->middleware('can:update,post')
+        ->name('users.likes');
+
     Route::get('checkout', Shop\Checkout::class)
         ->name('shop.checkout');
 

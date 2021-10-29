@@ -82,11 +82,13 @@
 -   `(25/oct 12:20pm)` Report Post: Option to review the reported posts, dashboard count for reported posts
 -   `(25/oct 02:20pm)` Optimize website: ran npm run prod
 -   `(29/oct 11:55am)` Can pin and unpin posts now
+-   `(29/oct 12:40pm)` See users who liked the post
 
 ## Fixes
 - `(25/oct 03:40pm)` Fixed: review policy and ability to review
 - `(25/oct 03:55pm)` Fixed: Can delete review now
 - `(25/oct 09:40pm)` Website design changed
+-  `()` Make explore default route after login
 
 ## :rocket: Feature List
 

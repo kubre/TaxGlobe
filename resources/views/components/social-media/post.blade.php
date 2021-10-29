@@ -145,9 +145,6 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
-                <span class="text-base">
-                    {{ number_shorten($post->like_count) }}
-                </span>
             </x-jet-secondary-button>
             {{-- Comment --}}
             <x-jet-secondary-button wire:click="loadComments" variant='white'>
@@ -251,6 +248,19 @@
 
         </div>
     </div>
+
+    @if ($post->like_count)
+        <div class="py-1 px-4 lg:px-8">
+            <a @can('update', [App\Models\Post::class, $post])
+                href="{{ route('users.likes', [
+    'user' => auth()->id(),
+    'post' => $post->slug,
+]) }}" @endcan
+                class="text-base">
+                {{ number_shorten($post->like_count) }} like{{ $post->like_count === 1 ? '' : 's' }}
+            </a>
+        </div>
+    @endif
 
     @if ($showComments || $fullPage)
         <div class="mt-2 pt-2 px-4 lg:px-8 border-t border-gray-300">

@@ -2,15 +2,19 @@
 
 namespace App\Http\Livewire\Common;
 
+use App\Models\Post;
 use App\Models\User as UserModel;
 use App\Traits\CustomWithPagination;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
 class UserList extends Component
 {
     use CustomWithPagination;
+    use AuthorizesRequests;
 
     public $searchTerm;
 
@@ -25,6 +29,7 @@ class UserList extends Component
         'users.followers' => 'getFollowers',
         'users.followings' => 'getFollowings',
         'users.suggestions' => 'getSuggestions',
+        'users.likes' => 'getLikers',
     ];
 
     public function mount(Request $request)
@@ -66,5 +71,14 @@ class UserList extends Component
         abort_unless(auth()->id() === $this->user->id, 403);
         return UserModel::inRandomOrder()
             ->where('id', '!=', $this->user->id);
+    }
+
+    public function getLikers()
+    {
+        $slug = \request()->route('post');
+        \abort_if(empty($slug), Response::HTTP_NOT_FOUND);
+        $post = Post::whereSlug($slug)->first();
+        $this->authorize('update', [Post::class, $post]);
+        return $post->likedUsers();
     }
 }
