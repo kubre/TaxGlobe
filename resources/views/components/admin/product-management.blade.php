@@ -39,10 +39,10 @@
         <script>
             document.addEventListener('DOMContentLoaded',
                 function() {
-                    Livewire.on('toggleStock', function(productId) {
+                    Livewire.on('toggleHide', function(productId) {
                         Swal.fire({
                             title: 'Are You Sure?',
-                            text: 'Are you sure you want toggle stock status of this product?',
+                            text: 'Are you sure you want toggle hide property?',
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
@@ -50,7 +50,7 @@
                             confirmButtonText: 'Toggle!'
                         }).then((result) => {
                             if (result.value) {
-                                @this.call('toggleStock', productId)
+                                @this.call('toggleHidden', productId)
                             }
                         });
                     });

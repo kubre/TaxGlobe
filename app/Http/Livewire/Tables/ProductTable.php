@@ -66,9 +66,14 @@ class ProductTable extends LivewireDatatable
                 ->width(100),
 
             NumberColumn::name('stock')
-            ->label('Stock (click to edit)')
+                ->label('Stock')
                 ->filterable()
                 ->editable()
+                ->width(20),
+
+            BooleanColumn::name('is_hidden')
+                ->label('Hide Listing')
+                ->booleanFilterable()
                 ->width(20),
 
             DateColumn::name('created_at')

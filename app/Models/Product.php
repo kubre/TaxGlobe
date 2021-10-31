@@ -28,6 +28,7 @@ class Product extends Model implements HasMedia
         'price' => 'int',
         'discount' => 'int',
         'stock' => 'int',
+        'is_hidden' => 'boolean',
     ];
 
     public static function booted()

@@ -30,6 +30,7 @@ class Storefront extends Component
             ->when($this->category, function ($query, $category) {
                 $query->where('type', $category);
             })
+            ->whereIsHidden(false)
             ->withAvg('reviews', 'rating')
             ->orderBy('id', 'DESC')
             ->paginate(20);

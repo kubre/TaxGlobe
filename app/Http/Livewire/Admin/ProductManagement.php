@@ -14,14 +14,14 @@ class ProductManagement extends Component
             ->slot('content');
     }
 
-    public function toggleStock(Product $product)
+    public function toggleHidden(Product $product)
     {
-        // $product->in_stock = !$product->in_stock;
-        // $product->save();
-        // $this->emit('refreshLivewireDatatable');
-        // $this->dispatchBrowserEvent('toast', [
-        //     'title' => 'Toggled stock status successfully!',
-        //     'icon' => 'success',
-        // ]);
+        $product->is_hidden = !$product->is_hidden;
+        $product->save();
+        $this->emit('refreshLivewireDatatable');
+        $this->dispatchBrowserEvent('toast', [
+            'title' => 'Toggled hidden status successfully!',
+            'icon' => 'success',
+        ]);
     }
 }
