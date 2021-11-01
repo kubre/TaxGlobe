@@ -82,7 +82,8 @@
                                     ₹ {{ $product->price }}
                                 </span>
                                 <small class="text-gray-900">
-                                    Save ₹ {{ $product->discount }} ({{ $product->discount_percentage }}%)
+                                    Save ₹ {{ $product->discount }}
+                                    ({{ round($product->discount_percentage, 0) }}%)
                                 </small>
                             @endif
                         @else
