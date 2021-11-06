@@ -90,6 +90,7 @@
 -   `(25/oct 03:55pm)` Fixed: Can delete review now
 -   `(25/oct 09:40pm)` Website design changed
 -   `(01/nov 11:35am)` Round discount percentage to 0 decimals
+-   `(06/nov 06:30pm)` Round discount percentage to 0 decimals in Product Details
 
 ## :rocket: Feature List
 
