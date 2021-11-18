@@ -21,6 +21,7 @@ class PostForm extends Component
     public $body;
     public $slug;
     public $image;
+    public $userId;
     public $attachments = [];
     public $oldImage;
 
@@ -62,6 +63,7 @@ class PostForm extends Component
 
     public function mount(string $type, PostModel $post)
     {
+        $this->userId = auth()->id();
         if (!is_null($post->id)) {
             $this->authorize('update', $post);
             $this->postId = $post->id;
@@ -69,6 +71,7 @@ class PostForm extends Component
             $this->body = $post->body;
             $this->slug = $post->slug;
             $this->oldImage = $post->image;
+            $this->userId = $post->user_id;
         }
         $this->type = $type;
     }
@@ -98,7 +101,7 @@ class PostForm extends Component
             'body' => $this->body,
             'image' => $file ?? null,
             'slug' => $this->slug ?? Str::of($this->title)->limit(80)->slug()->append('-', Str::random(12)),
-            'user_id' => \auth()->id(),
+            'user_id' => $this->userId,
             'type' => $this->type,
         ])->save();
 
