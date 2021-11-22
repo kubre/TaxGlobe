@@ -12,7 +12,7 @@
                 {{ $slot }}
             </div>
         </div>
-        <div class="{{ $isCompact ?? false ? 'hidden' : 'w-full lg:w-64 flex flex-col flex-none sm:space-y-4' }}">
+        <div class="{{ $isCompact ?? false ? 'hidden' : 'w-full lg:w-64 flex flex-col flex-none space-y-4' }}">
             {{ $right ?? '' }}
             <div class="flex space-x-4 md:space-x-2 text-xs justify-center flex-wrap">
                 <div>

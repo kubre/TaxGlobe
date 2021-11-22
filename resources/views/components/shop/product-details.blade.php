@@ -85,8 +85,9 @@
                             src="{{ $image->getUrl() }}">
                     @endforeach
                 </div>
-                <div class="flex justify-center items-center flex-1 order-first lg:order-1">
-                    <img class="max-h-80 object-fill" x-bind:src="image" x-on:click="openImage(image)" />
+                <div class="flex justify-center items-center flex-1 order-first lg:order-1 lg:px-2">
+                    <img style="max-height: 90vh; height: auto" class="object-fill" x-bind:src="image"
+                        x-on:click="openImage(image)" />
                 </div>
             </div>
 
@@ -222,8 +223,10 @@
             </div>
         </div>
         <x-slot name="right">
-            <strong class="text-center">Other Products</strong>
-            <livewire:widgets.product-slider />
+            <div class="space-y-4 pt-2 sm:pt-0 text-center">
+                <strong class="text-center">Other Products</strong>
+                <livewire:widgets.product-slider />
+            </div>
         </x-slot>
 
     </x-partials.grid>
