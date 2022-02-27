@@ -48,6 +48,10 @@ class PostList extends Component
 
     public function mount(Request $request)
     {
+        if ($request->hasAny(['taxMonth', 'taxYear'])) {
+            \redirect()->route('widgets.tax-widget', $request->all());
+        }
+
         if (!isset($this->user) && Auth::check()) {
             $this->user = Auth::user();
         }

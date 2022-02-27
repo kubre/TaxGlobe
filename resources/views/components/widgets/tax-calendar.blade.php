@@ -1,16 +1,16 @@
-<div x-data="{isOpen: false, selectedCategory: @entangle('selectedCategory')}"
-    class="fixed top-28 right-0 lg:static z-10 flex flex-col space-y-1 items-end">
+<div x-data="{isOpen: {{ $fullPage ? 'false' : 'true' }}, selectedCategory: @entangle('selectedCategory')}"
+    class="{{ $fullPage ? 'static' : 'fixed' }} top-28 right-0 lg:static z-10 flex flex-col space-y-1 items-end">
     @push('styles')
         <style>
-            @media screen and (min-width: 1024px) {
+           
+            @media screen and (min-width: {{ $fullPage ? '10px' : '1024px' }} ) {
                 .block-important {
                     display: block !important;
                 }
             }
-
         </style>
     @endpush
-    <x-jet-secondary-button class="visible lg:hidden rounded-l-xl pl-3 py-2" :isRound="false" variant='secondary'
+    <x-jet-secondary-button class="visible {{ $fullPage ? 'hidden' : '' }} lg:hidden rounded-l-xl pl-3 py-2" :isRound="false" variant='secondary'
         x-on:click="isOpen = !isOpen">
         <svg x-show="!isOpen" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
@@ -28,7 +28,7 @@
         x-transition:leave="transition ease-in duration-150"
         x-transition:leave-start="opacity-100 transform origin-top-right scale-100"
         x-transition:leave-end="opacity-0 transform origin-top-right scale-50"
-        class="block-important border border-gray-400 lg:border-0 bg-white rounded-lg px-4 max-h-80 h-80 py-2 w-full">
+        class="block-important {{ $fullPage ? '' : 'border border-black border-opacity-20'}} lg:border-none bg-white rounded-lg px-4 max-h-80 h-80 py-2 w-full">
 
         <div class="flex justify-between items-center">
             <strong>Tax Calendar</strong>
@@ -39,11 +39,11 @@
     'taxYear' => $selectedYear,
     'taxCategory' => $selectedCategory,
 ]) }}"
-                copy="{{ route('explore.index', [
+                copy="{!! route('explore.index', [
     'taxMonth' => $selectedMonth,
     'taxYear' => $selectedYear,
     'taxCategory' => $selectedCategory,
-]) }}">
+]) !!}">
             </x-widgets.share>
         </div>
 

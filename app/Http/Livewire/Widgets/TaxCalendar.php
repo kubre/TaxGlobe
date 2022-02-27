@@ -16,6 +16,7 @@ class TaxCalendar extends Component
     public $selectedYear;
     public $selectedCategory = 'All';
     public $categoriesInMonth;
+    public $fullPage = false;
 
     public function mount()
     {

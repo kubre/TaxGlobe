@@ -28,6 +28,9 @@ Route::get('/', SocialMediaComponents\PostList::class)
 Route::redirect('/explore', '/')
     ->name('explore.explore');
 
+Route::get('/tax-widget', Common\TaxWidgetPage::class)
+    ->name('widgets.tax-widget');
+
 Route::get('/shop', Shop\Storefront::class)
     ->name('shop.index');
 
