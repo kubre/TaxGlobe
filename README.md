@@ -91,6 +91,7 @@
 -   `(25/oct 09:40pm)` Website design changed
 -   `(01/nov 11:35am)` Round discount percentage to 0 decimals
 -   `(06/nov 06:30pm)` Round discount percentage to 0 decimals in Product Details
+-   `(27/feb 06:10pm)` Updated contact number
 
 ## :rocket: Feature List
 
