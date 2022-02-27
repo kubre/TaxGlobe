@@ -1,4 +1,4 @@
-<div x-data="{isOpen: {{ $fullPage ? 'false' : 'true' }}, selectedCategory: @entangle('selectedCategory')}"
+<div x-data="{isOpen: false, selectedCategory: @entangle('selectedCategory')}"
     class="{{ $fullPage ? 'static' : 'fixed' }} top-28 right-0 lg:static z-10 flex flex-col space-y-1 items-end">
     @push('styles')
         <style>
