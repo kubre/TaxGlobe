@@ -94,7 +94,7 @@
                             <strong>Upload an Image</strong>
                             <x-common.filepond wire:model.defer="image" allowImagePreview imagePreviewMaxHeight="200"
                                 allowFileTypeValidation acceptedFileTypes="['image/jpeg']" allowFileSizeValidation
-                                maxFileSize="2mb" />
+                                maxFileSize="3mb" />
                             <x-jet-input-error for='image' />
                         </div>
                     </div>
@@ -146,7 +146,7 @@
                             <strong>Upload an Image</strong>
                             <x-common.filepond wire:model.defer="image" allowImagePreview imagePreviewMaxHeight="200"
                                 allowFileTypeValidation acceptedFileTypes="['image/jpeg']" allowFileSizeValidation
-                                {{-- :files="is_null($image) ? [] : [$image]" --}} maxFileSize="2mb" />
+                                {{-- :files="is_null($image) ? [] : [$image]" --}} maxFileSize="3mb" />
                             <x-jet-input-error for='image' />
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                                             fill="currentColor"></path>
                                     </svg>
                                     <span class='ml-2' x-show='hover'>
-                                        {{ __('Publish') }}
+                                        {{ __('Short Update') }}
                                     </span>
                                 </x-jet-button>
                             @elseif($type == \App\Models\Post::TYPE_POST)

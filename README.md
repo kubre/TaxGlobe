@@ -94,6 +94,7 @@
 -   `(27/feb 06:10pm)` Updated contact number
 -   `(27/feb 06:30pm)` Updated label for Post to Short Update (Only display change)
 -   `(27/feb 07:00pm)` Fixed bottom publish button on article not updating body content
+-   `(27/feb 07:10pm)` Fixed image upload now accepts images up to 3MB
 
 ## :rocket: Feature List
 

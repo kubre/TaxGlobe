@@ -44,7 +44,7 @@ class PostForm extends Component
                         $fail('At least image is required');
                     }
                 },
-                'max:2048',
+                'max:3100',
             ],
         ];
     }
@@ -52,7 +52,7 @@ class PostForm extends Component
     public function updatedAttachments()
     {
         $this->validate([
-            'attachments.*' => 'nullable|file|mimes:pdf,docx,xlsx,doc,xls|max:3000',
+            'attachments.*' => 'nullable|file|mimes:pdf,docx,xlsx,doc,xls|max:3100',
             'attachments' => 'max:3',
         ], [
             'attachments.*.max' => 'Each file is restricted to Max 3MB size only!',
