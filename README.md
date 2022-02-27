@@ -97,6 +97,7 @@
 -   `(27/feb 07:10pm)` Fixed image upload now accepts images up to 3MB
 -   `(27/feb 07:25pm)` Links now work in short updates
 -   `(27/feb 08:15pm)` Tax Calendar now has separate page
+-   `(27/feb 08:35pm)` Admins have checkmark in-front of their name
 
 ## :rocket: Feature List
 

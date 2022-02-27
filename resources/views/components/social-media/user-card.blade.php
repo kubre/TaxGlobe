@@ -7,8 +7,15 @@
                 <img class="h-16 w-16 rounded-full border-2 border-indigo-200 object-cover"
                     src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}" />
                 <div class="flex flex-col">
-                    <div class="font-bold text-base">
-                        {{ $user->name }}
+                    <div class="font-bold text-base flex items-center">
+                        <span class="flex-none">
+                            {{ $user->name }}
+                        </span>
+                        @if($user->isAdmin())
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-1 text-white rounded-full inline-block flex-none" fill="#6495ED" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                            </svg>
+                        @endif
                     </div>
                     @auth
                         <div>
