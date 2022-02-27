@@ -92,6 +92,7 @@
 -   `(01/nov 11:35am)` Round discount percentage to 0 decimals
 -   `(06/nov 06:30pm)` Round discount percentage to 0 decimals in Product Details
 -   `(27/feb 06:10pm)` Updated contact number
+-   `(27/feb 06:30pm)` Updated label for Post to Short Update (Only display change)
 
 ## :rocket: Feature List
 

@@ -47,7 +47,7 @@
         <div class="{{ $isCompact ?? false ? 'p-4' : 'p-8' }} mb-2" x-data="postFormComponent()">
 
             <h4 class="text-lg font-bold mb-2">
-                {{ is_null($postId) ? 'New Post' : 'Update Content' }}
+                {{ is_null($postId) ? 'New Short Update' : 'Update Content' }}
             </h4>
 
             <form wire:submit.prevent="{{ is_null($postId) ? 'save' : 'save(' . $postId . ')' }}" method="post"
@@ -60,7 +60,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            {{ __('Post') }}
+                            {{ __('Publish') }}
                         </x-jet-button>
                     </div>
                     <div>
@@ -156,7 +156,7 @@
                             class="focus:ring-0 bg-indigo-50 focus:bg-indigo-100 border-0 border-b border-indigo-200 rounded-lg w-full resize-none"
                             :class="{ 'ring ring-red-300 focus:ring focus:ring-red-300' : post.length > 500, 'h-11' : type === '{{ \App\Models\Post::TYPE_IMAGE }}' }"
                             type="text" name="title"
-                            :placeholder="type === '{{ \App\Models\Post::TYPE_IMAGE }}' ? 'Caption' : 'Write a Post'"
+                            :placeholder="type === '{{ \App\Models\Post::TYPE_IMAGE }}' ? 'Caption' : 'Write a Short Update'"
                             wire:model.defer="title" autofoucs></textarea>
                         <div class='-mt-7 mr-2 text-gray-500 text-right' x-text='post.length + "/500"'>
                         </div>
@@ -171,7 +171,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        {{ __('Post') }}
+                        {{ __('Publish') }}
                     </x-jet-button>
                     @if ($isCompact ?? false)
                         <div class="space-x-2 flex">
@@ -189,7 +189,7 @@
                                             fill="currentColor"></path>
                                     </svg>
                                     <span class='ml-2' x-show='hover'>
-                                        {{ __('Post') }}
+                                        {{ __('Publish') }}
                                     </span>
                                 </x-jet-button>
                             @elseif($type == \App\Models\Post::TYPE_POST)
