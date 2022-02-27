@@ -54,7 +54,7 @@
                 enctype="multipart/form-data" x-cloak>
                 @if ($type == \App\Models\Post::TYPE_ARTICLE)
                     <div class="flex justify-end">
-                        <x-jet-button id='submit' class="">
+                        <x-jet-button id='submit' class="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -165,6 +165,16 @@
                 @endif
 
                 <div class="{{ $isCompact ?? false ? 'space-x-2 flex justify-between' : '' }} mt-4">
+                    @if ($type === \App\Models\Post::TYPE_ARTICLE)
+                    <x-jet-button id='submit' class="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {{ __('Publish') }}
+                    </x-jet-button>
+                    @else
                     <x-jet-button id='submit' x-bind:disabled='post.length > 500'>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
@@ -173,6 +183,7 @@
                         </svg>
                         {{ __('Publish') }}
                     </x-jet-button>
+                    @endif
                     @if ($isCompact ?? false)
                         <div class="space-x-2 flex">
                             @if ($type == \App\Models\Post::TYPE_IMAGE)
@@ -332,9 +343,13 @@
                                 return new MyUploadAdapter(loader);
                             };
 
-                            document.getElementById('submit').addEventListener('click', function() {
-                                @this.set('body', editor.getData());
-                            })
+                            var btnSubmits = document.getElementsByClassName('submit');
+
+                            for(var btnSubmit of btnSubmits) {
+                                btnSubmit.addEventListener('click', function() {
+                                    @this.set('body', editor.getData());
+                                });
+                            }
                         })
                         .catch(function(error) {
                             console.error(error);
