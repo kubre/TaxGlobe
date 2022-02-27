@@ -163,6 +163,16 @@
     <script type="IN/Share" data-url="https://www.linkedin.com"></script> --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            
+            var contents = document.getElementsByClassName("post-content");
+
+            for (var content of contents) {
+                console.log(typeof content.innerHTML)
+                if (!content.innerHTML.includes("javascript:")) {
+                    content.innerHTML = content.innerHTML.replace(/(https?:\/\/[^\s]+)/g, "<a href='$1' class='text-blue-700 underline' target='_blank'>$1</a>");
+                }
+            }
+
             Livewire.on('triggerDelete', function(postId) {
                 Swal.fire({
                     title: 'Are You Sure?',
