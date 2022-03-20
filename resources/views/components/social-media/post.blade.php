@@ -16,9 +16,7 @@
                         @endif
                     </span>
                     <span class="text-gray-500 text-xs truncate">
-                            <strong title="City">{{ $post->user->city ?? '' }}</strong>
                             @if ($post->user->bio)
-                                &nbsp;|&nbsp;
                                 <span title="{{$post->user->bio}}">
                                     {{ Str::limit($post->user->bio ?? '', 30, $end = '...') }}
                                 </span>

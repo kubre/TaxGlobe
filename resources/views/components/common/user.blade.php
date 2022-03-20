@@ -16,9 +16,8 @@
                         @endif
                 </div>
                 <div class="text-gray-500 text-xs">
-                    <strong title="City">{{ $user->city ?? '' }}</strong>
                     @if (!is_null($user->bio))
-                    &nbsp;|&nbsp;{{ $user->bio }}
+                    {{ $user->bio }}
                     @endif
                 </div>
             </div>
