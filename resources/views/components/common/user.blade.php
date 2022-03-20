@@ -15,9 +15,12 @@
                             </svg>
                         @endif
                 </div>
-                @if (!is_null($user->bio))
-                    <div class="text-gray-500 text-xs">{{ $user->bio }}</div>
-                @endif
+                <div class="text-gray-500 text-xs">
+                    <strong title="City">{{ $user->city ?? '' }}</strong>
+                    @if (!is_null($user->bio))
+                    &nbsp;|&nbsp;{{ $user->bio }}
+                    @endif
+                </div>
             </div>
         </div>
     </a>

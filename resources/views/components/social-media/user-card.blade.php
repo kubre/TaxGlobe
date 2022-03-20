@@ -57,7 +57,8 @@
 
             @if (!is_null($user->bio) && !$showBasicInfoOnly)
                 <div class="text-sm mt-1">
-                    {{ $user->bio }}
+                    <strong title="City">{{ $user->city ?? '' }}</strong>
+                    &nbsp;|&nbsp;{{ $user->bio }}
                 </div>
             @endif
         </div>
